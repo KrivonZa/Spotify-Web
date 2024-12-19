@@ -5,30 +5,25 @@ import Sidebar from "./_sidebar/Sidebar";
 import PlayMusic from "../../modules/UserModule/playMusic/PlayMusic";
 import { ModalProvider } from "../../globalContext/ModalContext";
 import ListFriend from "../../modules/UserModule/listFriend/ListFriend";
+import "./styles.css";
 export default function UserLayout() {
   return (
-    <div>
-      <div className="container mx-auto flex">
-        <ModalProvider>
-          <div style={{ width: "20%" }}>
-            <Sidebar />
-          </div>
-          <div style={{ width: "80%" }}>
-            <div className="mb-28">
-              <Header />
+    <div className="h-screen flex flex-col overflow-hidden">
+      <ModalProvider>
+        <Header />
+        <div className="flex flex-grow overflow-hidden mb-4">
+          <Sidebar />
+          <div className="flex-grow mr-4 h-full overflow-hidden bg-gradient-to-b from-[#1e1e1e] via-[#121212] to-[#121212] rounded-xl">
+            <div className="h-full overflow-y-auto custom-scrollbar">
+              <div>
+                <Outlet />
+                <div>{PlayMusic()}</div>
+              </div>
+              <Footer />
             </div>
-            <div>
-
-            <Outlet />
-            <div>{PlayMusic()}</div>
-            </div>
-            <Footer />
           </div>
-          <div className="list-friend fixed bottom-12 right-10">
-            <ListFriend />
-          </div>
-        </ModalProvider>
-      </div>
+        </div>
+      </ModalProvider>
     </div>
   );
 }
