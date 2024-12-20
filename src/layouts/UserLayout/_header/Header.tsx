@@ -54,9 +54,7 @@ export default function Header() {
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
-            <i
-              className="fa-solid fa-layer-group duration-200 text-[#a0a0a0] hover:text-white cursor-pointer transform hover:scale-110"
-            ></i>
+            <i className="fa-solid fa-layer-group duration-200 text-[#a0a0a0] hover:text-white cursor-pointer transform hover:scale-110"></i>
           </div>
         </div>
 
@@ -67,12 +65,16 @@ export default function Header() {
             </div>
           ) : (
             <div className="flex justify-end items-center gap-x-6">
-              <button className="py-2 px-4 font-bold text-gray-400 transform hover:scale-105 hover:text-gray-300 duration-200">
+              <button
+                className="py-2 px-4 font-bold text-gray-400 transform hover:scale-105 hover:text-gray-300 duration-200"
+                onClick={() => navigate("signup")}
+              >
                 Đăng kí
               </button>
               <button
                 className="py-2 px-4 font-bold rounded-full bg-white text-black hover:bg-gray-200 duration-200 transform hover:scale-105 ease-in-out"
-                onClick={openModal}
+                // onClick={openModal}
+                onClick={() => navigate("login")}
               >
                 Đăng nhập
               </button>
