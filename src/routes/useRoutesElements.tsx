@@ -2,11 +2,17 @@ import { useRoutes, useLocation } from "react-router-dom";
 import HomePage from "../modules/UserModule/homePageLayout/HomePage";
 import UserLayout from "../layouts/UserLayout";
 import AuthLayout from "../layouts/AuthLayout";
+import SignupStepIndex from "../layouts/AuthLayout/SignupStepIndex";
 import DetailArtists from "../modules/UserModule/detailArtists/DetailArtists";
 import Playlist from "../modules/UserModule/playList/Playlist";
 import Genre from "../modules/UserModule/genre/Genre";
 import GenreAndSong from "../modules/UserModule/genreAndSong/GenreAndSong";
-import { Login, Signup, ForgotPass } from "../modules/UserModule/authorize";
+import {
+  Login,
+  Signup,
+  ForgotPass,
+  SignupStep,
+} from "../modules/UserModule/authorize";
 import { useEffect } from "react";
 
 const useRoutesElements = () => {
@@ -73,7 +79,13 @@ const useRoutesElements = () => {
         },
         {
           path: "signup",
-          element: <Signup />,
+          element: <SignupStepIndex />,
+          children: [
+            { path: "", element: <Signup /> },
+            { path: "1", element: <SignupStep step={1} /> },
+            { path: "2", element: <SignupStep step={2} /> },
+            { path: "3", element: <SignupStep step={3} /> },
+          ],
         },
         {
           path: "forgot",
