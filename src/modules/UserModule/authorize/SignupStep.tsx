@@ -23,6 +23,8 @@ export function SignupStep({ step }: SignupStepProps) {
   const prevStep = () => {
     if (currentStep > 1) {
       navigate(`/signup/${currentStep - 1}`);
+    } else {
+      navigate(`/signup`);
     }
   };
 

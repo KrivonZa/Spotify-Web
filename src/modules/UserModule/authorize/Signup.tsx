@@ -10,7 +10,7 @@ export function Signup() {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className="bg-[#121212] w-full h-full flex justify-center">
+    <div className="bg-[#121212] h-full flex justify-center">
       <div className="my-10">
         <div className="mx-28">
           <div className="flex flex-col justify-center items-center">

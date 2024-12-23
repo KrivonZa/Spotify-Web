@@ -14,7 +14,7 @@ export default function SignupStepIndex() {
 
   return (
     <div className="min-h-screen flex justify-center bg-[#121212]">
-      <div className="min-w-[30%] max-w-[40%] mb-10">
+      <div className="w-[40%] mb-10">
         {currentStep && (
           <div className="flex flex-col justify-center items-center mt-10 mb-6">
             <div className="w-full text-center">
