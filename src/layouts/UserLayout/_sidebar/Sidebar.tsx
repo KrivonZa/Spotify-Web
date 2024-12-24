@@ -9,12 +9,14 @@
 import CreatePP from "../../../components/SidebarComponent/CreatePP";
 import { useState, useEffect } from "react";
 import { useTranslation } from "../../../lang/LanguageProvider";
+import LanguageModal from "../../../components/LanguageModal";
 
 export default function Sidebar() {
   const { locale, switchLanguage, i18next: t } = useTranslation();
   // const navigate = useNavigate();
 
   const [sidebarWidth, setSidebarWidth] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setSidebarWidth(`${window.innerWidth * 0.25}px`);
@@ -42,6 +44,28 @@ export default function Sidebar() {
     const newLocale = locale === 'vi' ? 'en' : 'vi';
     switchLanguage(newLocale);
   };
+
+  const toggleLanguageModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    const modal = document.getElementById("language-modal");
+    if (modal && !modal.contains(event.target as Node)) {
+      setIsModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isModalOpen]);
 
   const footerLinks = [
     t.t('sidebar.legal'),
@@ -85,11 +109,13 @@ export default function Sidebar() {
 
         <div 
           className="ml-8 inline-flex justify-center items-center rounded-full border-gray-500 hover:border-white border px-4 cursor-pointer transform hover:scale-105 duration-200"
-          onClick={toggleLanguage}
+          onClick={toggleLanguageModal}
         >
           <i className="fa-solid fa-globe mr-3"></i>
-          <div>{locale === 'vi' ? 'Tiếng Việt' : 'English'}</div>
+          <div>Tiếng Việt</div>
         </div>
+
+        {isModalOpen && <LanguageModal onClose={toggleLanguageModal} />}
       </div>
 
       <div

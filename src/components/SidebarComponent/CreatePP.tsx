@@ -1,7 +1,6 @@
-import React from "react";
 import "../../layouts/UserLayout/styles.css";
 
-const CreatePP: React.FC = () => {
+const CreatePP = () => {
   return (
     <div className="flex-grow mr-4 h-full overflow-hidden select-none">
       <div className="h-64 overflow-y-auto custom-scrollbar py-2 px-3">
