@@ -8,8 +8,10 @@
 // const { Title, Text } = Typography;
 import CreatePP from "../../../components/SidebarComponent/CreatePP";
 import { useState, useEffect } from "react";
+import { useTranslation } from "../../../lang/LanguageProvider";
 
 export default function Sidebar() {
+  const { locale, switchLanguage, i18next: t } = useTranslation();
   // const navigate = useNavigate();
 
   const [sidebarWidth, setSidebarWidth] = useState<string | null>(null);
@@ -36,6 +38,20 @@ export default function Sidebar() {
     document.addEventListener("mouseup", handleMouseUp);
   };
 
+  const toggleLanguage = () => {
+    const newLocale = locale === 'vi' ? 'en' : 'vi';
+    switchLanguage(newLocale);
+  };
+
+  const footerLinks = [
+    t.t('sidebar.legal'),
+    t.t('sidebar.safetyCenter'),
+    t.t('sidebar.privacyPolicy'),
+    t.t('sidebar.cookies'),
+    t.t('sidebar.about'),
+    t.t('sidebar.accessibility'),
+  ];
+
   return (
     <div className="flex h-full select-none">
       <div
@@ -45,7 +61,7 @@ export default function Sidebar() {
         <div className="flex justify-between items-center px-8">
           <div className="cursor-pointer hover:text-white text-gray-400 duration-200 flex items-center">
             <i className="fa-solid fa-lines-leaning mr-3 text-2xl"></i>
-            <div className="text-lg font-semibold">Your Library</div>
+            <div className="text-lg font-semibold">{t.t('sidebar.yourLibrary')}</div>
           </div>
           <div className="cursor-pointer hover:text-white text-gray-400 duration-200 hover:bg-gray-500 bg-opacity-10 hover:rounded-full w-10 h-10 flex justify-center items-center">
             <i className="fa-solid fa-plus text-2xl"></i>
@@ -57,14 +73,7 @@ export default function Sidebar() {
         </div>
 
         <div className="text-xs px-8 flex flex-wrap gap-2 my-8">
-          {[
-            "Pháp lý",
-            "Trung tâm an toàn và quyền riêng tư",
-            "Chính sách quyền riêng tư",
-            "Cookie",
-            "Giới thiệu Quảng cáo",
-            "Hỗ trợ tiếp cận",
-          ].map((item, index) => (
+          {footerLinks.map((item, index) => (
             <div
               key={index}
               className="cursor-pointer hover:text-gray-300 flex-auto duration-150"
@@ -74,9 +83,12 @@ export default function Sidebar() {
           ))}
         </div>
 
-        <div className="ml-8 inline-flex justify-center items-center rounded-full border-gray-500 hover:border-white border px-4 cursor-pointer transform hover:scale-105 duration-200">
+        <div 
+          className="ml-8 inline-flex justify-center items-center rounded-full border-gray-500 hover:border-white border px-4 cursor-pointer transform hover:scale-105 duration-200"
+          onClick={toggleLanguage}
+        >
           <i className="fa-solid fa-globe mr-3"></i>
-          <div>Tiếng Việt</div>
+          <div>{locale === 'vi' ? 'Tiếng Việt' : 'English'}</div>
         </div>
       </div>
 

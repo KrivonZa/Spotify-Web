@@ -1,0 +1,17 @@
+{
+  "common": {
+    "welcome": "Chào mừng",
+    "login": "Đăng nhập",
+    "signup": "Đăng ký",
+    "logout": "Đăng xuất"
+  },
+  "sidebar": {
+    "yourLibrary": "Thư viện",
+    "legal": "Pháp lý",
+    "safetyCenter": "Trung tâm an toàn và quyền riêng tư",
+    "privacyPolicy": "Chính sách quyền riêng tư",
+    "cookies": "Cookie",
+    "about": "Giới thiệu Quảng cáo",
+    "accessibility": "Hỗ trợ tiếp cận"
+  }
+}

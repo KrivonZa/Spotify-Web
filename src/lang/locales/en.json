@@ -1,0 +1,17 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout"
+  },
+  "sidebar": {
+    "yourLibrary": "Your Library",
+    "legal": "Legal",
+    "safetyCenter": "Safety Center & Privacy",
+    "privacyPolicy": "Privacy Policy",
+    "cookies": "Cookies",
+    "about": "About Ads",
+    "accessibility": "Accessibility"
+  }
+}
