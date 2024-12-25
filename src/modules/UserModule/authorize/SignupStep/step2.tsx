@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../styles.css";
 
 interface Step1Props {
@@ -16,6 +17,7 @@ export function Step2({ nextStep }: Step1Props) {
   const [error, setError] = useState<string>("");
   const [isValid, setIsValid] = useState(false);
   const [hasInput, setHasInput] = useState(false);
+  const { t } = useTranslation();
 
   const isLeapYear = (year: number) => {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -35,12 +37,12 @@ export function Step2({ nextStep }: Step1Props) {
       numericMonth <= 0 ||
       numericYear <= 0
     ) {
-      setError("Ngày, tháng, năm không hợp lệ.");
+      setError(t("signup.error1"));
       return false;
     }
 
     if (numericYear > currentYear || currentYear - numericYear > 130) {
-      setError("Năm sinh không hợp lệ.");
+      setError(t("signup.error2"));
       return false;
     }
 
@@ -59,7 +61,7 @@ export function Step2({ nextStep }: Step1Props) {
       31,
     ];
     if (numericMonth > 12 || numericDay > daysInMonth[numericMonth - 1]) {
-      setError("Ngày hoặc tháng không hợp lệ.");
+      setError(t("signup.error3"));
       return false;
     }
 
@@ -84,10 +86,8 @@ export function Step2({ nextStep }: Step1Props) {
   return (
     <div className="w-full h-full">
       <div className="mt-3">
-        <p className="font-bold">Tên</p>
-        <p className="text-[#a0a0a0] text-sm">
-          Tên này sẽ xuất hiện trên hồ sơ của bạn
-        </p>
+        <p className="font-bold">{t("signup.name")}</p>
+        <p className="text-[#a0a0a0] text-sm">{t("signup.descriptionName")}</p>
         <div
           className={`border border-gray-500 rounded-lg mt-2 hover:bg-[#414141] duration-150 ${
             isFocused === "email"
@@ -105,11 +105,8 @@ export function Step2({ nextStep }: Step1Props) {
       </div>
 
       <div className="mt-3">
-        <p className="font-bold">Ngày sinh</p>
-        <p className="text-[#a0a0a0] text-sm">
-          Ngày sinh của bạn giúp chúng tôi cung cấp nội dung đề xuất và quảng
-          cáo phù hợp với bạn.
-        </p>
+        <p className="font-bold">{t("signup.birth")}</p>
+        <p className="text-[#a0a0a0] text-sm">{t("signup.descriptionBirth")}</p>
         <div className="mt-2 grid grid-cols-[3fr_5fr_4fr] gap-x-3">
           <div
             className={`border border-gray-500 rounded-lg hover:bg-[#414141] duration-150 ${
@@ -167,10 +164,9 @@ export function Step2({ nextStep }: Step1Props) {
       </div>
 
       <div className="mt-3">
-        <p className="font-bold">Giới tính</p>
+        <p className="font-bold">{t("signup.gender")}</p>
         <p className="text-[#a0a0a0] text-sm">
-          Giới tính của bạn giúp chúng tôi cung cấp nội dung đề xuất và quảng
-          cáo phù hợp với bạn.
+          {t("signup.descriptionGender")}
         </p>
         <div className="mt-2">
           <div
@@ -182,7 +178,7 @@ export function Step2({ nextStep }: Step1Props) {
             ) : (
               <i className="fa-regular fa-circle"></i>
             )}
-            <p className="ml-2">Nam</p>
+            <p className="ml-2">{t("signup.male")}</p>
           </div>
           <div
             className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
@@ -193,7 +189,7 @@ export function Step2({ nextStep }: Step1Props) {
             ) : (
               <i className="fa-regular fa-circle"></i>
             )}
-            <p className="ml-2">Nữ</p>
+            <p className="ml-2">{t("signup.female")}</p>
           </div>
           <div
             className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
@@ -204,7 +200,7 @@ export function Step2({ nextStep }: Step1Props) {
             ) : (
               <i className="fa-regular fa-circle"></i>
             )}
-            <p className="ml-2">Không phân biệt giới tính</p>
+            <p className="ml-2">{t("signup.nonBinary")}</p>
           </div>
           <div
             className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
@@ -216,7 +212,7 @@ export function Step2({ nextStep }: Step1Props) {
               <i className="fa-regular fa-circle"></i>
             )}
 
-            <p className="ml-2">Giới tính khác</p>
+            <p className="ml-2">{t("signup.other")}</p>
           </div>
           <div
             className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
@@ -227,7 +223,7 @@ export function Step2({ nextStep }: Step1Props) {
             ) : (
               <i className="fa-regular fa-circle"></i>
             )}
-            <p className="ml-2">Không muốn nêu cụ thể</p>
+            <p className="ml-2">{t("signup.noSpecific")}</p>
           </div>
         </div>
       </div>
@@ -236,7 +232,7 @@ export function Step2({ nextStep }: Step1Props) {
         onClick={nextStep}
         disabled={!isValid}
       >
-        Tiếp theo
+        {t("signup.next")}
       </button>
     </div>
   );

@@ -4,12 +4,14 @@ import FormLogin from "../../../components/login";
 import { useAppSelector } from "../../../redux/hooks";
 import { useModal } from "../../../globalContext/ModalContext";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const navigate = useNavigate();
   const { isModalOpen, closeModal, openModal } = useModal();
   const { currentUser } = useAppSelector((state) => state.currentUser);
   const [isFocused, setIsFocused] = useState(false);
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -50,7 +52,7 @@ export default function Header() {
             <input
               type="text"
               className="bg-transparent border-r-2 focus:outline-none w-full px-3 mr-3 placeholder-[#a0a0a0]"
-              placeholder="Bạn muốn phát nội dung gì?"
+              placeholder={t("header.search")}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
@@ -69,14 +71,14 @@ export default function Header() {
                 className="py-2 px-4 font-bold text-gray-400 transform hover:scale-105 hover:text-gray-300 duration-200"
                 onClick={() => navigate("signup")}
               >
-                Đăng kí
+                {t("header.signup")}
               </button>
               <button
                 className="py-2 px-4 font-bold rounded-full bg-white text-black hover:bg-gray-200 duration-200 transform hover:scale-105 ease-in-out"
                 // onClick={openModal}
                 onClick={() => navigate("login")}
               >
-                Đăng nhập
+                {t("header.login")}
               </button>
             </div>
           )}

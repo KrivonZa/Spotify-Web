@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface Step1Props {
   nextStep: () => void;
@@ -9,6 +10,7 @@ export function Step3({ nextStep }: Step1Props) {
   const navigate = useNavigate();
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [dataSharingConsent, setDataSharingConsent] = useState(false);
+  const { t } = useTranslation();
 
   const canSubmit = marketingConsent && dataSharingConsent;
 
@@ -21,10 +23,12 @@ export function Step3({ nextStep }: Step1Props) {
         >
           <i
             className={`fa-regular ${
-              marketingConsent ? "fa-solid fa-square-check text-green-400" : "fa-square"
+              marketingConsent
+                ? "fa-solid fa-square-check text-green-400"
+                : "fa-square"
             } hover:text-green-400 duration-200 mr-2`}
           ></i>
-          <p>Tôi không muốn nhận tin nhắn tiếp thị từ Spotify</p>
+          <p>{t("signup.term1")}</p>
         </div>
 
         <div
@@ -38,25 +42,20 @@ export function Step3({ nextStep }: Step1Props) {
                 : "fa-square"
             } hover:text-green-400 duration-200 mr-2`}
           ></i>
-          <p>
-            Chia sẻ dữ liệu đăng ký của tôi với các nhà cung cấp nội dung của
-            Spotify cho mục đích tiếp thị.
-          </p>
+          <p>{t("signup.term2")}</p>
         </div>
 
         {/* Terms and Privacy */}
         <p className="my-3">
-          Bằng việc nhấp vào nút Đăng ký, bạn đồng ý với{" "}
+          {t("signup.agreeFirst1")}{" "}
           <span className="underline text-green-500 hover:text-green-400 cursor-pointer">
-            Điều khoản và điều kiện sử dụng
-          </span>{" "}
-          của Spotify.
+            {t("signup.agreeFirst2")}
+          </span>
         </p>
         <p className="my-3">
-          Để tìm hiểu thêm về cách thức Spotify thu thập, sử dụng, chia sẻ và
-          bảo vệ dữ liệu cá nhân của bạn, vui lòng xem{" "}
+          {t("signup.agreeSecond1")}{" "}
           <span className="underline text-green-500 hover:text-green-400 cursor-pointer">
-            Chính sách quyền riêng tư của Spotify.
+            {t("signup.agreeSecond2")}
           </span>
         </p>
       </div>
@@ -71,7 +70,7 @@ export function Step3({ nextStep }: Step1Props) {
         onClick={() => navigate("/")}
         disabled={!canSubmit}
       >
-        Đăng ký
+        {t("signup.signup")}
       </button>
     </div>
   );

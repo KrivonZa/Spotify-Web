@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Step1, Step2, Step3 } from "./SignupStep/index";
+import { useTranslation } from "react-i18next";
 
 interface SignupStepProps {
   step: number;
@@ -9,6 +10,7 @@ interface SignupStepProps {
 export function SignupStep({ step }: SignupStepProps) {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(step);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setCurrentStep(step);
@@ -40,8 +42,8 @@ export function SignupStep({ step }: SignupStepProps) {
         {currentStep === 1 && (
           <div className="w-full">
             <div className="mb-6">
-              <div className="text-[#a0a0a0]">Bước 1/3</div>
-              <div className="font-bold">Tạo mật khẩu</div>
+              <div className="text-[#a0a0a0]">{t("signup.step1")}</div>
+              <div className="font-bold">{t("signup.createPassword")}</div>
             </div>
             <Step1 nextStep={nextStep} />
           </div>
@@ -49,10 +51,8 @@ export function SignupStep({ step }: SignupStepProps) {
         {currentStep === 2 && (
           <div className="w-full">
             <div className="mb-6">
-              <div className="text-[#a0a0a0]">Bước 2/3</div>
-              <div className="font-bold">
-                Giới thiệu thông tin về bản thân bạn
-              </div>
+              <div className="text-[#a0a0a0]">{t("signup.step2")}</div>
+              <div className="font-bold">{t("signup.yourself")}</div>
             </div>
             <Step2 nextStep={nextStep} />
           </div>
@@ -60,8 +60,8 @@ export function SignupStep({ step }: SignupStepProps) {
         {currentStep === 3 && (
           <div className="w-full">
             <div className="mb-6">
-              <div className="text-[#a0a0a0]">Bước 3/3</div>
-              <div className="font-bold">Điều khoản & Điều kiện</div>
+              <div className="text-[#a0a0a0]">{t("signup.step3")}</div>
+              <div className="font-bold">{t("signup.term")}</div>
             </div>
             <Step3 nextStep={nextStep} />
           </div>

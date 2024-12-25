@@ -91,11 +91,11 @@ export default function Sidebar() {
           <CreatePP />
         </div>
 
-        <div className="text-xs px-8 flex flex-wrap gap-2 my-8">
+        <div className="text-xs px-8 flex flex-wrap leading-6 gap-x-4 my-5">
           {footerLinks.map((item, index) => (
             <div
               key={index}
-              className="cursor-pointer hover:text-gray-300 flex-auto duration-150"
+              className="cursor-pointer hover:text-gray-300 duration-150"
             >
               {item}
             </div>
@@ -107,7 +107,7 @@ export default function Sidebar() {
           onClick={toggleLanguageModal}
         >
           <i className="fa-solid fa-globe mr-3"></i>
-          <div>Tiếng Việt</div>
+          <div>{t("sidebar.language")}</div>
         </div>
 
         {isModalOpen && <LanguageModal onClose={toggleLanguageModal} />}

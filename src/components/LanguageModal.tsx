@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 
 const LanguageModal = ({ onClose }: { onClose: () => void }) => {
   const [animate, setAnimate] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setAnimate(true);
@@ -14,6 +16,7 @@ const LanguageModal = ({ onClose }: { onClose: () => void }) => {
   };
 
   const handleChange = (lang: string) => {
+    onClose();
     i18n.changeLanguage(lang);
   };
 
@@ -36,10 +39,8 @@ const LanguageModal = ({ onClose }: { onClose: () => void }) => {
         </div>
 
         <div className="px-4 py-5 border-b border-[#414141]">
-          <p className="text-xl font-bold">{i18n.t("chooseLanguage")}</p>
-          <p className="font-semibold">
-            Lựa chọn này sẽ cập nhật những nội dung bạn đọc trên Spotify
-          </p>
+          <p className="text-xl font-bold">{t("languageSelection.title")}</p>
+          <p className="font-semibold">{t("languageSelection.description")}</p>
         </div>
 
         <div className="px-4 py-4 grid grid-cols-2 leading-7">

@@ -1,10 +1,4 @@
 {
-  "common": {
-    "welcome": "Chào mừng",
-    "login": "Đăng nhập",
-    "signup": "Đăng ký",
-    "logout": "Đăng xuất"
-  },
   "sidebar": {
     "yourLibrary": "Thư viện",
     "legal": "Pháp lý",
@@ -12,6 +6,83 @@
     "privacyPolicy": "Chính sách quyền riêng tư",
     "cookies": "Cookie",
     "about": "Giới thiệu Quảng cáo",
-    "accessibility": "Hỗ trợ tiếp cận"
+    "accessibility": "Hỗ trợ tiếp cận",
+    "language": "Tiếng Việt",
+    "CPlaylist": "Tạo danh sách phát đầu tiên của bạn",
+    "CPlaylistDes": "Rất dễ! Chúng tôi sẽ giúp bạn",
+    "CPlaylistButton": "Tạo danh sách phát",
+    "SPodcast": "Hãy cùng tìm và theo dõi một số podcast",
+    "SPodcaseDes": "Chúng tôi sẽ cập nhật cho bạn thông tin về các tập mới",
+    "SPodcastButton": "Duyệt xem podcast"
+  },
+  "languageSelection": {
+    "title": "Chọn một ngôn ngữ",
+    "description": "Lựa chọn này sẽ cập nhật những nội dung bạn đọc trên Spotify"
+  },
+  "header": {
+    "search": "Bạn muốn phát nội dung gì?",
+    "login": "Đăng nhập",
+    "signup": "Đăng ký"
+  },
+  "login": {
+    "title": "Đăng nhập vào Spotify",
+    "google": "Tiếp tục bằng Google",
+    "facebook": "Tiếp tục bằng Facebook",
+    "apple": "Tiếp tục bằng Apple",
+    "email": "Email hoặc tên người dùng",
+    "password": "Mật khẩu",
+    "login": "Đăng nhập",
+    "forgot": "Quên mật khẩu của bạn?",
+    "signup1": "Bạn chưa có tài khoản?",
+    "signup2": "Đăng ký Spotify"
+  },
+  "forgot": {
+    "title": "Đặt lại mật khẩu của bạn",
+    "description": "Nhập địa chỉ email hoặc tên người dùng kết nối với tài khoản Spotify của bạn và chúng tôi sẽ gửi cho bạn email.",
+    "email": "Email hoặc tên người dùng",
+    "send": "Gửi email"
+  },
+  "signup": {
+    "title": "Đăng ký để bắt đầu nghe",
+    "email": "Địa chỉ email",
+    "next": "Tiếp theo",
+    "or": "hoặc",
+    "google": "Đăng ký bằng Google",
+    "facebook": "Đăng ký bằng Facebook",
+    "apple": "Đăng ký bằng Apple",
+    "login1": "Bạn đã có tài khoản?",
+    "login2": "Đăng nhập tại đây",
+    "step1": "Bước 1/3",
+    "createPassword": "Tạo mật khẩu",
+    "password": "Mật khẩu",
+    "descriptionPass": "Mật khẩu của bạn phải có ít nhất",
+    "condition1": "1 chữ cái",
+    "condition2": "1 chữ số hoặc ký tự đặc biệt (ví dụ: #?!&)",
+    "condition3": "10 ký tự",
+    "step2": "Bước 2/3",
+    "yourself": "Giới thiệu thông tin về bản thân bạn",
+    "name": "Tên",
+    "descriptionName": "Tên này sẽ xuất hiện trên hồ sơ của bạn",
+    "birth": "Ngày sinh",
+    "descriptionBirth": "Ngày sinh của bạn giúp chúng tôi cung cấp nội dung đề xuất và quảng cáo phù hợp với bạn.",
+    "gender": "Giới tính",
+    "descriptionGender": "Giới tính của bạn giúp chúng tôi cung cấp nội dung đề xuất và quảng cáo phù hợp với bạn.",
+    "male": "Nam",
+    "female": "Nữ",
+    "nonBinary": "Không phân biệt giới tính",
+    "other": "Giới tính khác",
+    "noSpecific": "Không muốn nêu cụ thể",
+    "error1": "Ngày, tháng, năm không hợp lệ.",
+    "error2": "Năm sinh không hợp lệ.",
+    "error3": "Ngày hoặc tháng không hợp lệ.",
+    "step3": "Bước 3/3",
+    "term": "Điều khoản & Điều kiện",
+    "term1": "Tôi không muốn nhận tin nhắn tiếp thị từ Spotify",
+    "term2": "Chia sẻ dữ liệu đăng ký của tôi với các nhà cung cấp nội dung của Spotify cho mục đích tiếp thị.",
+    "agreeFirst1": "Bằng việc nhấp vào nút Đăng ký, bạn đồng ý với",
+    "agreeFirst2": "Điều khoản và điều kiện sử dụng cuar Spotify.",
+    "agreeSecond1": "Để tìm hiểu thêm về cách thức Spotify thu thập, sử dụng, chia sẻ và bảo vệ dữ liệu cá nhân của bạn, vui lòng xem",
+    "agreeSecond2": "Chính sách quyền riêng tư của Spotify.",
+    "signup": "Đăng ký"
   }
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Step1Props {
   nextStep: () => void;
@@ -13,6 +14,7 @@ export function Step1({ nextStep }: Step1Props) {
     hasNumberOrSpecialChar: false,
     minLength: false,
   });
+  const { t } = useTranslation();
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prevState) => !prevState);
@@ -34,7 +36,7 @@ export function Step1({ nextStep }: Step1Props) {
   return (
     <div className="h-full">
       <div className="mt-3">
-        <p className="font-bold">Mật khẩu</p>
+        <p className="font-bold">{t("signup.password")}</p>
         <div
           className={`border border-gray-500 rounded-lg mt-2 hover:bg-[#414141] duration-150 flex justify-between pr-3 items-center ${
             isFocused === "pass"
@@ -45,7 +47,7 @@ export function Step1({ nextStep }: Step1Props) {
           <input
             type={isPasswordVisible ? "text" : "password"}
             className="bg-transparent focus:outline-none w-full px-3 py-3 placeholder-[#a0a0a0]"
-            placeholder="Mật khẩu"
+            placeholder={t("signup.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             onFocus={() => setIsFocused("pass")}
@@ -60,7 +62,7 @@ export function Step1({ nextStep }: Step1Props) {
         </div>
 
         <div className="mt-4">
-          <p className="font-bold">Mật khẩu của bạn phải có ít nhất</p>
+          <p className="font-bold">{t("signup.descriptionPass")}</p>
           <div className="mt-2 flex items-center gap-x-2">
             <i
               className={`fa-solid text-sm ${
@@ -69,7 +71,7 @@ export function Step1({ nextStep }: Step1Props) {
                   : "fa-circle-xmark text-red-500"
               }`}
             ></i>
-            <p className="text-sm">1 chữ cái</p>
+            <p className="text-sm">{t("signup.condition1")}</p>
           </div>
           <div className="mt-2 flex items-center gap-x-2">
             <i
@@ -79,9 +81,7 @@ export function Step1({ nextStep }: Step1Props) {
                   : "fa-circle-xmark text-red-500"
               }`}
             ></i>
-            <p className="text-sm">
-              1 chữ số hoặc ký tự đặc biệt (ví dụ: #?!&)
-            </p>
+            <p className="text-sm">{t("signup.condition2")}</p>
           </div>
           <div className="mt-2 flex items-center gap-x-2">
             <i
@@ -91,18 +91,18 @@ export function Step1({ nextStep }: Step1Props) {
                   : "fa-circle-xmark text-red-500"
               }`}
             ></i>
-            <p className="text-sm">10 ký tự</p>
+            <p className="text-sm">{t("signup.condition3")}</p>
           </div>
         </div>
       </div>
       <button
-        className={`text-center text-[#121212] font-bold bg-green-500 transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-8 ${
-          isFormValid ? "hover:bg-green-400" : "bg-gray-400 cursor-not-allowed"
+        className={`text-center text-[#121212] font-bold transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-8 ${
+          isFormValid ? "hover:bg-green-400 bg-green-500" : "bg-gray-400 cursor-not-allowed"
         }`}
         onClick={isFormValid ? nextStep : undefined}
         disabled={!isFormValid}
       >
-        Tiếp theo
+        {t("signup.next")}
       </button>
     </div>
   );
