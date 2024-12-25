@@ -8,13 +8,11 @@
 // const { Title, Text } = Typography;
 import CreatePP from "../../../components/SidebarComponent/CreatePP";
 import { useState, useEffect } from "react";
-import { useTranslation } from "../../../lang/LanguageProvider";
 import LanguageModal from "../../../components/LanguageModal";
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
-  const { locale, switchLanguage, i18next: t } = useTranslation();
-  // const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const [sidebarWidth, setSidebarWidth] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -40,11 +38,6 @@ export default function Sidebar() {
     document.addEventListener("mouseup", handleMouseUp);
   };
 
-  const toggleLanguage = () => {
-    const newLocale = locale === 'vi' ? 'en' : 'vi';
-    switchLanguage(newLocale);
-  };
-
   const toggleLanguageModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -68,12 +61,12 @@ export default function Sidebar() {
   }, [isModalOpen]);
 
   const footerLinks = [
-    t.t('sidebar.legal'),
-    t.t('sidebar.safetyCenter'),
-    t.t('sidebar.privacyPolicy'),
-    t.t('sidebar.cookies'),
-    t.t('sidebar.about'),
-    t.t('sidebar.accessibility'),
+    t("sidebar.legal"),
+    t("sidebar.safetyCenter"),
+    t("sidebar.privacyPolicy"),
+    t("sidebar.cookies"),
+    t("sidebar.about"),
+    t("sidebar.accessibility"),
   ];
 
   return (
@@ -85,7 +78,9 @@ export default function Sidebar() {
         <div className="flex justify-between items-center px-8">
           <div className="cursor-pointer hover:text-white text-gray-400 duration-200 flex items-center">
             <i className="fa-solid fa-lines-leaning mr-3 text-2xl"></i>
-            <div className="text-lg font-semibold">{t.t('sidebar.yourLibrary')}</div>
+            <div className="text-lg font-semibold">
+              {t("sidebar.yourLibrary")}
+            </div>
           </div>
           <div className="cursor-pointer hover:text-white text-gray-400 duration-200 hover:bg-gray-500 bg-opacity-10 hover:rounded-full w-10 h-10 flex justify-center items-center">
             <i className="fa-solid fa-plus text-2xl"></i>
@@ -107,7 +102,7 @@ export default function Sidebar() {
           ))}
         </div>
 
-        <div 
+        <div
           className="ml-8 inline-flex justify-center items-center rounded-full border-gray-500 hover:border-white border px-4 cursor-pointer transform hover:scale-105 duration-200"
           onClick={toggleLanguageModal}
         >

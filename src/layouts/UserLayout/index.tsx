@@ -14,8 +14,8 @@ export default function UserLayout() {
         <div className="flex flex-grow overflow-hidden mb-4">
           <Sidebar />
           <div className="flex-grow mr-4 h-full overflow-hidden bg-gradient-to-b from-[#1e1e1e] via-[#121212] to-[#121212] rounded-xl">
-            <div className="h-full overflow-y-auto custom-scrollbar">
-              <div>
+            <div className="h-full overflow-y-auto custom-scrollbar hover:custom-scrollbar-hover">
+              <div className="min-h-screen">
                 <Outlet />
                 <div>{PlayMusic()}</div>
               </div>
