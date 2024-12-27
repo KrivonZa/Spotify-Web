@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { apiGetUser } from "../../../apis/apiGetUser";
 import { TypeUser } from "../../../types/typeUser";
 import { Link } from "react-router-dom";
+import { useExtractColors } from "react-extract-colors";
+
+const image = "https://www.adorama.com/alc/wp-content/uploads/2017/11/shutterstock_114802408.jpg";
 
 const { Meta } = Card;
 export default function HomePage() {
@@ -14,6 +17,12 @@ export default function HomePage() {
   useEffect(() => {
     callApiGetUser();
   }, []);
+
+  const { dominantColor, darkerColor, lighterColor } = useExtractColors(image);
+
+  const bgDominantColor = dominantColor || "";
+  const bgDarkerColor = darkerColor || "";
+  const bgLighterColor = lighterColor || "";
 
   const renderArtists = () => {
     if (user) {
@@ -44,16 +53,26 @@ export default function HomePage() {
       });
     }
   };
+  console.log(bgDominantColor)
   return (
-    <section className="">
+    <section
+      style={{
+        background: `linear-gradient(45deg, ${bgDominantColor}, ${bgDarkerColor}, ${bgLighterColor})`,
+      }}
+    >
       <div className="tittle pt-9 pl-5">
         <a className="text-xl font-bold">Dành cho MÀY</a>
       </div>
-
-      {/* <div className="artists">{renderArtists()}</div> */}
-      {/* <div className='list-friend fixed bottom-5 right-10'>
-                <ListFriend />
-            </div> */}
+      <img src="https://www.adorama.com/alc/wp-content/uploads/2017/11/shutterstock_114802408.jpg" />
     </section>
   );
+}
+
+{
+  /* <div className="artists">{renderArtists()}</div> */
+}
+{
+  /* <div className='list-friend fixed bottom-5 right-10'>
+                <ListFriend />
+            </div> */
 }

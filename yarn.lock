@@ -1270,8 +1270,8 @@ __metadata:
   linkType: hard
 
 "antd@npm:^5.19.4":
-  version: 5.22.6
-  resolution: "antd@npm:5.22.6"
+  version: 5.22.7
+  resolution: "antd@npm:5.22.7"
   dependencies:
     "@ant-design/colors": ^7.1.0
     "@ant-design/cssinjs": ^1.21.1
@@ -1319,13 +1319,13 @@ __metadata:
     rc-tree: ~5.10.1
     rc-tree-select: ~5.24.5
     rc-upload: ~4.8.1
-    rc-util: ^5.44.2
+    rc-util: ^5.44.3
     scroll-into-view-if-needed: ^3.1.0
     throttle-debounce: ^5.0.2
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 53ae813adb15201f5a1691b7bf5503cba304540f954b616a86a605fd43ebdadddfc52116cd95fddff22c95a25442b46db4fe173a1cead1022488ad5462e32b2e
+  checksum: aaaed44705a383ccc295659fb2737bb7c39d7d026d08298565fd4f6917f35f8c837e0887d8e508a3f0f25961e2581ca0bab10db9cd6421ecb9b87bb3845258a3
   languageName: node
   linkType: hard
 
@@ -2095,6 +2095,7 @@ __metadata:
     postcss: ^8.4.40
     react: ^18.3.1
     react-dom: ^18.3.1
+    react-extract-colors: ^1.5.1
     react-i18next: ^15.2.0
     react-player: ^2.16.0
     react-redux: ^9.1.2
@@ -3785,7 +3786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-util@npm:^5.0.1, rc-util@npm:^5.16.1, rc-util@npm:^5.17.0, rc-util@npm:^5.18.1, rc-util@npm:^5.2.0, rc-util@npm:^5.20.1, rc-util@npm:^5.21.0, rc-util@npm:^5.24.4, rc-util@npm:^5.25.2, rc-util@npm:^5.27.0, rc-util@npm:^5.30.0, rc-util@npm:^5.31.1, rc-util@npm:^5.32.2, rc-util@npm:^5.34.1, rc-util@npm:^5.35.0, rc-util@npm:^5.36.0, rc-util@npm:^5.37.0, rc-util@npm:^5.38.0, rc-util@npm:^5.38.1, rc-util@npm:^5.40.1, rc-util@npm:^5.41.0, rc-util@npm:^5.43.0, rc-util@npm:^5.44.0, rc-util@npm:^5.44.1, rc-util@npm:^5.44.2":
+"rc-util@npm:^5.0.1, rc-util@npm:^5.16.1, rc-util@npm:^5.17.0, rc-util@npm:^5.18.1, rc-util@npm:^5.2.0, rc-util@npm:^5.20.1, rc-util@npm:^5.21.0, rc-util@npm:^5.24.4, rc-util@npm:^5.25.2, rc-util@npm:^5.27.0, rc-util@npm:^5.30.0, rc-util@npm:^5.31.1, rc-util@npm:^5.32.2, rc-util@npm:^5.34.1, rc-util@npm:^5.35.0, rc-util@npm:^5.36.0, rc-util@npm:^5.37.0, rc-util@npm:^5.38.0, rc-util@npm:^5.38.1, rc-util@npm:^5.40.1, rc-util@npm:^5.41.0, rc-util@npm:^5.43.0, rc-util@npm:^5.44.0, rc-util@npm:^5.44.1, rc-util@npm:^5.44.3":
   version: 5.44.3
   resolution: "rc-util@npm:5.44.3"
   dependencies:
@@ -3822,6 +3823,16 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 298954ecd8f78288dcaece05e88b570014d8f6dce5db6f66e6ee91448debeb59dcd31561dddb354eee47e6c1bb234669459060deb238ed0213497146e555a0b9
+  languageName: node
+  linkType: hard
+
+"react-extract-colors@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "react-extract-colors@npm:1.5.1"
+  peerDependencies:
+    react: ">=17.0.0"
+    react-dom: ">=17.0.0"
+  checksum: ff295dde69e9b5633e566db1a142ac5986fbf82613ef487cde4ceb3701bcaf9f38278a52462f574cde9c048302b9bfbc7d8e4573592af822ddbd4a34c64b1054
   languageName: node
   linkType: hard
 
