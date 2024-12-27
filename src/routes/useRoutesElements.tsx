@@ -14,9 +14,11 @@ import {
   SignupStep,
 } from "../modules/UserModule/authorize";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const useRoutesElements = () => {
   const location = useLocation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     let title = "";

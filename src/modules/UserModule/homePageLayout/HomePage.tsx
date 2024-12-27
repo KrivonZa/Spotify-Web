@@ -49,13 +49,6 @@ export default function HomePage() {
       <div className="tittle pt-9 pl-5">
         <a className="text-xl font-bold">Dành cho MÀY</a>
       </div>
-      <audio controls>
-        <source
-          src="https://www.dropbox.com/scl/fi/ga9dcejdlvfbrucksz6qk/y2mate.com-007-NO-TIME-TO-DIE-PIANO-COVER-shot-on-the-amazing-movie-location.mp3?rlkey=ppywdn21a7siy38kmesedb49n&st=dixf3pbt&raw=1"
-          type="audio/mp3"
-        />
-        Trình duyệt của bạn không hỗ trợ phát audio.
-      </audio>
 
       {/* <div className="artists">{renderArtists()}</div> */}
       {/* <div className='list-friend fixed bottom-5 right-10'>
