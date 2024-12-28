@@ -24,6 +24,25 @@
     "login": "Đăng nhập",
     "signup": "Đăng ký"
   },
+  "footer": {
+    "company": "Công ty",
+    "about": "Giới thiệu",
+    "job": "Việc làm",
+    "record": "For the Record",
+    "communities": "Cộng đồng",
+    "artist": "Dành cho các Nghệ sĩ",
+    "developers": "Nhà phát triển",
+    "ads": "Quảng cáo",
+    "investor": "Nhà đầu tư",
+    "vendor": "Nhà cung cấp",
+    "link": "Liên kết hữu ích",
+    "support": "Hỗ trợ",
+    "app": "Ứng dụng Di động Miễn phí",
+    "plans": "Các gói của Spotify",
+    "individual": "Premium Individual",
+    "student": "Premium Student",
+    "free": "Spotify Free"
+  },
   "login": {
     "title": "Đăng nhập vào Spotify",
     "google": "Tiếp tục bằng Google",

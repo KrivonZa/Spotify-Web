@@ -30,6 +30,25 @@
     "login": "Log in",
     "signup": "Sign up"
   },
+  "footer": {
+    "company": "Company",
+    "about": "About",
+    "job": "Jobs",
+    "record": "For the Record",
+    "communities": "Communities",
+    "artist": "For Artists",
+    "developers": "Developers",
+    "ads": "Advertising",
+    "investor": "Investors",
+    "vendor": "Vendors",
+    "link": "Useful links",
+    "support": "Support",
+    "app": "Free Mobile App",
+    "plans": "Spotify Plans",
+    "individual": "Premium Individual",
+    "student": "Premium Student",
+    "free": "Spotify Free"
+  },
   "login": {
     "title": "Log in to Spotify",
     "google": "Continue with Google",
