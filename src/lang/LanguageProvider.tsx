@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import i18n from "./i18next";
+import i18n, { languageResources } from "./i18next";
 
 interface LanguageContextType {
   language: string;
@@ -21,8 +21,14 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const systemLanguage = navigator.language.split("-")[0];
-  const [language, setLanguage] = useState<string>(systemLanguage);
+  const supportedLanguages = Object.keys(languageResources);
+
+  const getDefaultLanguage = () => {
+    const browserLanguage = navigator.language.split("-")[0];
+    return supportedLanguages.includes(browserLanguage) ? browserLanguage : "en";
+  };
+
+  const [language, setLanguage] = useState<string>(getDefaultLanguage());
 
   const changeLanguage = (lang: string) => {
     setLanguage(lang);

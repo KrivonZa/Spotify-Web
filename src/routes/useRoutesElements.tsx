@@ -26,19 +26,19 @@ const useRoutesElements = () => {
     if (location.pathname === "/") {
       title = "Spotify";
     } else if (location.pathname.startsWith("/detail-artists")) {
-      title = "Chi Tiết Nghệ Sĩ";
+      title = t("routes.artists");
     } else if (location.pathname.startsWith("/play-list")) {
-      title = "Danh Sách Phát";
+      title = t("routes.playlist");
     } else if (location.pathname === "/genre") {
-      title = "Thể Loại";
+      title = t("routes.genre");
     } else if (location.pathname.startsWith("/genre")) {
-      title = "Thể Loại và Bài Hát";
+      title = t("routes.genreDetail");
     } else if (location.pathname === "/login") {
-      title = "Đăng Nhập";
+      title = t("routes.login");
     } else if (location.pathname.includes("/signup")) {
-      title = "Đăng Ký";
+      title = t("routes.signup");
     } else if (location.pathname === "/forgot") {
-      title = "Quên Mật Khẩu";
+      title = t("routes.forgot");
     }
 
     document.title = title;

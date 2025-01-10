@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../redux/hooks";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import { AppDispatch } from "../../../redux/store";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { message } from "antd";
+import { loginThunk } from "../../../stores/authManager/thunk";
+import { useAuth } from "../../../hooks/useAuth";
 import "./styles.css";
 
 export function Login() {
@@ -11,10 +16,37 @@ export function Login() {
   const navigate = useNavigate();
   const [isFocused, setIsFocused] = useState<string | null>(null);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { t } = useTranslation();
+  const { loading } = useAuth();
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prevState) => !prevState);
+  };
+
+  const handleClick = (name: string) => {
+    message.warning(name + " " + t("login.warn1"));
+  };
+
+  const handleLogin = async () => {
+    if (email && password) {
+      const loginData = { email, password };
+      try {
+        const result = await dispatch(loginThunk(loginData)).unwrap();
+        if (result) {
+          navigate("/");
+        }
+      } catch (error: any) {
+        if (error.code === 1006) {
+          message.error(t("login.error1"));
+        } else if (error.code === 1007) {
+          message.error(t("login.error2"));
+        } else {
+          message.error(t("login.error3"))
+        }
+      }
+    }
   };
 
   return (
@@ -29,15 +61,24 @@ export function Login() {
             {t("login.title")}
           </div>
           <div className="w-full grid grid-flow-row gap-y-4">
-            <button className="py-3 px-6 flex items-center rounded-full border border-white relative duration-200 hover:bg-[#414141]">
+            <button
+              className="py-3 px-6 flex items-center rounded-full border border-white relative duration-200 hover:bg-[#414141]"
+              onClick={() => handleClick("Google")}
+            >
               <i className="fa-brands fa-google text-xl"></i>
               <p className="font-bold mx-auto">{t("login.google")}</p>
             </button>
-            <button className="py-3 px-6 flex items-center rounded-full border border-white relative duration-200 hover:bg-[#414141]">
+            <button
+              className="py-3 px-6 flex items-center rounded-full border border-white relative duration-200 hover:bg-[#414141]"
+              onClick={() => handleClick("Facebook")}
+            >
               <i className="fa-brands fa-facebook text-xl"></i>
               <p className="font-bold mx-auto">{t("login.facebook")}</p>
             </button>
-            <button className="py-3 px-6 flex items-center rounded-full border border-white relative duration-200 hover:bg-[#414141]">
+            <button
+              className="py-3 px-6 flex items-center rounded-full border border-white relative duration-200 hover:bg-[#414141]"
+              onClick={() => handleClick("Apple")}
+            >
               <i className="fa-brands fa-apple text-xl"></i>
               <p className="font-bold mx-auto">{t("login.apple")}</p>
             </button>
@@ -62,6 +103,7 @@ export function Login() {
                 placeholder={t("login.email")}
                 onFocus={() => setIsFocused("email")}
                 onBlur={() => setIsFocused(null)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -81,6 +123,7 @@ export function Login() {
                 placeholder={t("login.password")}
                 onFocus={() => setIsFocused("pass")}
                 onBlur={() => setIsFocused(null)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <i
                 className={`fa-regular text-lg cursor-pointer text-[#a0a0a0] duration-150 hover:text-white ${
@@ -92,8 +135,17 @@ export function Login() {
           </div>
 
           <div className="flex flex-col justify-center items-center">
-            <button className="text-center text-[#121212] font-bold bg-green-500 hover:bg-green-400 transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-5">
-              {t("login.login")}
+            <button
+              className="text-center text-[#121212] font-bold bg-green-500 hover:bg-green-400 transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-5"
+              onClick={handleLogin}
+            >
+              {loading ? (
+                <Spin
+                  indicator={<LoadingOutlined spin className="text-white" />}
+                />
+              ) : (
+                t("login.login")
+              )}
             </button>
             <button
               className="font-semibold underline hover:text-green-600 duration-200 my-7"

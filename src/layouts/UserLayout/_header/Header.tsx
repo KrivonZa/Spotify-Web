@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 export default function Header() {
   const navigate = useNavigate();
   const { isModalOpen, closeModal, openModal } = useModal();
-  const { currentUser } = useAppSelector((state) => state.currentUser);
   const [isFocused, setIsFocused] = useState(false);
   const { t } = useTranslation();
 
@@ -61,7 +60,7 @@ export default function Header() {
         </div>
 
         <div className="mx-8 font-bold flex-1">
-          {currentUser ? (
+          {false ? (
             <div onClick={handleLogout} className="">
               Log out
             </div>

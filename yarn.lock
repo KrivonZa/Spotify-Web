@@ -686,6 +686,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@popperjs/core@npm:^2.9.0":
+  version: 2.11.8
+  resolution: "@popperjs/core@npm:2.11.8"
+  checksum: e5c69fdebf52a4012f6a1f14817ca8e9599cb1be73dd1387e1785e2ed5e5f0862ff817f420a87c7fc532add1f88a12e25aeb010ffcbdc98eace3d55ce2139cf0
+  languageName: node
+  linkType: hard
+
 "@rc-component/async-validator@npm:^5.0.3":
   version: 5.0.4
   resolution: "@rc-component/async-validator@npm:5.0.4"
@@ -1019,6 +1026,13 @@ __metadata:
   version: 1.0.6
   resolution: "@types/estree@npm:1.0.6"
   checksum: 8825d6e729e16445d9a1dd2fb1db2edc5ed400799064cd4d028150701031af012ba30d6d03fe9df40f4d7a437d0de6d2b256020152b7b09bde9f2e420afdffd9
+  languageName: node
+  linkType: hard
+
+"@types/howler@npm:^2.2.12":
+  version: 2.2.12
+  resolution: "@types/howler@npm:2.2.12"
+  checksum: 0f8b88abd9b0607db50c4fbc91cc6646a9eee4a337f3e8b9c39696e78eff1eb0b3f5913bf32cccc7a96d2be2af8544376ce3afa5de4b1ba9873d0287abe97a5b
   languageName: node
   linkType: hard
 
@@ -2078,6 +2092,7 @@ __metadata:
   resolution: "fe-spotify@workspace:."
   dependencies:
     "@reduxjs/toolkit": ^2.2.7
+    "@types/howler": ^2.2.12
     "@types/react": ^18.3.3
     "@types/react-dom": ^18.3.0
     "@typescript-eslint/eslint-plugin": ^7.15.0
@@ -2089,13 +2104,13 @@ __metadata:
     eslint: ^8.57.0
     eslint-plugin-react-hooks: ^4.6.2
     eslint-plugin-react-refresh: ^0.4.7
+    framer-motion: ^11.15.0
     i18next: ^24.2.0
     init: ^0.1.2
     moment: ^2.30.1
     postcss: ^8.4.40
     react: ^18.3.1
     react-dom: ^18.3.1
-    react-extract-colors: ^1.5.1
     react-i18next: ^15.2.0
     react-player: ^2.16.0
     react-redux: ^9.1.2
@@ -2104,6 +2119,7 @@ __metadata:
     socket.io-client: ^4.8.0
     tailwind-scrollbar: ^3.1.0
     tailwindcss: ^3.4.7
+    tippy.js: ^6.3.7
     typescript: ^5.2.2
     vite: ^5.3.5
   languageName: unknown
@@ -2190,6 +2206,28 @@ __metadata:
   version: 4.3.7
   resolution: "fraction.js@npm:4.3.7"
   checksum: e1553ae3f08e3ba0e8c06e43a3ab20b319966dfb7ddb96fd9b5d0ee11a66571af7f993229c88ebbb0d4a816eb813a24ed48207b140d442a8f76f33763b8d1f3f
+  languageName: node
+  linkType: hard
+
+"framer-motion@npm:^11.15.0":
+  version: 11.15.0
+  resolution: "framer-motion@npm:11.15.0"
+  dependencies:
+    motion-dom: ^11.14.3
+    motion-utils: ^11.14.3
+    tslib: ^2.4.0
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 94ad254ca4874a9aa8eb64a721ad40e76a926489206d817ad4512b65d4506c65803714f9393309d352aa828b2272bbff8700878c92ab4d1202eab16a6efc45d7
   languageName: node
   linkType: hard
 
@@ -2890,6 +2928,20 @@ __metadata:
   version: 2.30.1
   resolution: "moment@npm:2.30.1"
   checksum: 859236bab1e88c3e5802afcf797fc801acdbd0ee509d34ea3df6eea21eb6bcc2abd4ae4e4e64aa7c986aa6cba563c6e62806218e6412a765010712e5fa121ba6
+  languageName: node
+  linkType: hard
+
+"motion-dom@npm:^11.14.3":
+  version: 11.14.3
+  resolution: "motion-dom@npm:11.14.3"
+  checksum: af9e6f6bfd1ff5c08ccd1138d10fb08a2f4b86e968a3eaf180cdcb80e9c8f7ed34dcedffc18c4bf99cf5b64d8938b5ba5e6b88e7f46ffe5ed7b1d4c23150cae2
+  languageName: node
+  linkType: hard
+
+"motion-utils@npm:^11.14.3":
+  version: 11.14.3
+  resolution: "motion-utils@npm:11.14.3"
+  checksum: 49ca9cd5731ce50a53b35f9d3f0b1858bcd24c6e602bfd6d64c9ec0006a1f87ee57be3872d55503233555c1fcfaf358fc4e18c6e2771d31a676f1243833352c4
   languageName: node
   linkType: hard
 
@@ -3826,16 +3878,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-extract-colors@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "react-extract-colors@npm:1.5.1"
-  peerDependencies:
-    react: ">=17.0.0"
-    react-dom: ">=17.0.0"
-  checksum: ff295dde69e9b5633e566db1a142ac5986fbf82613ef487cde4ceb3701bcaf9f38278a52462f574cde9c048302b9bfbc7d8e4573592af822ddbd4a34c64b1054
-  languageName: node
-  linkType: hard
-
 "react-fast-compare@npm:^3.0.1":
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
@@ -4503,6 +4545,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tippy.js@npm:^6.3.7":
+  version: 6.3.7
+  resolution: "tippy.js@npm:6.3.7"
+  dependencies:
+    "@popperjs/core": ^2.9.0
+  checksum: cac955318a65288e8d2dca05059878b003c6e66f92c94f7810f5bc5448eb6646abdf7dacc9bd00020e2611592598d0aae3a28ec9a45349a159603c3fdddce5fb
+  languageName: node
+  linkType: hard
+
 "to-regex-range@npm:^5.0.1":
   version: 5.0.1
   resolution: "to-regex-range@npm:5.0.1"
@@ -4532,6 +4583,13 @@ __metadata:
   version: 0.1.13
   resolution: "ts-interface-checker@npm:0.1.13"
   checksum: 20c29189c2dd6067a8775e07823ddf8d59a33e2ffc47a1bd59a5cb28bb0121a2969a816d5e77eda2ed85b18171aa5d1c4005a6b88ae8499ec7cc49f78571cb5e
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.4.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a
   languageName: node
   linkType: hard
 

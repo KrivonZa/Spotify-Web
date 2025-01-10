@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.css";
+import tippy from "tippy.js";
+import "tippy.js/dist/tippy.css";
 
 const BottomPlayer = () => {
   const [volume, setVolume] = useState(100);
@@ -68,8 +70,10 @@ const BottomPlayer = () => {
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = parseFloat(e.target.value);
+    console.log("new", newTime);
     if (audioRef.current) {
       audioRef.current.currentTime = newTime;
+      console.log("old", audioRef.current.currentTime);
     }
     setCurrentTime(newTime);
   };
@@ -78,6 +82,10 @@ const BottomPlayer = () => {
     if (volume === 0) return "fa-volume-xmark";
     if (volume <= 75) return "fa-volume-low";
     return "fa-volume-high";
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
   };
 
   return (
@@ -139,9 +147,10 @@ const BottomPlayer = () => {
         </div>
         <audio
           ref={audioRef}
-          src="https://firebasestorage.googleapis.com/v0/b/swp391-a9fd3.appspot.com/o/spotifyMusic%2FtestMusic.mp3?alt=media&token=1aeb9e6c-efdc-484f-92f6-1ce5a36e9acf"
+          src="https://music-media.trangiangkhanh.site/db0d8fc2-a53f-4fec-8c7f-c901cecd1b4b_2025-01-03T07:01:15.132006185.mp3"
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
+          onEnded={handleEnded}
         ></audio>
       </div>
       <div className="grid grid-flow-col justify-between gap-x-5 text-[#a0a0a0] basis-1/4">

@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../../redux/store";
+import { useSignupContext } from "../../../../globalContext/SignupContext";
+import { signupThunk } from "../../../../stores/authManager/thunk";
+import { useAuth } from "../../../../hooks/useAuth";
 
 interface Step1Props {
   nextStep: () => void;
@@ -11,8 +18,18 @@ export function Step3({ nextStep }: Step1Props) {
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [dataSharingConsent, setDataSharingConsent] = useState(false);
   const { t } = useTranslation();
+  const { loading } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
+  const { email, password, name, dateOfBirth, gender } = useSignupContext();
 
   const canSubmit = marketingConsent && dataSharingConsent;
+
+  const handleSignup = async () => {
+    if (canSubmit) {
+      const signupData = { email, password, name, dateOfBirth, gender };
+      await dispatch(signupThunk(signupData));
+    }
+  };
 
   return (
     <div className="w-full h-full">
@@ -67,10 +84,14 @@ export function Step3({ nextStep }: Step1Props) {
             ? "bg-green-500 hover:bg-green-400 transform hover:scale-105 duration-200"
             : "bg-gray-400 cursor-not-allowed"
         }`}
-        onClick={() => navigate("/")}
+        onClick={handleSignup}
         disabled={!canSubmit}
       >
-        {t("signup.signup")}
+        {loading ? (
+          <Spin indicator={<LoadingOutlined spin className="text-white" />} />
+        ) : (
+          t("signup.signup")
+        )}
       </button>
     </div>
   );

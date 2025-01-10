@@ -54,7 +54,11 @@
     "google": "Continue with Google",
     "facebook": "Continue with Facebook",
     "apple": "Continue with Apple",
-    "email": "Email or username",
+    "warn1": "is temporarily not supporting login",
+    "error1": "User does not exist",
+    "error2": "Wrong password",
+    "error3": "Server error",
+    "email": "Email",
     "password": "Password",
     "login": "Log In",
     "forgot": "Forgot your password?",
@@ -75,8 +79,10 @@
     "google": "Sign up with Google",
     "facebook": "Sign up with Facebook",
     "apple": "Sign up with Apple",
+    "warn1": "is temporarily not supporting signup",
     "login1": "Already have an account?",
     "login2": "Log in here",
+    "invalid": "Invalid Email format",
     "step1": "Step 1 of 3",
     "createPassword": "Create a password",
     "password": "Password",
@@ -94,9 +100,6 @@
     "descriptionGender": "We use your gender to help personalize our content recommendations and ads for you.",
     "male": "Man",
     "female": "Woman",
-    "nonBinary": "Non-binary",
-    "other": "Something else",
-    "noSpecific": "Prefer not to say",
     "error1": "Invalid day, month, year.",
     "error2": "Invalid year of birth.",
     "error3": "Invalid day or month.",
@@ -109,5 +112,19 @@
     "agreeSecond1": "To learn more about how Spotify collects, uses, shares and protects your personal data, please see",
     "agreeSecond2": "Spotify's Privacy Policy.",
     "signup": "Sign up"
+  },
+  "homepage": {
+    "all": "All",
+    "music": "Music",
+    "podcast": "Podcasts"
+  },
+  "routes": {
+    "artists": "Artist Details",
+    "playlist": "Playlists",
+    "genre": "Genres",
+    "genreDetail": "Genres and Songs",
+    "login": "Log In",
+    "signup":"Sign Up",
+    "forgot": "Forgot Password"
   }
 }

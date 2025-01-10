@@ -1,78 +1,59 @@
-import { Card } from "antd";
-import { useEffect, useState } from "react";
-import { apiGetUser } from "../../../apis/apiGetUser";
-import { TypeUser } from "../../../types/typeUser";
-import { Link } from "react-router-dom";
-import { useExtractColors } from "react-extract-colors";
+import { useState } from "react";
+import { useColor } from "../../../globalContext/ColorContext";
+import { useTranslation } from "react-i18next";
+import data from "./data.json";
+import { processImageAndSetBackground } from "../../../tools/dominantColor";
 
-const image = "https://www.adorama.com/alc/wp-content/uploads/2017/11/shutterstock_114802408.jpg";
-
-const { Meta } = Card;
 export default function HomePage() {
-  const [user, setUser] = useState<TypeUser[]>([]);
-  const callApiGetUser = async () => {
-    const result = await apiGetUser();
-    setUser(Array.isArray(result) ? result : [result]);
-  };
-  useEffect(() => {
-    callApiGetUser();
-  }, []);
+  const { t } = useTranslation();
+  const { setPrimaryColor } = useColor();
 
-  const { dominantColor, darkerColor, lighterColor } = useExtractColors(image);
-
-  const bgDominantColor = dominantColor || "";
-  const bgDarkerColor = darkerColor || "";
-  const bgLighterColor = lighterColor || "";
-
-  const renderArtists = () => {
-    if (user) {
-      return user.map((itemUser) => {
-        if (itemUser.role === "Singer") {
-          return (
-            <Link
-              key={itemUser.userId}
-              to={`/detail-artists/${itemUser.userId}`}
-            >
-              <Card
-                className=""
-                hoverable
-                style={{ width: 200 }}
-                cover={
-                  <img
-                    className="img-artists"
-                    alt="example"
-                    src={itemUser.avatar}
-                  />
-                }
-              >
-                <Meta title={itemUser.name} description={itemUser.role} />
-              </Card>
-            </Link>
-          );
-        }
-      });
+  const handleMouseEnter = async (imageUrl: string) => {
+    const calculatedRgb = await processImageAndSetBackground(imageUrl);
+    if (calculatedRgb) {
+      setPrimaryColor(`rgb(${calculatedRgb.r}, ${calculatedRgb.g}, ${calculatedRgb.b})`);
     }
   };
-  console.log(bgDominantColor)
+
+  const handleMouseLeave = () => {
+    setPrimaryColor("#383838");
+  };
+
   return (
-    <section
-      style={{
-        background: `linear-gradient(45deg, ${bgDominantColor}, ${bgDarkerColor}, ${bgLighterColor})`,
-      }}
-    >
-      <div className="tittle pt-9 pl-5">
-        <a className="text-xl font-bold">Dành cho MÀY</a>
+    <section className="min-h-screen">
+      <div className="px-7 py-5">
+        <div className="flex gap-x-3 font-medium">
+          <button className="px-4 py-1 rounded-full bg-white bg-opacity-15 hover:bg-opacity-25 duration-200">
+            {t("homepage.all")}
+          </button>
+          <button className="px-4 py-1 rounded-full bg-white bg-opacity-15 hover:bg-opacity-25 duration-200">
+            {t("homepage.music")}
+          </button>
+          <button className="px-4 py-1 rounded-full bg-white bg-opacity-15 hover:bg-opacity-25 duration-200">
+            {t("homepage.podcast")}
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-5">
+          {data.map((item, index) => (
+            <div
+              key={index}
+              className="bg-white bg-opacity-15 hover:bg-opacity-25 duration-200 h-12 flex items-center rounded overflow-hidden cursor-pointer"
+              onMouseEnter={() => handleMouseEnter(item.image)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <img
+                className="w-12 h-full object-cover"
+                src={item.image}
+                alt={item.name}
+              />
+              <p className="font-medium px-2 py-1 text-sm text-pretty">
+                {item.name}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
-      <img src="https://www.adorama.com/alc/wp-content/uploads/2017/11/shutterstock_114802408.jpg" />
     </section>
   );
-}
-
-{
-  /* <div className="artists">{renderArtists()}</div> */
-}
-{
-  /* <div className='list-friend fixed bottom-5 right-10'>
-                <ListFriend />
-            </div> */
 }

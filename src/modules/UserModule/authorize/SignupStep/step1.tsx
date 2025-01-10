@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSignupContext } from "../../../../globalContext/SignupContext";
 
 interface Step1Props {
   nextStep: () => void;
 }
 
 export function Step1({ nextStep }: Step1Props) {
-  const [password, setPassword] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
   const [isFocused, setIsFocused] = useState<string | null>(null);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [validations, setValidations] = useState({
@@ -15,6 +16,7 @@ export function Step1({ nextStep }: Step1Props) {
     minLength: false,
   });
   const { t } = useTranslation();
+  const { setPassword } = useSignupContext();
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prevState) => !prevState);
@@ -22,11 +24,11 @@ export function Step1({ nextStep }: Step1Props) {
 
   useEffect(() => {
     setValidations({
-      hasLetter: /[a-zA-Z]/.test(password), // Ít nhất 1 chữ cái
-      hasNumberOrSpecialChar: /[0-9#?!&]/.test(password), // Ít nhất 1 chữ số hoặc ký tự đặc biệt
-      minLength: password.length >= 10, // Tối thiểu 10 ký tự
+      hasLetter: /[a-zA-Z]/.test(passwordInput), // Ít nhất 1 chữ cái
+      hasNumberOrSpecialChar: /[0-9#?!&]/.test(passwordInput), // Ít nhất 1 chữ số hoặc ký tự đặc biệt
+      minLength: passwordInput.length >= 10, // Tối thiểu 10 ký tự
     });
-  }, [password]);
+  }, [passwordInput]);
 
   const isFormValid =
     validations.hasLetter &&
@@ -48,8 +50,8 @@ export function Step1({ nextStep }: Step1Props) {
             type={isPasswordVisible ? "text" : "password"}
             className="bg-transparent focus:outline-none w-full px-3 py-3 placeholder-[#a0a0a0]"
             placeholder={t("signup.password")}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
             onFocus={() => setIsFocused("pass")}
             onBlur={() => setIsFocused(null)}
           />
@@ -99,7 +101,12 @@ export function Step1({ nextStep }: Step1Props) {
         className={`text-center text-[#121212] font-bold transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-8 ${
           isFormValid ? "hover:bg-green-400 bg-green-500" : "bg-gray-400 cursor-not-allowed"
         }`}
-        onClick={isFormValid ? nextStep : undefined}
+        onClick={() => {
+          if (isFormValid) {
+            setPassword(passwordInput);
+            nextStep();
+          }
+        }}
         disabled={!isFormValid}
       >
         {t("signup.next")}

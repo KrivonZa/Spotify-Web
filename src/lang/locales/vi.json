@@ -48,7 +48,11 @@
     "google": "Tiếp tục bằng Google",
     "facebook": "Tiếp tục bằng Facebook",
     "apple": "Tiếp tục bằng Apple",
-    "email": "Email hoặc tên người dùng",
+    "warn1": "tạm thời không hỗ trợ đăng nhập",
+    "error1": "Người dùng không tồn tại",
+    "error2": "Mật khẩu sai",
+    "error3": "Lỗi máy chủ",
+    "email": "Email",
     "password": "Mật khẩu",
     "login": "Đăng nhập",
     "forgot": "Quên mật khẩu của bạn?",
@@ -69,8 +73,10 @@
     "google": "Đăng ký bằng Google",
     "facebook": "Đăng ký bằng Facebook",
     "apple": "Đăng ký bằng Apple",
+    "warn1": "tạm thời không hỗ trợ đăng ký",
     "login1": "Bạn đã có tài khoản?",
     "login2": "Đăng nhập tại đây",
+    "invalid": "Định dạng Email không hợp lệ",
     "step1": "Bước 1/3",
     "createPassword": "Tạo mật khẩu",
     "password": "Mật khẩu",
@@ -88,9 +94,6 @@
     "descriptionGender": "Giới tính của bạn giúp chúng tôi cung cấp nội dung đề xuất và quảng cáo phù hợp với bạn.",
     "male": "Nam",
     "female": "Nữ",
-    "nonBinary": "Không phân biệt giới tính",
-    "other": "Giới tính khác",
-    "noSpecific": "Không muốn nêu cụ thể",
     "error1": "Ngày, tháng, năm không hợp lệ.",
     "error2": "Năm sinh không hợp lệ.",
     "error3": "Ngày hoặc tháng không hợp lệ.",
@@ -103,5 +106,19 @@
     "agreeSecond1": "Để tìm hiểu thêm về cách thức Spotify thu thập, sử dụng, chia sẻ và bảo vệ dữ liệu cá nhân của bạn, vui lòng xem",
     "agreeSecond2": "Chính sách quyền riêng tư của Spotify.",
     "signup": "Đăng ký"
+  },
+  "homepage": {
+    "all": "Tất cả",
+    "music": "Nhạc",
+    "podcast": "Podcasts"
+  },
+  "routes": {
+    "artists": "Chi Tiết Nghệ Sĩ",
+    "playlist": "Danh Sách Phát",
+    "genre": "Thể Loại",
+    "genreDetail": "Thể Loại và Bài Hát",
+    "login": "Đăng Nhập",
+    "signup":"Đăng Ký",
+    "forgot": "Quên Mật Khẩu"
   }
 }

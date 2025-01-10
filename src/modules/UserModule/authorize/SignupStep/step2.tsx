@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSignupContext } from "../../../../globalContext/SignupContext";
 import "../styles.css";
 
 interface Step1Props {
@@ -10,7 +11,8 @@ interface Step1Props {
 export function Step2({ nextStep }: Step1Props) {
   const navigate = useNavigate();
   const [isFocused, setIsFocused] = useState<string | null>(null);
-  const [isSelected, setIsSelected] = useState<number | null>(null);
+  const [isSelected, setIsSelected] = useState<boolean | null>(null);
+  const [nameInput, setNameInput] = useState<string>("");
   const [day, setDay] = useState<string>("");
   const [month, setMonth] = useState<string>("");
   const [year, setYear] = useState<string>("");
@@ -18,6 +20,7 @@ export function Step2({ nextStep }: Step1Props) {
   const [isValid, setIsValid] = useState(false);
   const [hasInput, setHasInput] = useState(false);
   const { t } = useTranslation();
+  const { setName, setDateOfBirth, setGender } = useSignupContext();
 
   const isLeapYear = (year: number) => {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -71,9 +74,9 @@ export function Step2({ nextStep }: Step1Props) {
 
   useEffect(() => {
     if (hasInput) {
-      setIsValid(validateDate());
+      setIsValid(validateDate() && nameInput.trim() !== "" && isSelected !== null); // Kiểm tra tên và lựa chọn giới tính
     }
-  }, [day, month, year, hasInput]);
+  }, [day, month, year, hasInput, nameInput, isSelected]);
 
   const handleInputChange = (
     setter: React.Dispatch<React.SetStateAction<string>>,
@@ -83,6 +86,15 @@ export function Step2({ nextStep }: Step1Props) {
     setter(value);
   };
 
+  const handleNext = () => {
+    if (isValid) {
+      setName(nameInput);
+      setDateOfBirth(`${day}/${month}/${year}`);
+      setGender(isSelected);
+      nextStep();
+    }
+  };
+
   return (
     <div className="w-full h-full">
       <div className="mt-3">
@@ -90,7 +102,7 @@ export function Step2({ nextStep }: Step1Props) {
         <p className="text-[#a0a0a0] text-sm">{t("signup.descriptionName")}</p>
         <div
           className={`border border-gray-500 rounded-lg mt-2 hover:bg-[#414141] duration-150 ${
-            isFocused === "email"
+            isFocused === "name"
               ? "border-white bg-[#414141]"
               : "border-[#141414]"
           }`}
@@ -98,8 +110,10 @@ export function Step2({ nextStep }: Step1Props) {
           <input
             type="text"
             className="bg-transparent focus:outline-none w-full px-3 py-3 placeholder-[#a0a0a0]"
-            onFocus={() => setIsFocused("email")}
+            onFocus={() => setIsFocused("name")}
             onBlur={() => setIsFocused(null)}
+            value={nameInput}
+            onChange={(e) => handleInputChange(setNameInput, e.target.value)}
           />
         </div>
       </div>
@@ -171,9 +185,9 @@ export function Step2({ nextStep }: Step1Props) {
         <div className="mt-2">
           <div
             className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
-            onClick={() => setIsSelected(1)}
+            onClick={() => setIsSelected(true)}
           >
-            {isSelected === 1 ? (
+            {isSelected === true ? (
               <i className="fa-solid fa-circle-dot text-green-400"></i>
             ) : (
               <i className="fa-regular fa-circle"></i>
@@ -182,54 +196,24 @@ export function Step2({ nextStep }: Step1Props) {
           </div>
           <div
             className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
-            onClick={() => setIsSelected(2)}
+            onClick={() => setIsSelected(false)}
           >
-            {isSelected === 2 ? (
+            {isSelected === false ? (
               <i className="fa-solid fa-circle-dot text-green-400"></i>
             ) : (
               <i className="fa-regular fa-circle"></i>
             )}
             <p className="ml-2">{t("signup.female")}</p>
           </div>
-          <div
-            className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
-            onClick={() => setIsSelected(3)}
-          >
-            {isSelected === 3 ? (
-              <i className="fa-solid fa-circle-dot text-green-400"></i>
-            ) : (
-              <i className="fa-regular fa-circle"></i>
-            )}
-            <p className="ml-2">{t("signup.nonBinary")}</p>
-          </div>
-          <div
-            className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
-            onClick={() => setIsSelected(4)}
-          >
-            {isSelected === 4 ? (
-              <i className="fa-solid fa-circle-dot text-green-400"></i>
-            ) : (
-              <i className="fa-regular fa-circle"></i>
-            )}
-
-            <p className="ml-2">{t("signup.other")}</p>
-          </div>
-          <div
-            className="mt-2 flex items-center text-sm cursor-default hover:text-green-400 duration-200"
-            onClick={() => setIsSelected(5)}
-          >
-            {isSelected === 5 ? (
-              <i className="fa-solid fa-circle-dot text-green-400"></i>
-            ) : (
-              <i className="fa-regular fa-circle"></i>
-            )}
-            <p className="ml-2">{t("signup.noSpecific")}</p>
-          </div>
         </div>
       </div>
       <button
-        className="text-center text-[#121212] font-bold bg-green-500 hover:bg-green-400 transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-5"
-        onClick={nextStep}
+        className={`text-center text-[#121212] font-bold transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-5 ${
+          isValid
+            ? "hover:bg-green-400 bg-green-500"
+            : "bg-gray-400 cursor-not-allowed"
+        }`}
+        onClick={handleNext}
         disabled={!isValid}
       >
         {t("signup.next")}
