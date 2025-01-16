@@ -9,6 +9,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { checkEmailThunk } from "../../../stores/authManager/thunk";
 import { useAuth } from "../../../hooks/useAuth";
 import { useSignupContext } from "../../../globalContext/SignupContext";
+import "./styles.css";
 
 export function Signup() {
   const dispatch = useDispatch<AppDispatch>();

@@ -28,7 +28,15 @@
   "header": {
     "search": "What do you want to play?",
     "login": "Log in",
-    "signup": "Sign up"
+    "signup": "Sign up",
+    "premium": "Explore Premium",
+    "download": "Install App",
+    "account": "Account",
+    "profile": "Profile",
+    "upgrade": "Upgrade to Premium",
+    "upgrade1": "This feature is not available yet",
+    "setting": "Settings",
+    "logout": "Log out"
   },
   "footer": {
     "company": "Company",
@@ -67,9 +75,25 @@
   },
   "forgot": {
     "title": "Reset your password",
-    "description": "Enter the email address or username linked to your Spotify account and we'll send you an email.",
-    "email": "Email or username",
-    "send": "Send link"
+    "description": "Enter your email address and we'll send you an email.",
+    "email": "Your Email",
+    "send": "Send email",
+    "sendAgain": "Send email again",
+    "success": "We have sent you an email. Please get the code and enter it here",
+    "authorizeFail": "Email not found. Please ensure your email is correct",
+    "fail": "Email sending failed. Please try again",
+    "confirmCode": "Confirm Code(attatched with email)",
+    "confirm": "Confirm",
+    "confirmSuccess": "Confirm successfully",
+    "confirmExpired": "The confirm code is expired. Please try again",
+    "confirmFail": "Confirm failed. Please try again"
+  },
+  "reset": {
+    "title": "Reset your password",
+    "description": "Fill in all the fields below to complete resetting your password.",
+    "email": "Your Email",
+    "password": "New password",
+    "confirmPassword": "Confirm password"
   },
   "signup": {
     "title": "Sign up to start listening",
@@ -124,7 +148,15 @@
     "genre": "Genres",
     "genreDetail": "Genres and Songs",
     "login": "Log In",
-    "signup":"Sign Up",
+    "signup": "Sign Up",
     "forgot": "Forgot Password"
+  },
+  "setting": {
+    "useless": "This feature is still in testing"
+  },
+  "boundary": {
+    "NFtitle": "Page Not Found",
+    "NFdescription": "The page you try to enter is not existed",
+    "NFbutton": "Back to Homepage"
   }
 }

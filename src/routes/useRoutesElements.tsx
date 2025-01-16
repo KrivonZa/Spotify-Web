@@ -1,5 +1,9 @@
 import { useRoutes, useLocation } from "react-router-dom";
-import HomePage from "../modules/UserModule/homePageLayout/HomePage";
+import {
+  HomePage,
+  Notification,
+  Setting,
+} from "../modules/UserModule/homePageLayout";
 import UserLayout from "../layouts/UserLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import SignupStepIndex from "../layouts/AuthLayout/SignupStepIndex";
@@ -12,7 +16,10 @@ import {
   Signup,
   ForgotPass,
   SignupStep,
+  ResetPassword,
 } from "../modules/UserModule/authorize";
+import { MainProfile } from "../modules/UserModule/profile";
+import { NotFound } from "../modules/UserModule/boundary";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -54,6 +61,18 @@ const useRoutesElements = () => {
           element: <HomePage />,
         },
         {
+          path: "notification",
+          element: <Notification />,
+        },
+        {
+          path: "setting",
+          element: <Setting />,
+        },
+        {
+          path: "user",
+          element: <MainProfile />,
+        },
+        {
           path: "detail-artists/:id",
           element: <DetailArtists />,
         },
@@ -93,7 +112,15 @@ const useRoutesElements = () => {
           path: "forgot",
           element: <ForgotPass />,
         },
+        {
+          path: "reset",
+          element: <ResetPassword />,
+        },
       ],
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
   return element;

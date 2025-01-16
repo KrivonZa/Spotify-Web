@@ -8,6 +8,8 @@ import { store } from "./stores/index.ts";
 import { LanguageProvider } from "./lang/LanguageProvider.tsx";
 import { SignupProvider } from "./globalContext/SignupContext.tsx";
 import { ColorProvider } from "./globalContext/ColorContext.tsx";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -17,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <LanguageProvider>
             <BrowserRouter>
               <App />
+              <ToastContainer />
             </BrowserRouter>
           </LanguageProvider>
         </ColorProvider>

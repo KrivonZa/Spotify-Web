@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Spin } from "antd";
+import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../redux/store";
 import { useSignupContext } from "../../../../globalContext/SignupContext";
-import { signupThunk } from "../../../../stores/authManager/thunk";
+import { signupThunk, loginThunk } from "../../../../stores/authManager/thunk";
 import { useAuth } from "../../../../hooks/useAuth";
+import "../styles.css";
 
 interface Step1Props {
   nextStep: () => void;
@@ -28,6 +29,21 @@ export function Step3({ nextStep }: Step1Props) {
     if (canSubmit) {
       const signupData = { email, password, name, dateOfBirth, gender };
       await dispatch(signupThunk(signupData));
+      const loginData = { email, password };
+      try {
+        const result = await dispatch(loginThunk(loginData)).unwrap();
+        if (result) {
+          navigate("/");
+        }
+      } catch (error: any) {
+        if (error.code === 1006) {
+          message.error(t("login.error1"));
+        } else if (error.code === 1007) {
+          message.error(t("login.error2"));
+        } else {
+          message.error(t("login.error3"))
+        }
+      }
     }
   };
 

@@ -1,10 +1,12 @@
-import { Modal } from "antd";
+import { message, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import FormLogin from "../../../components/login";
 import { useAppSelector } from "../../../redux/hooks";
 import { useModal } from "../../../globalContext/ModalContext";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import DropdownProfile from "../../../components/HeaderComponent/DropdownProfile";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -12,9 +14,12 @@ export default function Header() {
   const [isFocused, setIsFocused] = useState(false);
   const { t } = useTranslation();
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate(0);
+  const user = localStorage.getItem("user");
+
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  const handleButtonClick = () => {
+    setDropdownVisible((prev) => !prev);
   };
 
   return (
@@ -60,9 +65,51 @@ export default function Header() {
         </div>
 
         <div className="mx-8 font-bold flex-1">
-          {false ? (
-            <div onClick={handleLogout} className="">
-              Log out
+          {user ? (
+            <div className="flex justify-end items-center gap-x-6">
+              <button
+                className="py-2 px-3 font-bold text-sm text-black bg-white transform hover:scale-105 hover:bg-slate-200 duration-200 rounded-full"
+                onClick={() => message.warning(t("setting.useless"))}
+              >
+                {t("header.premium")}
+              </button>
+              <button
+                className="py-2 px-3 font-bold text-sm text-white transform hover:scale-105 hover:text-gray-300 duration-200 flex justify-center items-center"
+                onClick={() => message.warning(t("setting.useless"))}
+              >
+                <i className="fa-regular fa-circle-down mr-2 text-lg"></i>
+                {t("header.download")}
+              </button>
+              <button
+                className="hover:text-white duration-200 text-gray-400 text-lg"
+                onClick={() => navigate("/notification")}
+              >
+                <i className="fa-regular fa-bell"></i>
+              </button>
+              <div>
+                <button
+                  className="bg-gray-400 bg-opacity-30 px-2 py-2 rounded-full transform hover:scale-105 duration-200"
+                  onClick={handleButtonClick}
+                >
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaV47rPuoPjE81cDeRTBsRyos0_WablNntEQ&s"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                </button>
+                {isDropdownVisible && (
+                  <motion.div
+                    className="absolute right-4 mt-2"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <DropdownProfile
+                      onClose={() => setDropdownVisible(false)}
+                    />
+                  </motion.div>
+                )}
+              </div>
             </div>
           ) : (
             <div className="flex justify-end items-center gap-x-6">

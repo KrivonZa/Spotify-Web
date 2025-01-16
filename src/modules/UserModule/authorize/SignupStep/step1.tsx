@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSignupContext } from "../../../../globalContext/SignupContext";
+import "../styles.css";
 
 interface Step1Props {
   nextStep: () => void;

@@ -15,3 +15,14 @@ export interface login {
   email: string;
   password: string;
 }
+
+export interface forgetConfirm {
+  email: string;
+  code: number;
+}
+
+export interface resetPassword {
+  email: string;
+  password: string;
+  newPassword: string;
+}

@@ -1,15 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkEmailThunk, signupThunk, loginThunk } from "./thunk";
+import {
+  checkEmailThunk,
+  signupThunk,
+  loginThunk,
+  forgetPassThunk,
+  forgetConfirmThunk,
+  resetPassThunk,
+} from "./thunk";
 import { checkEmail } from "../../types/auth";
 
 type stateType = {
   checkEmail: checkEmail | null;
   loading: boolean;
+  user: any;
 };
 
 const initialState: stateType = {
   checkEmail: null,
   loading: false,
+  user: {},
 };
 
 export const manageAuthSlice = createSlice({
@@ -33,10 +42,37 @@ export const manageAuthSlice = createSlice({
     builder.addCase(loginThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(loginThunk.fulfilled, (state) => {
+    builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
       state.loading = false;
+      state.user = payload;
+      localStorage.setItem("user", JSON.stringify(payload));
     });
     builder.addCase(loginThunk.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(forgetPassThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(forgetPassThunk.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(forgetConfirmThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(forgetConfirmThunk.fulfilled, (state) => {
+      state.loading = false;
+      localStorage.setItem("confirm", JSON.stringify(true));
+    });
+    builder.addCase(forgetConfirmThunk.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(resetPassThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(resetPassThunk.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(resetPassThunk.rejected, (state) => {
       state.loading = false;
     });
   },

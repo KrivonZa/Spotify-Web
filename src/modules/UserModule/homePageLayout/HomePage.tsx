@@ -3,15 +3,30 @@ import { useColor } from "../../../globalContext/ColorContext";
 import { useTranslation } from "react-i18next";
 import data from "./data.json";
 import { processImageAndSetBackground } from "../../../tools/dominantColor";
+import { useNavigate } from "react-router-dom";
 
-export default function HomePage() {
+export function HomePage() {
   const { t } = useTranslation();
   const { setPrimaryColor } = useColor();
+  const navigate = useNavigate();
+
+  // const user = localStorage.getItem("user");
+
+  // if (user) {
+  //   const userInfo = JSON.parse(user);
+  //   console.log(userInfo);
+  //   console.log("Token:", userInfo.token);
+  //   console.log("Authen:", userInfo.authenticated);
+  // } else {
+  //   console.log("Không tìm thấy thông tin người dùng trong localStorage.");
+  // }
 
   const handleMouseEnter = async (imageUrl: string) => {
     const calculatedRgb = await processImageAndSetBackground(imageUrl);
     if (calculatedRgb) {
-      setPrimaryColor(`rgb(${calculatedRgb.r}, ${calculatedRgb.g}, ${calculatedRgb.b})`);
+      setPrimaryColor(
+        `rgb(${calculatedRgb.r}, ${calculatedRgb.g}, ${calculatedRgb.b})`
+      );
     }
   };
 

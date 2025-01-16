@@ -22,7 +22,15 @@
   "header": {
     "search": "Bạn muốn phát nội dung gì?",
     "login": "Đăng nhập",
-    "signup": "Đăng ký"
+    "signup": "Đăng ký",
+    "premium": "Khám phá Premium",
+    "download": "Cài đặt Ứng dụng",
+    "account": "Tài khoản",
+    "profile": "Hồ sơ",
+    "upgrade": "Nâng cấp lên Premium",
+    "upgrade1": "Chức năng này chưa có sẵn",
+    "setting": "Cài đặt",
+    "logout": "Đăng xuất"
   },
   "footer": {
     "company": "Công ty",
@@ -61,9 +69,25 @@
   },
   "forgot": {
     "title": "Đặt lại mật khẩu của bạn",
-    "description": "Nhập địa chỉ email hoặc tên người dùng kết nối với tài khoản Spotify của bạn và chúng tôi sẽ gửi cho bạn email.",
-    "email": "Email hoặc tên người dùng",
-    "send": "Gửi email"
+    "description": "Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn email.",
+    "email": "Email của bạn",
+    "send": "Gửi email",
+    "sendAgain": "Gửi lại email",
+    "success": "Chúng tôi đã gửi cho bạn một email. Vui lòng lấy mã và nhập vào đây",
+    "authorizeFail": "Không tìm thấy email. Vui lòng đảm bảo bạn đã nhập đúng email",
+    "fail": "EGửi email không thành công. vui lòng thử lại",
+    "confirmCode": "Mã xác nhận(được đính kèm cùng email)",
+    "confirm": "Xác nhận",
+    "confirmSuccess": "Xác nhận thành công",
+    "confirmExpired": "Mã xác nhận đã hết hạn. Vui lòng thử lại",
+    "confirmFail": "xác nhận không thành công. Vui lòng thử lại"
+  },
+  "reset":{
+    "title": "Đặt lại mật khẩu của bạn",
+    "description": "Điền tất cả các ô nhập bên dưới để hoàn thành đặt lại mật khẩu của bạn",
+    "email": "Email của bạn",
+    "password": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu"
   },
   "signup": {
     "title": "Đăng ký để bắt đầu nghe",
@@ -118,7 +142,15 @@
     "genre": "Thể Loại",
     "genreDetail": "Thể Loại và Bài Hát",
     "login": "Đăng Nhập",
-    "signup":"Đăng Ký",
+    "signup": "Đăng Ký",
     "forgot": "Quên Mật Khẩu"
+  },
+  "setting": {
+    "useless": "Chức năng vẫn đang trong quá trình thử nghiệm"
+  },
+  "boundary": {
+    "NFtitle": "Không tìm thấy trang",
+    "NFdescription": "Trang bạn cố gắng truy cập không tồn tại",
+    "NFbutton": "Quay lại trang chủ"
   }
 }
