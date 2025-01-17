@@ -25,21 +25,25 @@ export default function Header() {
   return (
     <div>
       <header className="h-16 w-full flex justify-between items-center">
-        <div
-          className="w-12 ml-10 cursor-pointer flex-1"
-          onClick={() => navigate("/")}
-        >
+        <div className="w-12 ml-10 flex-1">
           <img
             src="/src/public/spotify.svg"
             alt="Logo Spotify"
-            className="w-10 h-10"
+            className="w-10 h-10 cursor-pointer"
+            onClick={() => {
+              navigate("/");
+              setDropdownVisible(false);
+            }}
           />
         </div>
 
         <div className="flex justify-between items-center w-full flex-1">
           <button
             className="px-3 py-2 hover:bg-[#414141] rounded-full flex items-center justify-center duration-200 mr-3"
-            onClick={() => navigate("/")}
+            onClick={() => {
+              navigate("/");
+              setDropdownVisible(false);
+            }}
           >
             <i className="fa-solid fa-home text-xl"></i>
           </button>
@@ -57,7 +61,9 @@ export default function Header() {
               type="text"
               className="bg-transparent border-r-2 focus:outline-none w-full px-3 mr-3 placeholder-[#a0a0a0]"
               placeholder={t("header.search")}
-              onFocus={() => setIsFocused(true)}
+              onFocus={() => {
+                setIsFocused(true), setDropdownVisible(false);
+              }}
               onBlur={() => setIsFocused(false)}
             />
             <i className="fa-solid fa-layer-group duration-200 text-[#a0a0a0] hover:text-white cursor-pointer transform hover:scale-110"></i>
@@ -82,7 +88,10 @@ export default function Header() {
               </button>
               <button
                 className="hover:text-white duration-200 text-gray-400 text-lg"
-                onClick={() => navigate("/notification")}
+                onClick={() => {
+                  navigate("/notification");
+                  setDropdownVisible(false);
+                }}
               >
                 <i className="fa-regular fa-bell"></i>
               </button>

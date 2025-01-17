@@ -30,8 +30,10 @@ export default function Sidebar() {
       window.innerWidth * 0.25,
       Math.min(e.clientX, maxWidth)
     );
-    if (newWidth === maxWidth) {
+    if (newWidth >= window.innerWidth * 0.32) {
       setIsExpand(true);
+    } else if (newWidth < window.innerWidth * 0.32) {
+      setIsExpand(false);
     } else {
       setIsExpand(false);
     }

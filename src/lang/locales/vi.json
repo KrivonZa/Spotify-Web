@@ -152,5 +152,14 @@
     "NFtitle": "Không tìm thấy trang",
     "NFdescription": "Trang bạn cố gắng truy cập không tồn tại",
     "NFbutton": "Quay lại trang chủ"
+  },
+  "profile":{
+    "profile": "Hồ sơ",
+    "following": "đang theo dõi",
+    "topArtists": "Nghệ sĩ hàng đầu tháng này",
+    "artist": "Nghệ sĩ",
+    "visible": "Chỉ hiển thị với bạn",
+    "topTracks": "Bản nhạc hàng đầu tháng này",
+    "all": "Hiện tất cả"
   }
 }
