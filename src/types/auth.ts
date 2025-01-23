@@ -23,6 +23,11 @@ export interface forgetConfirm {
 
 export interface resetPassword {
   email: string;
+  newPassword: string;
+}
+
+export interface changePassword {
+  email: string | undefined;
   password: string;
   newPassword: string;
 }

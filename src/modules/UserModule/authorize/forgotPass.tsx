@@ -73,7 +73,9 @@ export function ForgotPass() {
           <p className="font-bold">{t("forgot.email")}</p>
           <div
             className={`border border-gray-500 rounded-lg mt-2 hover:bg-[#414141] duration-150 ${
-              isFocused === "email" ? "border-white bg-[#414141]" : "border-[#141414]"
+              isFocused === "email"
+                ? "border-white bg-[#414141]"
+                : "border-[#141414]"
             }`}
           >
             <input
@@ -108,7 +110,9 @@ export function ForgotPass() {
               <p className="font-bold">{t("forgot.confirmCode")}</p>
               <div
                 className={`border border-gray-500 rounded-lg mt-2 hover:bg-[#414141] duration-150 ${
-                  isFocused === "code" ? "border-white bg-[#414141]" : "border-[#141414]"
+                  isFocused === "code"
+                    ? "border-white bg-[#414141]"
+                    : "border-[#141414]"
                 }`}
               >
                 <input
@@ -124,25 +128,27 @@ export function ForgotPass() {
         </div>
 
         <div className="flex flex-col justify-center items-center">
-          <button
-            disabled={failConfirm}
-            className={`text-center text-[#121212] font-bold transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-2 ${
-              failConfirm
-                ? "bg-gray-400 cursor-not-allowed"
-                : "hover:bg-green-400 bg-green-500 "
-            }`}
-            onClick={isCorrect ? handleConfirm : handleSubmit}
-          >
-            {loading ? (
-              <Spin
-                indicator={<LoadingOutlined spin className="text-white" />}
-              />
-            ) : isCorrect ? (
-              t("forgot.confirm")
-            ) : (
-              t("forgot.send")
-            )}
-          </button>
+          {!failConfirm && (
+            <button
+              disabled={failConfirm}
+              className={`text-center text-[#121212] font-bold transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-2 ${
+                failConfirm
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "hover:bg-green-400 bg-green-500 "
+              }`}
+              onClick={isCorrect ? handleConfirm : handleSubmit}
+            >
+              {loading ? (
+                <Spin
+                  indicator={<LoadingOutlined spin className="text-white" />}
+                />
+              ) : isCorrect ? (
+                t("forgot.confirm")
+              ) : (
+                t("forgot.send")
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>

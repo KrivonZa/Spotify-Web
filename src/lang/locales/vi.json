@@ -82,12 +82,15 @@
     "confirmExpired": "Mã xác nhận đã hết hạn. Vui lòng thử lại",
     "confirmFail": "xác nhận không thành công. Vui lòng thử lại"
   },
-  "reset":{
+  "reset": {
     "title": "Đặt lại mật khẩu của bạn",
     "description": "Điền tất cả các ô nhập bên dưới để hoàn thành đặt lại mật khẩu của bạn",
     "email": "Email của bạn",
     "password": "Mật khẩu mới",
-    "confirmPassword": "Xác nhận mật khẩu"
+    "confirmPassword": "Xác nhận mật khẩu",
+    "passwordsMatch": "Mật khẩu của bạn phải trùng khớp với mật khẩu bạn đã nhập trước đó",
+    "success": "Đặt lại mật khẩu thành công! Vui lòng đăng nhập lại với mật khẩu mới của bạn",
+    "fail": "Đặt lại mật khẩu không thành công! Vui lòng thử lại"
   },
   "signup": {
     "title": "Đăng ký để bắt đầu nghe",
@@ -153,13 +156,36 @@
     "NFdescription": "Trang bạn cố gắng truy cập không tồn tại",
     "NFbutton": "Quay lại trang chủ"
   },
-  "profile":{
+  "profile": {
     "profile": "Hồ sơ",
     "following": "đang theo dõi",
     "topArtists": "Nghệ sĩ hàng đầu tháng này",
     "artist": "Nghệ sĩ",
     "visible": "Chỉ hiển thị với bạn",
     "topTracks": "Bản nhạc hàng đầu tháng này",
-    "all": "Hiện tất cả"
+    "all": "Hiện tất cả",
+    "tokenExpired": "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại"
+  },
+  "updateProfile": {
+    "detail": "Chi tiết hồ sơ",
+    "policy": "Bằng cách tiếp tục, bạn đồng ý cho phép Spotify truy cập vào hình ảnh bạn đã chọn để tải lên. Vui lòng đảm bảo bạn có quyền tải lên hình ảnh.",
+    "save": "Lưu",
+    "name": "Tên"
+  },
+  "accountMenu": {
+    "plan": "Gói của bạn",
+    "premium": "Dùng Premium",
+    "account": "Tài khoản",
+    "profile": "Chỉnh sửa hồ sơ",
+    "security": "Bảo mật và quyền riêng tư",
+    "change": "Đổi mật khẩu"
+  },
+  "changePassword": {
+    "title": "Đổi mật khẩu của bạn",
+    "currentPass": "Mật khẩu hiện nay",
+    "cancel": "Hủy",
+    "set": "Cài đặt mật khẩu mới",
+    "success": "Thay đổi mật khẩu thành công",
+    "fail": "Thay đổi mật khẩu không thành công! Vui lòng thử lại"
   }
 }

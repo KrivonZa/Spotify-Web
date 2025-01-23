@@ -93,7 +93,10 @@
     "description": "Fill in all the fields below to complete resetting your password.",
     "email": "Your Email",
     "password": "New password",
-    "confirmPassword": "Confirm password"
+    "confirmPassword": "Confirm password",
+    "passwordsMatch": "Your password must be match to the previous you type",
+    "success": "Reset password successfully! Please login with your new password",
+    "fail":"Reset password failed! Please try again"
   },
   "signup": {
     "title": "Sign up to start listening",
@@ -159,13 +162,36 @@
     "NFdescription": "The page you try to enter is not existed",
     "NFbutton": "Back to Homepage"
   },
-  "profile":{
+  "profile": {
     "profile": "Profile",
     "following": "Following",
     "topArtists": "Top artists this month",
     "artist": "Artist",
     "visible": "Only visible to you",
     "topTracks": "Top tracks this month",
-    "all": "Show All"
+    "all": "Show All",
+    "tokenExpired": "Your session has expired, please log in again"
+  },
+  "updateProfile": {
+    "detail": "Profile details",
+    "policy": "By proceeding, you agree to give Spotify access to the image you choose to upload. Please make sure you have the right to upload the image.",
+    "save": "Save",
+    "name": "Name"
+  },
+  "accountMenu": {
+    "plan": "Your plan",
+    "premium": "Join Premium",
+    "account": "Account",
+    "profile": "Edit profile",
+    "security": "Security and privacy",
+    "change": "Change password"
+  },
+  "changePassword": {
+    "title": "Change your password",
+    "currentPass": "Current password",
+    "cancel": "Cancel",
+    "set": "Set new password",
+    "success": "Change password successfully",
+    "fail":"Change password failed! Please try again"
   }
 }

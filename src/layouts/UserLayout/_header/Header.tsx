@@ -3,18 +3,30 @@ import { useNavigate } from "react-router-dom";
 import FormLogin from "../../../components/login";
 import { useAppSelector } from "../../../redux/hooks";
 import { useModal } from "../../../globalContext/ModalContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import DropdownProfile from "../../../components/HeaderComponent/DropdownProfile";
+import { useUser } from "../../../hooks/useUser";
+import { userInfoThunk } from "../../../stores/userManager/thunk";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../stores";
 
 export default function Header() {
   const navigate = useNavigate();
   const { isModalOpen, closeModal, openModal } = useModal();
+  const dispatch = useDispatch<AppDispatch>();
   const [isFocused, setIsFocused] = useState(false);
   const { t } = useTranslation();
+  const { userInfo } = useUser();
 
   const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (user) {
+      dispatch(userInfoThunk());
+    }
+  }, []);
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -101,7 +113,7 @@ export default function Header() {
                   onClick={handleButtonClick}
                 >
                   <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaV47rPuoPjE81cDeRTBsRyos0_WablNntEQ&s"
+                    src={userInfo?.avatar}
                     className="w-8 h-8 rounded-full object-cover"
                   />
                 </button>

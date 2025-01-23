@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../redux/hooks";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { AppDispatch } from "../../../redux/store";
+import { AppDispatch } from "../../../stores";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { message } from "antd";

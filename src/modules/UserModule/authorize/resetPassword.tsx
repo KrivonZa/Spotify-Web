@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../redux/hooks";
 import { Spin } from "antd";
@@ -22,6 +22,28 @@ export function ResetPassword() {
   const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false);
+  const [validations, setValidations] = useState({
+    hasLetter: false,
+    hasNumberOrSpecialChar: false,
+    minLength: false,
+    passwordsMatch: false,
+  });
+
+  useEffect(() => {
+    setValidations({
+      hasLetter: /[a-zA-Z]/.test(newPassword),
+      hasNumberOrSpecialChar: /[0-9#?!&]/.test(newPassword),
+      minLength: newPassword.length >= 10,
+      passwordsMatch: newPassword === confirmPassword && confirmPassword !== "",
+    });
+  }, [newPassword, confirmPassword]);
+
+  const isFormValid =
+    validations.hasLetter &&
+    validations.hasNumberOrSpecialChar &&
+    validations.minLength &&
+    validations.passwordsMatch &&
+    email;
 
   const toggleNewPasswordVisibility = () => {
     setIsNewPasswordVisible((prevState) => !prevState);
@@ -31,12 +53,29 @@ export function ResetPassword() {
     setIsConfirmPasswordVisible((prevState) => !prevState);
   };
 
-//   const handleReset = async () => {
-//     if ( email && newPassword && confirmPassword) {
-//         const resetData = {email, newPassword, confirmPassword};
-//         const response = await dispatch((resetData));
-//     }
-//   }
+  const handleReset = async () => {
+    if (!email || !newPassword || !confirmPassword) {
+      return;
+    }
+  
+    if (newPassword !== confirmPassword) {
+      return;
+    }
+  
+    const resetData = { email, newPassword };
+  
+    try {
+      const response = await dispatch(resetPassThunk(resetData)).unwrap();
+      if (response.status === 200) {
+        toast.success(t("reset.success"));
+        navigate("/login");
+      } else {
+        toast.error(t("reset.fail"));
+      }
+    } catch (error: any) {
+        toast.error(t("reset.fail"));
+    }
+  };
 
   return (
     <div className="bg-[#121212] w-full h-full flex justify-center">
@@ -116,14 +155,59 @@ export function ResetPassword() {
             ></i>
           </div>
         </div>
+        <div className="mt-4">
+          <p className="font-bold">{t("signup.descriptionPass")}</p>
+          <div className="mt-2 flex items-center gap-x-2">
+            <i
+              className={`fa-solid text-sm ${
+                validations.hasLetter
+                  ? "fa-circle-check text-green-400"
+                  : "fa-circle-xmark text-red-500"
+              }`}
+            ></i>
+            <p className="text-sm">{t("signup.condition1")}</p>
+          </div>
+          <div className="mt-2 flex items-center gap-x-2">
+            <i
+              className={`fa-solid text-sm ${
+                validations.hasNumberOrSpecialChar
+                  ? "fa-circle-check text-green-400"
+                  : "fa-circle-xmark text-red-500"
+              }`}
+            ></i>
+            <p className="text-sm">{t("signup.condition2")}</p>
+          </div>
+          <div className="mt-2 flex items-center gap-x-2">
+            <i
+              className={`fa-solid text-sm ${
+                validations.minLength
+                  ? "fa-circle-check text-green-400"
+                  : "fa-circle-xmark text-red-500"
+              }`}
+            ></i>
+            <p className="text-sm">{t("signup.condition3")}</p>
+          </div>
+          <div className="mt-2 flex items-center gap-x-2">
+            <i
+              className={`fa-solid text-sm ${
+                validations.passwordsMatch
+                  ? "fa-circle-check text-green-400"
+                  : "fa-circle-xmark text-red-500"
+              }`}
+            ></i>
+            <p className="text-sm">{t("reset.passwordsMatch")}</p>
+          </div>
+        </div>
 
         <div className="flex flex-col justify-center items-center">
           <button
             className={`text-center text-[#121212] font-bold transform hover:scale-105 duration-200 py-3 w-full rounded-full mt-2 ${
-              false
+              !isFormValid
                 ? "bg-gray-400 cursor-not-allowed"
-                : "hover:bg-green-400 bg-green-500 "
+                : "hover:bg-green-400 bg-green-500"
             }`}
+            onClick={handleReset}
+            disabled={!isFormValid}
           >
             {loading ? (
               <Spin

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { manageAuth } from "../../services/manageAuth";
-import { signup, login, forgetConfirm, resetPassword } from "../../types/auth";
+import { signup, login, forgetConfirm, resetPassword, changePassword } from "../../types/auth";
 
 export const checkEmailThunk = createAsyncThunk(
   "checkEmail",
@@ -72,7 +72,20 @@ export const resetPassThunk = createAsyncThunk(
   async (req: resetPassword, { rejectWithValue }) => {
     try {
       const data = await manageAuth.reset(req);
-      return data.data;
+      return data;
+    } catch (error) {
+      console.log("API error:", error);
+      return rejectWithValue((error as any).response.data);
+    }
+  }
+);
+
+export const changePassThunk = createAsyncThunk(
+  "changePass",
+  async (req: changePassword, { rejectWithValue }) => {
+    try {
+      const data = await manageAuth.change(req);
+      return data;
     } catch (error) {
       console.log("API error:", error);
       return rejectWithValue((error as any).response.data);

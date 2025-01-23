@@ -6,6 +6,7 @@ import {
   forgetPassThunk,
   forgetConfirmThunk,
   resetPassThunk,
+  changePassThunk
 } from "./thunk";
 import { checkEmail } from "../../types/auth";
 
@@ -71,8 +72,18 @@ export const manageAuthSlice = createSlice({
     });
     builder.addCase(resetPassThunk.fulfilled, (state) => {
       state.loading = false;
+      
     });
     builder.addCase(resetPassThunk.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(changePassThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(changePassThunk.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(changePassThunk.rejected, (state) => {
       state.loading = false;
     });
   },

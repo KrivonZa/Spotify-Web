@@ -6,6 +6,7 @@ import {
 } from "../modules/UserModule/homePageLayout";
 import UserLayout from "../layouts/UserLayout";
 import AuthLayout from "../layouts/AuthLayout";
+import AccountLayout from "../layouts/AccountLayout";
 import SignupStepIndex from "../layouts/AuthLayout/SignupStepIndex";
 import DetailArtists from "../modules/UserModule/detailArtists/DetailArtists";
 import Playlist from "../modules/UserModule/playList/Playlist";
@@ -18,6 +19,7 @@ import {
   SignupStep,
   ResetPassword,
 } from "../modules/UserModule/authorize";
+import { ChangePassword, AccountMenu } from "../modules/UserModule/account";
 import { MainProfile } from "../modules/UserModule/profile";
 import { NotFound } from "../modules/UserModule/boundary";
 import { useEffect } from "react";
@@ -115,6 +117,20 @@ const useRoutesElements = () => {
         {
           path: "reset",
           element: <ResetPassword />,
+        },
+      ],
+    },
+    {
+      path: "",
+      element: <AccountLayout />,
+      children: [
+        {
+          path: "account",
+          element: <AccountMenu />,
+        },
+        {
+          path: "changePassword",
+          element: <ChangePassword />,
         },
       ],
     },

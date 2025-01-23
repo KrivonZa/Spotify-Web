@@ -11,14 +11,17 @@ const DropdownProfile: React.FC<DropdownProfileProps> = ({ onClose }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("user");
-    navigate(0);
+    navigate("/");
     onClose();
   };
   return (
     <div className="bg-[#414141] rounded-md flex flex-col min-w-56 max-w-64 p-4 space-y-5 text-sm">
       <button
         className="text-left hover:text-gray-300 duration-100 flex justify-between items-center"
-        onClick={onClose}
+        onClick={() => {
+          navigate("/account");
+          onClose();
+        }}
       >
         {t("header.account")}
         <i className="fa-solid fa-up-right-from-square"></i>

@@ -1,29 +1,68 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import UpdateNA from "../../../components/ProfieComponent/updateNA";
+import { AppDispatch } from "../../../stores";
+import { useDispatch } from "react-redux";
+import { userInfoThunk } from "../../../stores/userManager/thunk";
+import { useUser } from "../../../hooks/useUser";
+import { motion } from "framer-motion";
 
 export function MainProfile() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { userInfo } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [isUpdateNA, setUpdateNA] = useState(false);
+
+  useEffect(() => {
+    dispatch(userInfoThunk());
+  });
+
+  const handleNameClick = () => {
+    setUpdateNA(true);
+  };
+
+  const handleImageClick = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.click();
+    setUpdateNA(true);
+  };
 
   return (
     <section className="min-h-screen">
       <div className="flex items-end px-6 pb-6 pt-24">
-        <div>
+        <div
+          className="relative w-52 h-52 group cursor-pointer"
+          onClick={handleImageClick}
+        >
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaV47rPuoPjE81cDeRTBsRyos0_WablNntEQ&s"
+            src={userInfo?.avatar}
             className="w-52 h-52 rounded-full object-cover shadow-xl"
           />
+
+          <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center gap-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-full">
+            <p className="hover:underline duration-100 text-lg">Choose Photo</p>
+            <i className="fa-solid fa-pen text-2xl"></i>
+            <p className="hover:underline duration-100 text-lg">Remove Photo</p>
+          </div>
         </div>
         <div className="ml-6 flex flex-col gap-y-2">
           <p className="text-sm font-semibold">{t("profile.profile")}</p>
-          <p className="text-7xl font-extrabold">Kevin Truong</p>
+          <p
+            className="text-7xl font-extrabold cursor-pointer"
+            onClick={handleNameClick}
+          >
+            {userInfo?.nickName}
+          </p>
           <p className="flex text-gray-400">
             &bull;&nbsp;
             <p className="font-semibold hover:underline cursor-pointer text-white">
               5 {t("profile.following")}
             </p>
-          </p>
+          </p>{" "}
+          {/*Khi nào người dùng follow hoặc theo dõi ai đó thì mới có đoạn following */}
         </div>
       </div>
       <div className="px-4 py-10">
@@ -148,6 +187,14 @@ export function MainProfile() {
           </div>
         </div>
       </div>
+      {isUpdateNA && (
+        <UpdateNA
+          userInfo={userInfo}
+          onClose={() => {
+            setUpdateNA(false);
+          }}
+        />
+      )}
     </section>
   );
 }
