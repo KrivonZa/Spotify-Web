@@ -19,7 +19,11 @@ import {
   SignupStep,
   ResetPassword,
 } from "../modules/UserModule/authorize";
-import { ChangePassword, AccountMenu } from "../modules/UserModule/account";
+import {
+  ChangePassword,
+  AccountMenu,
+  EditProfile,
+} from "../modules/UserModule/account";
 import { MainProfile } from "../modules/UserModule/profile";
 import { NotFound } from "../modules/UserModule/boundary";
 import { useEffect } from "react";
@@ -131,6 +135,10 @@ const useRoutesElements = () => {
         {
           path: "changePassword",
           element: <ChangePassword />,
+        },
+        {
+          path: "editProfile",
+          element: <EditProfile />,
         },
       ],
     },

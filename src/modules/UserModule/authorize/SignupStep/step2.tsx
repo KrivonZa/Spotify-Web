@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSignupContext } from "../../../../globalContext/SignupContext";
 import "../styles.css";
@@ -9,7 +8,6 @@ interface Step1Props {
 }
 
 export function Step2({ nextStep }: Step1Props) {
-  const navigate = useNavigate();
   const [isFocused, setIsFocused] = useState<string | null>(null);
   const [isSelected, setIsSelected] = useState<boolean | null>(null);
   const [nameInput, setNameInput] = useState<string>("");

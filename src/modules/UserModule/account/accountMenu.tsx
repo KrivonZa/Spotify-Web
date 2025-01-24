@@ -25,7 +25,10 @@ export function AccountMenu() {
           <p className="text-2xl font-bold py-2 px-3">
             {t("accountMenu.account")}
           </p>
-          <div className="flex items-center justify-between my-4 py-2 px-3 hover:bg-[#383838] duration-200 cursor-pointer group">
+          <div
+            className="flex items-center justify-between my-4 py-2 px-3 hover:bg-[#383838] duration-200 cursor-pointer group"
+            onClick={() => navigate("/editProfile")}
+          >
             <div className="flex items-center gap-2">
               <div className="px-2 py-2 bg-[#707070] h-8 w-8 flex justify-center items-center rounded-lg group-hover:bg-[#505050] duration-200">
                 <i className="fa-solid fa-pen text-sm group-hover:text-white"></i>

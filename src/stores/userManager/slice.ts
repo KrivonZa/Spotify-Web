@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userInfoThunk } from "./thunk";
+import { userInfoThunk, updateInfo1Thunk, updateInfo2Thunk } from "./thunk";
 import { userInfo } from "../../types/user";
 import { toast } from "react-toastify";
 import { t } from "i18next";
@@ -26,11 +26,33 @@ export const manageUserSlice = createSlice({
       state.userInfo = payload;
       state.loading = false;
     });
-    builder.addCase(userInfoThunk.rejected, (state, { payload }) => {
+    builder.addCase(userInfoThunk.rejected, (state) => {
       localStorage.removeItem("user");
       state.userInfo = null;
       toast.error(t("profile.tokenExpired"));
       state.loading = false;
+    });
+    builder.addCase(updateInfo1Thunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateInfo1Thunk.fulfilled, (state) => {
+      state.loading = false;
+      toast.success(t("editProfile.success1"));
+    });
+    builder.addCase(updateInfo1Thunk.rejected, (state) => {
+      state.loading = false;
+      toast.error(t("editProfile.fail1"));
+    });
+    builder.addCase(updateInfo2Thunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateInfo2Thunk.fulfilled, (state) => {
+      state.loading = false;
+      toast.success(t("editProfile.success2"));
+    });
+    builder.addCase(updateInfo2Thunk.rejected, (state) => {
+      state.loading = false;
+      toast.error(t("editProfile.fail2"));
     });
   },
 });

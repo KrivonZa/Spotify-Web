@@ -1,13 +1,15 @@
 import axios, { AxiosInstance } from "axios";
+import config from "./config.json";
 
-export const apiInstance = (baseURL: string, getToken: () => string): AxiosInstance => {
+export const apiFileInstance = (): AxiosInstance => {
+  const user = localStorage.getItem("user");
   const api = axios.create({
-    baseURL: baseURL,
+    baseURL: config.baseUrl,
   });
 
   api.interceptors.request.use(
     (config) => {
-      const token = getToken();
+      const token = user ? JSON.parse(user).token : "";
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }

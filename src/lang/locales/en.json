@@ -96,7 +96,7 @@
     "confirmPassword": "Confirm password",
     "passwordsMatch": "Your password must be match to the previous you type",
     "success": "Reset password successfully! Please login with your new password",
-    "fail":"Reset password failed! Please try again"
+    "fail": "Reset password failed! Please try again"
   },
   "signup": {
     "title": "Sign up to start listening",
@@ -170,7 +170,9 @@
     "visible": "Only visible to you",
     "topTracks": "Top tracks this month",
     "all": "Show All",
-    "tokenExpired": "Your session has expired, please log in again"
+    "tokenExpired": "Your session has expired, please log in again",
+    "choose": "Choose Photo",
+    "remove": "Remove Photo"
   },
   "updateProfile": {
     "detail": "Profile details",
@@ -192,6 +194,18 @@
     "cancel": "Cancel",
     "set": "Set new password",
     "success": "Change password successfully",
-    "fail":"Change password failed! Please try again"
+    "fail": "Change password failed! Please try again"
+  },
+  "editProfile": {
+    "title": "Edit profile",
+    "nickname": "Nickname",
+    "gender": "Gender",
+    "dob": "Date of birth",
+    "cancel": "Cancel",
+    "save": "Save profile",
+    "success1": "Update Part 1 information successfully",
+    "fail1": "Update Part 1 information failed, please try again",
+    "success2": "Update Part 2 information update successfully",
+    "fail2": "Update Part 2 information failed, please try again"
   }
 }

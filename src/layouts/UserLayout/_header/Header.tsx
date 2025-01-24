@@ -113,7 +113,10 @@ export default function Header() {
                   onClick={handleButtonClick}
                 >
                   <img
-                    src={userInfo?.avatar}
+                    src={
+                      userInfo?.avatar ||
+                      "https://media.istockphoto.com/id/1305665241/vector/anonymous-gender-neutral-face-avatar-incognito-head-silhouette-stock-illustration.jpg?s=612x612&w=0&k=20&c=qA6GUTalFyrBCRVUzQgp2B5zODxmOA4NXTBcw9notYY="
+                    }
                     className="w-8 h-8 rounded-full object-cover"
                   />
                 </button>

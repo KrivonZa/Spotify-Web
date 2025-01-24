@@ -19,14 +19,7 @@ export function MainProfile() {
     dispatch(userInfoThunk());
   });
 
-  const handleNameClick = () => {
-    setUpdateNA(true);
-  };
-
-  const handleImageClick = () => {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.click();
+  const handleUpdateClick = () => {
     setUpdateNA(true);
   };
 
@@ -35,24 +28,31 @@ export function MainProfile() {
       <div className="flex items-end px-6 pb-6 pt-24">
         <div
           className="relative w-52 h-52 group cursor-pointer"
-          onClick={handleImageClick}
+          onClick={handleUpdateClick}
         >
           <img
-            src={userInfo?.avatar}
+            src={
+              userInfo?.avatar ||
+              "https://media.istockphoto.com/id/1305665241/vector/anonymous-gender-neutral-face-avatar-incognito-head-silhouette-stock-illustration.jpg?s=612x612&w=0&k=20&c=qA6GUTalFyrBCRVUzQgp2B5zODxmOA4NXTBcw9notYY="
+            }
             className="w-52 h-52 rounded-full object-cover shadow-xl"
           />
 
           <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center gap-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-full">
-            <p className="hover:underline duration-100 text-lg">Choose Photo</p>
+            <p className="hover:underline duration-100 text-lg">
+              {t("profile.choose")}
+            </p>
             <i className="fa-solid fa-pen text-2xl"></i>
-            <p className="hover:underline duration-100 text-lg">Remove Photo</p>
+            <p className="hover:underline duration-100 text-lg">
+              {t("profile.remove")}
+            </p>
           </div>
         </div>
         <div className="ml-6 flex flex-col gap-y-2">
           <p className="text-sm font-semibold">{t("profile.profile")}</p>
           <p
             className="text-7xl font-extrabold cursor-pointer"
-            onClick={handleNameClick}
+            onClick={handleUpdateClick}
           >
             {userInfo?.nickName}
           </p>

@@ -164,7 +164,9 @@
     "visible": "Chỉ hiển thị với bạn",
     "topTracks": "Bản nhạc hàng đầu tháng này",
     "all": "Hiện tất cả",
-    "tokenExpired": "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại"
+    "tokenExpired": "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại",
+    "choose": "Chọn Ảnh",
+    "remove": "Xóa Ảnh"
   },
   "updateProfile": {
     "detail": "Chi tiết hồ sơ",
@@ -187,5 +189,17 @@
     "set": "Cài đặt mật khẩu mới",
     "success": "Thay đổi mật khẩu thành công",
     "fail": "Thay đổi mật khẩu không thành công! Vui lòng thử lại"
+  },
+  "editProfile": {
+    "title": "Chỉnh sửa hồ sơ",
+    "nickname": "Tên người dùng",
+    "gender": "Giới tính",
+    "dob": "Ngày sinh",
+    "cancel": "Hủy",
+    "save": "Lưu hồ sơ",
+    "success1": "Cập nhật thông tin thành phần 1 thành công",
+    "fail1": "Cập nhật thông tin thành phần 1 không thành công, vui lòng thử lại",
+    "success2": "Cập nhật thông tin thành phần 2 thành công",
+    "fail2": "Cập nhật thông tin thành phần 2 không thành công, vui lòng thử lại"
   }
 }
