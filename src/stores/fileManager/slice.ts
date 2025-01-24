@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { uploadImageThunk, uploadAudioThunk } from "./thunk";
-import { dataImageFile } from "../../types/file";
+import { dataImageFile, dataAudioFile } from "../../types/file";
 
 type stateType = {
   dataImageFile: dataImageFile | null;
+  dataAudioFile: dataAudioFile | null;
   loading: boolean;
 };
 
 const initialState: stateType = {
   dataImageFile: null,
+  dataAudioFile: null,
   loading: false,
 };
 
@@ -32,6 +34,7 @@ export const manageFileSlice = createSlice({
     });
     builder.addCase(uploadAudioThunk.fulfilled, (state, { payload }) => {
       state.loading = false;
+      state.dataAudioFile = payload;
     });
     builder.addCase(uploadAudioThunk.rejected, (state) => {
       state.loading = false;
