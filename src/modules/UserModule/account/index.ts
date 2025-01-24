@@ -1,3 +1,5 @@
 export * from "./changePassword"
 export * from "./accountMenu"
 export * from "./editProfile"
+export * from "./becomeArtist"
+export * from "./playlist"

@@ -99,7 +99,7 @@ const UpdateNA: React.FC<UpdateNAProps> = ({ onClose, userInfo }) => {
                 "https://media.istockphoto.com/id/1305665241/vector/anonymous-gender-neutral-face-avatar-incognito-head-silhouette-stock-illustration.jpg?s=612x612&w=0&k=20&c=qA6GUTalFyrBCRVUzQgp2B5zODxmOA4NXTBcw9notYY="
               }
               className="w-48 h-48 rounded-full object-cover shadow-xl"
-              alt="User avatar"
+              alt="Avatar"
             />
             <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center gap-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-full">
               <p className="hover:underline duration-100 text-lg">
@@ -108,7 +108,10 @@ const UpdateNA: React.FC<UpdateNAProps> = ({ onClose, userInfo }) => {
               <i className="fa-solid fa-pen text-2xl"></i>
               <p
                 className="hover:underline duration-100 text-lg"
-                onClick={handleRemoveImage}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRemoveImage();
+                }}
               >
                 {t("profile.remove")}
               </p>

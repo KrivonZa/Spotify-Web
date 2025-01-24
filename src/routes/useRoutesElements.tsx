@@ -9,7 +9,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import AccountLayout from "../layouts/AccountLayout";
 import SignupStepIndex from "../layouts/AuthLayout/SignupStepIndex";
 import DetailArtists from "../modules/UserModule/detailArtists/DetailArtists";
-import Playlist from "../modules/UserModule/playList/Playlist";
+// import Playlist from "../modules/UserModule/playList/Playlist";
 import Genre from "../modules/UserModule/genre/Genre";
 import GenreAndSong from "../modules/UserModule/genreAndSong/GenreAndSong";
 import {
@@ -23,6 +23,8 @@ import {
   ChangePassword,
   AccountMenu,
   EditProfile,
+  BecomeArtist,
+  Playlist
 } from "../modules/UserModule/account";
 import { MainProfile } from "../modules/UserModule/profile";
 import { NotFound } from "../modules/UserModule/boundary";
@@ -52,6 +54,24 @@ const useRoutesElements = () => {
       title = t("routes.signup");
     } else if (location.pathname === "/forgot") {
       title = t("routes.forgot");
+    } else if (location.pathname === "/reset") {
+      title = t("routes.reset");
+    } else if (location.pathname === "/notification") {
+      title = t("routes.notification");
+    } else if (location.pathname === "/setting") {
+      title = t("routes.setting");
+    } else if (location.pathname === "/user") {
+      title = t("routes.user");
+    } else if (location.pathname === "/account") {
+      title = t("routes.account");
+    } else if (location.pathname === "/changePassword") {
+      title = t("routes.change");
+    } else if (location.pathname === "/editProfile") {
+      title = t("routes.editProfile");
+    } else if (location.pathname === "/becomeArtist") {
+      title = t("routes.becomeArtist");
+    } else if (location.pathname === "*") {
+      title = t("routes.notFound");
     }
 
     document.title = title;
@@ -139,6 +159,14 @@ const useRoutesElements = () => {
         {
           path: "editProfile",
           element: <EditProfile />,
+        },
+        {
+          path: "becomeArtist",
+          element: <BecomeArtist />,
+        },
+        {
+          path: "playlist",
+          element: <Playlist />,
         },
       ],
     },

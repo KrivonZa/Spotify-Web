@@ -152,7 +152,16 @@
     "genreDetail": "Genres and Songs",
     "login": "Log In",
     "signup": "Sign Up",
-    "forgot": "Forgot Password"
+    "forgot": "Forgot Password",
+    "notification": "Notifications",
+    "setting": "Settings",
+    "user": "Profile",
+    "reset": "Reset Password",
+    "account": "Account",
+    "change": "Change Password",
+    "editProfile": "Edit Profile",
+    "becomeArtist": "Become Artist",
+    "notFound": "Not Found"
   },
   "setting": {
     "useless": "This feature is still in testing"
@@ -186,7 +195,8 @@
     "account": "Account",
     "profile": "Edit profile",
     "security": "Security and privacy",
-    "change": "Change password"
+    "change": "Change password",
+    "artist": "Become Artist"
   },
   "changePassword": {
     "title": "Change your password",
@@ -207,5 +217,16 @@
     "fail1": "Update Part 1 information failed, please try again",
     "success2": "Update Part 2 information update successfully",
     "fail2": "Update Part 2 information failed, please try again"
+  },
+  "becomeArtist": {
+    "title": "Become Artist",
+    "description": "To become an artist in our system, you need to agree to the following regulations. Please check all the checkboxes below to confirm that you agree to the terms and conditions",
+    "rule1": "I agree to the terms of use of our platform",
+    "rule2": "I undertake to provide accurate and complete information upon registration",
+    "rule3": "I understand that I will be required to comply with the community's rules of conduct",
+    "continue": "By registering, you acknowledge that you have read and agree to the above terms. We are excited to have you join our artist community",
+    "cancel": "Cancel",
+    "success": "Yay, you're a real artist! Show everyone your creativity now!",
+    "fail": "Something wrong while processing, please try again"
   }
 }

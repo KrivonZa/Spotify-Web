@@ -146,7 +146,16 @@
     "genreDetail": "Thể Loại và Bài Hát",
     "login": "Đăng Nhập",
     "signup": "Đăng Ký",
-    "forgot": "Quên Mật Khẩu"
+    "forgot": "Quên Mật Khẩu",
+    "notification": "Thông báo",
+    "setting": "Cài đặt",
+    "user": "Hồ sơ",
+    "reset": "Đặt lại mật khẩu",
+    "account": "Tài khoản",
+    "change": "Thay đổi mật khẩu",
+    "editProfile": "Chỉnh sửa hồ sơ",
+    "becomeArtist": "Trở thành Nghệ sĩ",
+    "notFound": "Không tìm thấy"
   },
   "setting": {
     "useless": "Chức năng vẫn đang trong quá trình thử nghiệm"
@@ -180,7 +189,8 @@
     "account": "Tài khoản",
     "profile": "Chỉnh sửa hồ sơ",
     "security": "Bảo mật và quyền riêng tư",
-    "change": "Đổi mật khẩu"
+    "change": "Đổi mật khẩu",
+    "artist": "Trở thành Nghệ sĩ"
   },
   "changePassword": {
     "title": "Đổi mật khẩu của bạn",
@@ -201,5 +211,16 @@
     "fail1": "Cập nhật thông tin thành phần 1 không thành công, vui lòng thử lại",
     "success2": "Cập nhật thông tin thành phần 2 thành công",
     "fail2": "Cập nhật thông tin thành phần 2 không thành công, vui lòng thử lại"
+  },
+  "becomeArtist": {
+    "title": "Trở thành Nghệ sĩ",
+    "description": "Để trở thành nghệ sĩ trong hệ thống của chúng tôi, bạn cần đồng ý với các quy định sau. Vui lòng kiểm tra tất cả các ô checkbox dưới đây để xác nhận rằng bạn đồng ý với các điều khoản và điều kiện",
+    "rule1": "Tôi đồng ý với các quy định về việc sử dụng nền tảng của chúng tôi",
+    "rule2": "Tôi cam kết cung cấp thông tin chính xác và đầy đủ khi đăng ký",
+    "rule3": "Tôi hiểu rằng tôi sẽ phải tuân thủ các quy tắc ứng xử của cộng đồng",
+    "continue": "Bằng cách đăng ký, bạn cam kết rằng bạn đã đọc và đồng ý với các điều khoản trên. Chúng tôi rất vui khi bạn gia nhập cộng đồng nghệ sĩ của chúng tôi",
+    "cancel": "Hủy",
+    "success": "Yay, bạn đã trở thành một nghệ sĩ thực thụ! Hãy cho mọi người biết khả năng sáng tạo của bạn ngay bây giờ!",
+    "fail": "Đã có lỗi trong quá trình xử lý, vui lòng thử lại"
   }
 }
