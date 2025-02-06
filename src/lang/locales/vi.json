@@ -13,7 +13,8 @@
     "CPlaylistButton": "Tạo danh sách phát",
     "SPodcast": "Hãy cùng tìm và theo dõi một số podcast",
     "SPodcaseDes": "Chúng tôi sẽ cập nhật cho bạn thông tin về các tập mới",
-    "SPodcastButton": "Duyệt xem podcast"
+    "SPodcastButton": "Duyệt xem podcast",
+    "playlist": "Danh Sách Phát"
   },
   "languageSelection": {
     "title": "Chọn một ngôn ngữ",
@@ -137,7 +138,9 @@
   "homepage": {
     "all": "Tất cả",
     "music": "Nhạc",
-    "podcast": "Podcasts"
+    "podcast": "Podcasts",
+    "allSong": "Tất cả bản nhạc",
+    "allArtist": "Tất cả nghệ sĩ"
   },
   "routes": {
     "artists": "Chi Tiết Nghệ Sĩ",
@@ -222,5 +225,17 @@
     "cancel": "Hủy",
     "success": "Yay, bạn đã trở thành một nghệ sĩ thực thụ! Hãy cho mọi người biết khả năng sáng tạo của bạn ngay bây giờ!",
     "fail": "Đã có lỗi trong quá trình xử lý, vui lòng thử lại"
+  },
+  "playlist": {
+    "createSuccess": "Tạo Danh sách phát thành công",
+    "createFail": "Tạo Danh sách phát thất bại! Vui lòng thử lại",
+    "deleteSuccess": "Xóa Danh sách phát thành công",
+    "deleteFail": "Xóa Danh sách phát thất bại! Vui lòng thử lại"
+  },
+  "deletePlaylist": {
+    "title": "Xóa Danh Sách Phát",
+    "description": "Bạn có muốn xóa Danh sách phát ",
+    "delete": "Xóa",
+    "cancel": "Hủy"
   }
 }

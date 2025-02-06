@@ -56,17 +56,10 @@ export function MainProfile() {
           >
             {userInfo?.nickName}
           </p>
-          <p className="flex text-gray-400">
-            &bull;&nbsp;
-            <p className="font-semibold hover:underline cursor-pointer text-white">
-              5 {t("profile.following")}
-            </p>
-          </p>{" "}
           {/*Khi nào người dùng follow hoặc theo dõi ai đó thì mới có đoạn following */}
         </div>
       </div>
       <div className="px-4 py-10">
-        <i className="fa-solid fa-ellipsis text-2xl text-gray-400 hover:text-white duration-200 transform hover:scale-105 cursor-pointer"></i>
         <div className="mt-6">
           <div>
             <p className="text-xl font-bold">{t("profile.topArtists")}</p>

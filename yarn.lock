@@ -2126,6 +2126,7 @@ __metadata:
     react-youtube: ^10.1.0
     socket.io-client: ^4.8.0
     tailwind-scrollbar: ^3.1.0
+    tailwind-scrollbar-hide: ^2.0.0
     tailwindcss: ^3.4.7
     tippy.js: ^6.3.7
     typescript: ^5.2.2
@@ -4474,6 +4475,15 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
+  languageName: node
+  linkType: hard
+
+"tailwind-scrollbar-hide@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "tailwind-scrollbar-hide@npm:2.0.0"
+  peerDependencies:
+    tailwindcss: ">=3.0.0 || >= 4.0.0 || >= 4.0.0-beta.8 || >= 4.0.0-alpha.20"
+  checksum: 47d42e672f644609548b5a08f9324db5d773c211a034a33fe83796debd9d5fd6773fe986307138c7af0252073302b23653543de85e0b9843a5f181817f690821
   languageName: node
   linkType: hard
 

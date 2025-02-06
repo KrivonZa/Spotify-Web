@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./styles.css";
 import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
+import { useSong } from "../../../globalContext/SongContext";
 
 const BottomPlayer = () => {
   const [volume, setVolume] = useState(100);
@@ -10,6 +11,7 @@ const BottomPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { selectedMusic } = useSong();
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseInt(e.target.value, 10);

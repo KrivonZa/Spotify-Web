@@ -42,7 +42,7 @@ export function AccountMenu() {
             <i className="fa-solid fa-chevron-right text-sm group-hover:text-gray-300 group-hover:translate-x-1 duration-200"></i>
           </div>
 
-          {userInfo && !userInfo.subcribe && (
+          {userInfo && !userInfo.isSubcribe && (
             <div
               className="flex items-center justify-between my-4 py-2 px-3 hover:bg-[#383838] duration-200 cursor-pointer group"
               onClick={() => navigate("/becomeArtist")}

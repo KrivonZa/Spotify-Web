@@ -8,10 +8,6 @@ import UserLayout from "../layouts/UserLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import AccountLayout from "../layouts/AccountLayout";
 import SignupStepIndex from "../layouts/AuthLayout/SignupStepIndex";
-import DetailArtists from "../modules/UserModule/detailArtists/DetailArtists";
-// import Playlist from "../modules/UserModule/playList/Playlist";
-import Genre from "../modules/UserModule/genre/Genre";
-import GenreAndSong from "../modules/UserModule/genreAndSong/GenreAndSong";
 import {
   Login,
   Signup,
@@ -42,7 +38,7 @@ const useRoutesElements = () => {
       title = "Spotify";
     } else if (location.pathname.startsWith("/detail-artists")) {
       title = t("routes.artists");
-    } else if (location.pathname.startsWith("/play-list")) {
+    } else if (location.pathname.startsWith("/playlist")) {
       title = t("routes.playlist");
     } else if (location.pathname === "/genre") {
       title = t("routes.genre");
@@ -99,20 +95,8 @@ const useRoutesElements = () => {
           element: <MainProfile />,
         },
         {
-          path: "detail-artists/:id",
-          element: <DetailArtists />,
-        },
-        {
-          path: "play-list/:id",
+          path: "playlist/:playlistId",
           element: <Playlist />,
-        },
-        {
-          path: "genre",
-          element: <Genre />,
-        },
-        {
-          path: "genre/:id",
-          element: <GenreAndSong />,
         },
       ],
     },
@@ -163,10 +147,6 @@ const useRoutesElements = () => {
         {
           path: "becomeArtist",
           element: <BecomeArtist />,
-        },
-        {
-          path: "playlist",
-          element: <Playlist />,
         },
       ],
     },

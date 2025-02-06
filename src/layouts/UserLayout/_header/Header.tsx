@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 import DropdownProfile from "../../../components/HeaderComponent/DropdownProfile";
 import { useUser } from "../../../hooks/useUser";
 import { userInfoThunk } from "../../../stores/userManager/thunk";
+import { getAllArtistThunk } from "../../../stores/artistManager/thunk";
+import { getAllMusicThunk } from "../../../stores/musicManager/thunk";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../stores";
 
@@ -17,6 +19,7 @@ export default function Header() {
   const { isModalOpen, closeModal, openModal } = useModal();
   const dispatch = useDispatch<AppDispatch>();
   const [isFocused, setIsFocused] = useState(false);
+  const [isSearch, setIsSearch] = useState("");
   const { t } = useTranslation();
   const { userInfo } = useUser();
 
@@ -33,6 +36,10 @@ export default function Header() {
   const handleButtonClick = () => {
     setDropdownVisible((prev) => !prev);
   };
+
+  const handleSearch = () => {
+    
+  }
 
   return (
     <div>
@@ -72,9 +79,15 @@ export default function Header() {
             <input
               type="text"
               className="bg-transparent border-r-2 focus:outline-none w-full px-3 mr-3 placeholder-[#a0a0a0]"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
               placeholder={t("header.search")}
               onFocus={() => {
-                setIsFocused(true), setDropdownVisible(false);
+                setIsFocused(true);
+                setDropdownVisible(false);
               }}
               onBlur={() => setIsFocused(false)}
             />
@@ -122,7 +135,7 @@ export default function Header() {
                 </button>
                 {isDropdownVisible && (
                   <motion.div
-                    className="absolute right-4 mt-2"
+                    className="absolute right-4 mt-2 z-10"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}

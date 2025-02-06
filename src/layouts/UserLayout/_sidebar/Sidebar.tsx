@@ -1,15 +1,10 @@
-// import { NavLink, useNavigate } from "react-router-dom";
-// import { Avatar, Button, Col, Popover, Row, Space, Typography } from "antd";
-// import { useModal } from "../../../globalContext/ModalContext";
-// import { useAppSelector } from "../../../redux/hooks";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../../redux/store";
-// import { useEffect, useState } from "react";
-// const { Title, Text } = Typography;
 import CreatePP from "../../../components/SidebarComponent/CreatePP";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../stores";
 import LanguageModal from "../../../components/LanguageModal";
 import { useTranslation } from "react-i18next";
+import { createPlaylistThunk } from "../../../stores/playlistManager/thunk";
 
 export default function Sidebar() {
   const { t } = useTranslation();
@@ -17,8 +12,16 @@ export default function Sidebar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpand, setIsExpand] = useState(false);
   const [isMinimize, setIsMinimize] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   const user = localStorage.getItem("user");
+
+  const handleCreatePlaylist = async () => {
+    if (!user) {
+      return;
+    }
+    await dispatch(createPlaylistThunk());
+  };
 
   useEffect(() => {
     setSidebarWidth(`${window.innerWidth * 0.25}px`);
@@ -30,14 +33,8 @@ export default function Sidebar() {
       window.innerWidth * 0.25,
       Math.min(e.clientX, maxWidth)
     );
-    if (newWidth >= window.innerWidth * 0.32) {
-      setIsExpand(true);
-    } else if (newWidth < window.innerWidth * 0.32) {
-      setIsExpand(false);
-    } else {
-      setIsExpand(false);
-    }
     setSidebarWidth(`${newWidth}px`);
+    setIsExpand(newWidth >= window.innerWidth * 0.32);
   };
 
   const handleIncreaseWidth = () => {
@@ -101,12 +98,16 @@ export default function Sidebar() {
     t("sidebar.accessibility"),
   ];
 
+  const isWidthGreaterThanThreshold = () => {
+    return parseFloat(sidebarWidth || "0") > window.innerWidth * 0.3;
+  };
+
   return (
     <div className="flex h-full select-none">
       {isMinimize ? (
         <div className="flex h-full select-none">
           <div
-            className="flex flex-col items-center gap-y-3 text-white bg-[#121212] leading-10 py-5 rounded-xl"
+            className="flex flex-col items-center gap-y-3 text-white bg-[#121212] leading-10 py-5 rounded-xl custom-scrollbar overflow-y-auto scrollbar-hide"
             style={{ width: sidebarWidth || "5%" }}
           >
             <div
@@ -126,8 +127,8 @@ export default function Sidebar() {
       ) : (
         <div className="flex h-full select-none">
           <div
-            className="text-white bg-[#121212] leading-10 py-5 rounded-xl"
-            style={{ width: sidebarWidth || "25%" }}
+            className="text-white bg-[#121212] leading-10 py-5 rounded-xl custom-scrollbar overflow-y-auto scrollbar-hide"
+            style={{ width: sidebarWidth || "25%", height: "100%" }}
           >
             <div className="flex justify-between items-center px-8">
               <div
@@ -142,7 +143,10 @@ export default function Sidebar() {
                 </div>
               </div>
               <div className="flex justify-center items-center gap-x-5">
-                <div className="cursor-pointer hover:text-white text-gray-400 duration-200 hover:bg-gray-500 bg-opacity-10 hover:rounded-full w-10 h-10 flex justify-center items-center">
+                <div
+                  className="cursor-pointer hover:text-white text-gray-400 duration-200 hover:bg-gray-500 bg-opacity-10 hover:rounded-full w-10 h-10 flex justify-center items-center"
+                  onClick={handleCreatePlaylist}
+                >
                   <i className="fa-solid fa-plus text-2xl"></i>
                 </div>
 
@@ -164,7 +168,7 @@ export default function Sidebar() {
             </div>
 
             <div className="my-10">
-              <CreatePP />
+              <CreatePP isExpanded={isWidthGreaterThanThreshold()} />
             </div>
 
             <div className="text-xs px-8 flex flex-wrap leading-6 gap-x-4 my-5">

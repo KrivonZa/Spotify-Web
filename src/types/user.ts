@@ -5,7 +5,7 @@ export interface userInfo {
   birthday: string;
   nickName: string;
   avatar: string;
-  subcribe: boolean;
+  isSubcribe: boolean;
 }
 
 export interface editProfile1 {

@@ -2,9 +2,7 @@ import Header from "./_header/Header";
 import Footer from "./_footer/Footer";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./_sidebar/Sidebar";
-import PlayMusic from "../../modules/UserModule/playMusic/PlayMusic";
 import { ModalProvider } from "../../globalContext/ModalContext";
-import ListFriend from "../../modules/UserModule/listFriend/ListFriend";
 import "./styles.css";
 import BottomPlayer from "./_player/BottomPlayer";
 import { useColor } from "../../globalContext/ColorContext";
@@ -21,7 +19,7 @@ export default function UserLayout() {
           <Sidebar />
           <div className="flex-grow mr-4 h-full overflow-hidden rounded-xl bg-[#121212]">
             <motion.div
-              className="h-full overflow-y-auto custom-scrollbar"
+              className="h-full overflow-y-auto overflow-x-hidden custom-scrollbar"
               animate={{
                 background: `linear-gradient(to bottom, ${primaryColor} 0%, #121212 60%)`,
               }}
