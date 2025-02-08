@@ -1,7 +1,22 @@
 export interface userPlaylist {
-  playlistId: string;
-  backgroundImage: string;
-  title: string;
+  account: Account
+  playlists: Playlist[]
+}
+
+export interface Account {
+  id: string
+  email: string
+  gender: boolean
+  birthday: string
+  nickName: string
+  avatar: string
+  isSubcribe: boolean
+}
+
+export interface Playlist {
+  playlistId: string
+  backgroundImage: string
+  title: string
 }
 
 export interface playlistDetail {
@@ -19,6 +34,7 @@ export interface music {
   musicName: string;
   uploadTime: string;
   thumbnail: string;
+  musicUrl: string;
   artistCollaboration: artistCollaboration[];
 }
 

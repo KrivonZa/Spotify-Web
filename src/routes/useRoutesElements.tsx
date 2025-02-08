@@ -20,7 +20,10 @@ import {
   AccountMenu,
   EditProfile,
   BecomeArtist,
-  Playlist
+  Playlist,
+  ArtistDetail,
+  YourMusic,
+  YourPlaylist,
 } from "../modules/UserModule/account";
 import { MainProfile } from "../modules/UserModule/profile";
 import { NotFound } from "../modules/UserModule/boundary";
@@ -98,6 +101,10 @@ const useRoutesElements = () => {
           path: "playlist/:playlistId",
           element: <Playlist />,
         },
+        {
+          path: "artist/:artistId",
+          element: <ArtistDetail />,
+        },
       ],
     },
     {
@@ -147,6 +154,14 @@ const useRoutesElements = () => {
         {
           path: "becomeArtist",
           element: <BecomeArtist />,
+        },
+        {
+          path: "yourMusic",
+          element: <YourMusic />,
+        },
+        {
+          path: "yourPlaylist",
+          element: <YourPlaylist />,
         },
       ],
     },

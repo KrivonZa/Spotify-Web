@@ -79,6 +79,43 @@ export function AccountMenu() {
             <i className="fa-solid fa-chevron-right text-sm group-hover:text-gray-300 group-hover:translate-x-1 duration-200"></i>
           </div>
         </div>
+
+        {userInfo && userInfo.isSubcribe && (
+          <div className="bg-[#414141] rounded-lg">
+            <p className="text-2xl font-bold py-2 px-3">
+              {t("accountMenu.song")}
+            </p>
+            <div
+              className="flex items-center justify-between my-4 py-2 px-3 hover:bg-[#383838] duration-200 cursor-pointer group"
+              onClick={() => navigate("/yourMusic")}
+            >
+              <div className="flex items-center gap-2">
+                <div className="px-2 py-2 bg-[#707070] h-8 w-8 flex justify-center items-center rounded-lg group-hover:bg-[#505050] duration-200">
+                  <i className="fa-solid fa-headphones text-sm group-hover:text-white"></i>
+                </div>
+                <p className="font-semibold group-hover:text-gray-300 group-hover:translate-x-1 duration-200">
+                  {t("accountMenu.music")}
+                </p>
+              </div>
+              <i className="fa-solid fa-chevron-right text-sm group-hover:text-gray-300 group-hover:translate-x-1 duration-200"></i>
+            </div>
+
+            <div
+              className="flex items-center justify-between my-4 py-2 px-3 hover:bg-[#383838] duration-200 cursor-pointer group"
+              onClick={() => navigate("/yourPlaylist")}
+            >
+              <div className="flex items-center gap-2">
+                <div className="px-2 py-2 bg-[#707070] h-8 w-8 flex justify-center items-center rounded-lg group-hover:bg-[#505050] duration-200">
+                  <i className="fa-solid fa-music text-sm group-hover:text-white"></i>
+                </div>
+                <p className="font-semibold group-hover:text-gray-300 group-hover:translate-x-1 duration-200">
+                  {t("accountMenu.playlist")}
+                </p>
+              </div>
+              <i className="fa-solid fa-chevron-right text-sm group-hover:text-gray-300 group-hover:translate-x-1 duration-200"></i>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

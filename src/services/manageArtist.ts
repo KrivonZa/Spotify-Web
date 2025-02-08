@@ -3,6 +3,7 @@ import { apiInstance } from "../constants/publicAPI";
 
 export const manageArtist = {
   becomeArtist: () => apiPrivateInstance().patch(`artist/become-artist`),
-  getAllArtist: (req: string) =>
+  searchArtist: (req: string) =>
     apiInstance().get(`artist/get-all?name=${req}`),
+  // searchArtist: (req: string) => apiInstance().get(`artist/get-all?name=${req}`),
 };

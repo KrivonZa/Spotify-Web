@@ -40,6 +40,19 @@ export const deletePlaylistThunk = createAsyncThunk(
   }
 );
 
+export const getAllPlaylistThunk = createAsyncThunk(
+  "getAllPlaylist",
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await managePlaylist.getAllPlaylist();
+      return data.data;
+    } catch (error) {
+      console.log("API error:", error);
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const getPlaylistDetailThunk = createAsyncThunk(
   "getPlaylistDetail",
   async (req: string, { rejectWithValue }) => {

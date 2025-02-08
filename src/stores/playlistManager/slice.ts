@@ -3,21 +3,24 @@ import {
   userPlaylistThunk,
   createPlaylistThunk,
   deletePlaylistThunk,
-  getPlaylistDetailThunk
+  getPlaylistDetailThunk,
+  getAllPlaylistThunk
 } from "./thunk";
-import { userPlaylist, playlistDetail } from "../../types/playlist";
+import { userPlaylist, playlistDetail, Playlist } from "../../types/playlist";
 import { toast } from "react-toastify";
 import { t } from "i18next";
 
 type stateType = {
-  userPlaylist: userPlaylist[] | [];
+  userPlaylist: userPlaylist | null;
   playlistDetail: playlistDetail | null;
+  allPlaylist: Playlist[] | [];
   loading: boolean;
 };
 
 const initialState: stateType = {
-  userPlaylist: [],
+  userPlaylist: null,
   playlistDetail: null,
+  allPlaylist: [],
   loading: false,
 };
 
@@ -54,6 +57,9 @@ export const managePlaylistSlice = createSlice({
     });
     builder.addCase(getPlaylistDetailThunk.fulfilled, (state, { payload }) => {
       state.playlistDetail = payload;
+    });
+    builder.addCase(getAllPlaylistThunk.fulfilled, (state, { payload }) => {
+      state.allPlaylist = payload;
     });
   },
 });

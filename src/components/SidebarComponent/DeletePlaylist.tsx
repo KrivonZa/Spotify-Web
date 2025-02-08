@@ -8,12 +8,12 @@ import {
   deletePlaylistThunk,
   userPlaylistThunk,
 } from "../../stores/playlistManager/thunk";
-import { userPlaylist } from "../../types/playlist";
+import { Playlist } from "../../types/playlist";
 import { usePlaylist } from "../../hooks/usePlaylist";
 
 interface DeletePlaylistProps {
   onClose: (shouldDelete?: boolean) => void;
-  playlist: userPlaylist | null;
+  playlist: Playlist | null;
 }
 
 const DeletePlaylist: React.FC<DeletePlaylistProps> = ({

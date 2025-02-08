@@ -8,9 +8,12 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import DropdownProfile from "../../../components/HeaderComponent/DropdownProfile";
 import { useUser } from "../../../hooks/useUser";
+import { useArtist } from "../../../hooks/useArtist";
 import { userInfoThunk } from "../../../stores/userManager/thunk";
-import { getAllArtistThunk } from "../../../stores/artistManager/thunk";
-import { getAllMusicThunk } from "../../../stores/musicManager/thunk";
+import { searchArtistThunk } from "../../../stores/artistManager/thunk";
+import { searchMusicThunk } from "../../../stores/musicManager/thunk";
+import { resetSearchArtist } from "../../../stores/artistManager/slice";
+import { resetSearchMusic } from "../../../stores/musicManager/slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../stores";
 
@@ -38,8 +41,16 @@ export default function Header() {
   };
 
   const handleSearch = () => {
-    
-  }
+    if (!isSearch) return;
+    dispatch(searchArtistThunk(isSearch));
+    dispatch(searchMusicThunk(isSearch));
+  };
+
+  const handleReset = () => {
+    // dispatch(resetSearchArtist());
+    dispatch(resetSearchMusic());
+    setIsSearch("");
+  };
 
   return (
     <div>
@@ -62,6 +73,7 @@ export default function Header() {
             onClick={() => {
               navigate("/");
               setDropdownVisible(false);
+              handleReset();
             }}
           >
             <i className="fa-solid fa-home text-xl"></i>
@@ -75,10 +87,13 @@ export default function Header() {
               className={`fa-solid fa-search duration-150 cursor-pointer hover:text-white transform hover:scale-110 ${
                 isFocused ? "text-white" : "text-[#a0a0a0]"
               }`}
+              onClick={handleSearch}
             ></i>
             <input
               type="text"
               className="bg-transparent border-r-2 focus:outline-none w-full px-3 mr-3 placeholder-[#a0a0a0]"
+              value={isSearch}
+              onChange={(e) => setIsSearch(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleSearch();

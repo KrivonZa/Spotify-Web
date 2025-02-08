@@ -146,6 +146,7 @@
     "music": "Music",
     "podcast": "Podcasts",
     "allSong": "All Song",
+    "allPlaylist": "All Playlist",
     "allArtist": "All Artist"
   },
   "routes": {
@@ -199,7 +200,10 @@
     "profile": "Edit profile",
     "security": "Security and privacy",
     "change": "Change password",
-    "artist": "Become Artist"
+    "artist": "Become Artist",
+    "song": "Playground for Artist",
+    "music": "Your music",
+    "playlist": "Your playlist"
   },
   "changePassword": {
     "title": "Change your password",
@@ -243,5 +247,13 @@
     "description": "Do you want to delete Playlist ",
     "delete": "Delete",
     "cancel": "Cancel"
+  },
+  "playlistDetail": {
+    "playlist": "Playlist",
+    "choose":"Choose Photo",
+    "remove":"Remove Photo",
+    "song": " song",
+    "list": "List",
+    "compact": "Compact"
   }
 }

@@ -139,7 +139,8 @@
     "all": "Tất cả",
     "music": "Nhạc",
     "podcast": "Podcasts",
-    "allSong": "Tất cả bản nhạc",
+    "allSong": "Tất cả nhạc",
+    "allPlaylist": "Tất cả Danh sách phát",
     "allArtist": "Tất cả nghệ sĩ"
   },
   "routes": {
@@ -193,7 +194,10 @@
     "profile": "Chỉnh sửa hồ sơ",
     "security": "Bảo mật và quyền riêng tư",
     "change": "Đổi mật khẩu",
-    "artist": "Trở thành Nghệ sĩ"
+    "artist": "Trở thành Nghệ sĩ",
+    "song": "Sân chơi cho Nghệ sĩ",
+    "music": "Nhạc của bạn",
+    "playlist": "Playlist của bạn"
   },
   "changePassword": {
     "title": "Đổi mật khẩu của bạn",
@@ -237,5 +241,13 @@
     "description": "Bạn có muốn xóa Danh sách phát ",
     "delete": "Xóa",
     "cancel": "Hủy"
+  },
+  "playlistDetail": {
+    "playlist": "Danh sách phát",
+    "choose": "Chọn Ảnh",
+    "remove":"Xóa Ảnh",
+    "song": " bài hát",
+    "list": "Danh sách",
+    "compact": "Rút gọn"
   }
 }

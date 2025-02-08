@@ -8,5 +8,6 @@ export const managePlaylist = {
     apiPrivateInstance().delete(
       `playlist/delete/{playlistId}?playlistId=${req}`
     ),
-  getPlaylistDetail: (req:string) => apiPrivateInstance().get(`/playlist/{playlistId}?playlistId=${req}`),
+  getPlaylistDetail: (req:string) => apiInstance().get(`/playlist/detail/{playlistId}?playlistId=${req}`),
+  getAllPlaylist: () => apiInstance().get(`/playlist/get-all`)
 };

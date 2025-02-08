@@ -8,7 +8,7 @@ import {
   userPlaylistThunk,
 } from "../../stores/playlistManager/thunk";
 import { usePlaylist } from "../../hooks/usePlaylist";
-import { userPlaylist } from "../../types/playlist";
+import { Playlist } from "../../types/playlist";
 import DeletePlaylist from "./DeletePlaylist";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = localStorage.getItem("user");
-  const [playlistToDelete, setPlaylistToDelete] = useState<userPlaylist | null>(
+  const [playlistToDelete, setPlaylistToDelete] = useState<Playlist | null>(
     null
   );
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
     }
     await dispatch(createPlaylistThunk());
   };
-  const { userPlaylist, playlistDetail, loading } = usePlaylist();
+  const { userPlaylist, playlistDetail, loading, allPlaylist } = usePlaylist();
 
   useEffect(() => {
     if (!user) {
@@ -41,7 +41,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
     dispatch(userPlaylistThunk());
   }, [dispatch, userPlaylist]);
 
-  const handleDeletePlaylist = (playlistToDelete: userPlaylist) => {
+  const handleDeletePlaylist = (playlistToDelete: Playlist) => {
     handleClose();
     setPlaylistToDelete(playlistToDelete);
   };
@@ -52,7 +52,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
 
   return (
     <div className="flex-grow mr-4 h-full overflow-hidden select-none">
-      {userPlaylist.length === 0 ? (
+      {userPlaylist?.playlists.length === 0 ? (
         <div className="h-64 overflow-y-auto custom-scrollbar py-2 px-3">
           <div className="bg-[#292929] py-4 px-2 rounded-xl mb-5">
             <p className="font-bold text-lg leading-8">
@@ -84,7 +84,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
       ) : (
         <div className="py-2 px-3">
           <div className="space-y-2">
-            {userPlaylist.map((playlist) => (
+            {userPlaylist?.playlists.map((playlist) => (
               <div
                 key={playlist.playlistId}
                 className="flex items-center gap-x-4 p-2 bg-[#292929] rounded-lg shadow-lg hover:bg-slate-700 transition-all duration-200 cursor-pointer group"

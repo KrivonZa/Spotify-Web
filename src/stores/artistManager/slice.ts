@@ -1,23 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { becomeArtistThunk, getAllArtistThunk } from "./thunk";
+import { becomeArtistThunk, searchArtistThunk } from "./thunk";
 import { artist } from "../../types/artist";
 import { toast } from "react-toastify";
 import { t } from "i18next";
 
 type stateType = {
   loading: boolean;
-  artist: artist[] | null;
+  searchArtist: artist[] | null;
 };
 
 const initialState: stateType = {
   loading: false,
-  artist: null,
+  searchArtist: null,
 };
 
 export const manageArtistSlice = createSlice({
   name: "manageArtist",
   initialState,
-  reducers: {},
+  reducers: {
+    resetSearchArtist: (state) => {
+      state.searchArtist = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(becomeArtistThunk.pending, (state) => {
       state.loading = true;
@@ -33,14 +37,14 @@ export const manageArtistSlice = createSlice({
       toast.error(t("becomeArtist.fail"));
       state.loading = false;
     });
-    builder.addCase(getAllArtistThunk.pending, (state) => {
+    builder.addCase(searchArtistThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getAllArtistThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(searchArtistThunk.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.artist = payload;
+      state.searchArtist = payload;
     });
-    builder.addCase(getAllArtistThunk.rejected, (state) => {
+    builder.addCase(searchArtistThunk.rejected, (state) => {
       state.loading = false;
     });
   },
@@ -48,3 +52,5 @@ export const manageArtistSlice = createSlice({
 
 export const { reducer: manageArtistReducer, actions: manageArtistActions } =
   manageArtistSlice;
+
+export const { resetSearchArtist } = manageArtistSlice.actions;

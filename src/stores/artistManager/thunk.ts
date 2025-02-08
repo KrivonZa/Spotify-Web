@@ -14,11 +14,11 @@ export const becomeArtistThunk = createAsyncThunk(
   }
 );
 
-export const getAllArtistThunk = createAsyncThunk(
-  "getAllArtist",
+export const searchArtistThunk = createAsyncThunk(
+  "searchArtist",
   async (req: string, { rejectWithValue }) => {
     try {
-      const data = await manageArtist.getAllArtist(req);
+      const data = await manageArtist.searchArtist(req);
       return data.data;
     } catch (error) {
       console.log("API error:", error);
