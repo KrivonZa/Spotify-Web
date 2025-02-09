@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { managePlaylist } from "../../services/managePlaylist";
+import { addToPlaylist } from "../../types/playlist";
 
 export const userPlaylistThunk = createAsyncThunk(
   "userPlaylist",
@@ -58,6 +59,19 @@ export const getPlaylistDetailThunk = createAsyncThunk(
   async (req: string, { rejectWithValue }) => {
     try {
       const data = await managePlaylist.getPlaylistDetail(req);
+      return data.data;
+    } catch (error) {
+      console.log("API error:", error);
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addToPlaylistThunk = createAsyncThunk(
+  "addToPlaylist",
+  async (req: addToPlaylist, { rejectWithValue }) => {
+    try {
+      const data = await managePlaylist.addMusicToPlaylist(req);
       return data.data;
     } catch (error) {
       console.log("API error:", error);

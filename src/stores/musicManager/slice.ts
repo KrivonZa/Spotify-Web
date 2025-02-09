@@ -1,17 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { searchMusicThunk } from "./thunk";
+import {
+  searchMusicThunk,
+  getMusicByUserThunk,
+  deleteMusicThunk,
+} from "./thunk";
 import { getMusic } from "../../types/music";
 import { toast } from "react-toastify";
 import { t } from "i18next";
 
 type stateType = {
   loading: boolean;
-  searchMusic: getMusic[] | null;
+  searchMusic: getMusic[] | [];
+  artistMusic: getMusic[] | [];
 };
 
 const initialState: stateType = {
   loading: false,
-  searchMusic: null,
+  searchMusic: [],
+  artistMusic: [],
 };
 
 export const manageMusicSlice = createSlice({
@@ -33,10 +39,28 @@ export const manageMusicSlice = createSlice({
     builder.addCase(searchMusicThunk.rejected, (state) => {
       state.loading = false;
     });
+    builder.addCase(getMusicByUserThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getMusicByUserThunk.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.artistMusic = payload;
+    });
+    builder.addCase(deleteMusicThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteMusicThunk.fulfilled, (state) => {
+      state.loading = false;
+      toast.success(t("deleteMusic.deleteSuccess"));
+    });
+    builder.addCase(deleteMusicThunk.rejected, (state) => {
+      state.loading = false;
+      toast.success(t("deleteMusic.deleteSuccess"));
+    });
   },
 });
 
 export const { reducer: manageMusicReducer, actions: manageMusicActions } =
   manageMusicSlice;
 
-  export const { resetSearchMusic } = manageMusicSlice.actions;
+export const { resetSearchMusic } = manageMusicSlice.actions;

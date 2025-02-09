@@ -12,8 +12,8 @@ export function AccountMenu() {
   return (
     <div className="bg-[#121212] w-full h-full flex justify-center">
       <div className="my-20 mx-28 w-[50%] flex flex-col gap-y-5">
-        <div className="flex w-full gap-x-5 h-[20%]">
-          <div className="w-2/3 bg-[#414141] rounded-lg px-3 py-3 hover:scale-105 transform duration-200">
+        <div className="flex w-full gap-x-5">
+          <div className="w-2/3 bg-[#414141] rounded-lg px-3 py-3 pb-24 hover:scale-105 transform duration-200">
             <p className="text-xs font-medium">{t("accountMenu.plan")}</p>
             <p className="text-3xl font-bold text-[#888888]">Spotify Free</p>
           </div>

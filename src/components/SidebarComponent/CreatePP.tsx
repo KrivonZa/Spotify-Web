@@ -31,6 +31,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
       return;
     }
     await dispatch(createPlaylistThunk());
+    await dispatch(userPlaylistThunk());
   };
   const { userPlaylist, playlistDetail, loading, allPlaylist } = usePlaylist();
 
@@ -39,7 +40,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
       return;
     }
     dispatch(userPlaylistThunk());
-  }, [dispatch, userPlaylist]);
+  }, [dispatch]);
 
   const handleDeletePlaylist = (playlistToDelete: Playlist) => {
     handleClose();
@@ -52,36 +53,9 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
 
   return (
     <div className="flex-grow mr-4 h-full overflow-hidden select-none">
-      {userPlaylist?.playlists.length === 0 ? (
-        <div className="h-64 overflow-y-auto custom-scrollbar py-2 px-3">
-          <div className="bg-[#292929] py-4 px-2 rounded-xl mb-5">
-            <p className="font-bold text-lg leading-8">
-              {t("sidebar.CPlaylist")}
-            </p>
-            <p className="leading-8">{t("sidebar.CPlaylistDes")}</p>
-            <button
-              className="bg-white rounded-full px-4 py-2 my-2 transform hover:scale-105 hover:bg-slate-200 duration-200"
-              onClick={handleCreatePlaylist}
-            >
-              <div className="text-black font-bold text-base">
-                {t("sidebar.CPlaylistButton")}
-              </div>
-            </button>
-          </div>
-
-          <div className="bg-[#292929] py-4 px-2 rounded-xl mt-5">
-            <p className="font-bold text-lg leading-8">
-              {t("sidebar.SPodcast")}
-            </p>
-            <p className="leading-8">{t("sidebar.SPodcaseDes")}</p>
-            <button className="bg-white rounded-full px-4 py-2 my-2 transform hover:scale-105 hover:bg-slate-200 duration-200">
-              <div className="text-black font-bold text-base">
-                {t("sidebar.SPodcastButton")}
-              </div>
-            </button>
-          </div>
-        </div>
-      ) : (
+      {userPlaylist &&
+      userPlaylist.playlists &&
+      userPlaylist.playlists.length > 0 ? (
         <div className="py-2 px-3">
           <div className="space-y-2">
             {userPlaylist?.playlists.map((playlist) => (
@@ -119,7 +93,10 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
                 {isExpanded && (
                   <div
                     className="cursor-pointer hover:text-white text-gray-400 ml-auto mr-5 duration-200 hover:bg-gray-500 bg-opacity-10 hover:rounded-full w-10 h-10 flex justify-center items-center"
-                    onClick={() => handleDeletePlaylist(playlist)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeletePlaylist(playlist);
+                    }}
                   >
                     <i className="fa-solid fa-trash"></i>
                   </div>
@@ -132,6 +109,35 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      ) : (
+        <div className="h-64 overflow-y-auto custom-scrollbar py-2 px-3">
+          <div className="bg-[#292929] py-4 px-2 rounded-xl mb-5">
+            <p className="font-bold text-lg leading-8">
+              {t("sidebar.CPlaylist")}
+            </p>
+            <p className="leading-8">{t("sidebar.CPlaylistDes")}</p>
+            <button
+              className="bg-white rounded-full px-4 py-2 my-2 transform hover:scale-105 hover:bg-slate-200 duration-200"
+              onClick={handleCreatePlaylist}
+            >
+              <div className="text-black font-bold text-base">
+                {t("sidebar.CPlaylistButton")}
+              </div>
+            </button>
+          </div>
+
+          <div className="bg-[#292929] py-4 px-2 rounded-xl mt-5">
+            <p className="font-bold text-lg leading-8">
+              {t("sidebar.SPodcast")}
+            </p>
+            <p className="leading-8">{t("sidebar.SPodcaseDes")}</p>
+            <button className="bg-white rounded-full px-4 py-2 my-2 transform hover:scale-105 hover:bg-slate-200 duration-200">
+              <div className="text-black font-bold text-base">
+                {t("sidebar.SPodcastButton")}
+              </div>
+            </button>
           </div>
         </div>
       )}

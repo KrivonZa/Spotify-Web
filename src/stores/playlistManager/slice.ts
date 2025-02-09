@@ -4,7 +4,8 @@ import {
   createPlaylistThunk,
   deletePlaylistThunk,
   getPlaylistDetailThunk,
-  getAllPlaylistThunk
+  getAllPlaylistThunk,
+  addToPlaylistThunk,
 } from "./thunk";
 import { userPlaylist, playlistDetail, Playlist } from "../../types/playlist";
 import { toast } from "react-toastify";
@@ -30,7 +31,11 @@ export const managePlaylistSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(userPlaylistThunk.fulfilled, (state, { payload }) => {
+      state.loading = false;
       state.userPlaylist = payload;
+    });
+    builder.addCase(userPlaylistThunk.rejected, (state) => {
+      state.loading = false;
     });
     builder.addCase(createPlaylistThunk.pending, (state) => {
       state.loading = true;
@@ -47,7 +52,7 @@ export const managePlaylistSlice = createSlice({
     builder.addCase(deletePlaylistThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(deletePlaylistThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(deletePlaylistThunk.fulfilled, (state) => {
       state.loading = false;
       toast.success(t("playlist.deleteSuccess"));
     });
@@ -60,6 +65,17 @@ export const managePlaylistSlice = createSlice({
     });
     builder.addCase(getAllPlaylistThunk.fulfilled, (state, { payload }) => {
       state.allPlaylist = payload;
+    });
+    builder.addCase(addToPlaylistThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addToPlaylistThunk.fulfilled, (state) => {
+      state.loading = false;
+      toast.success(t("addToPlaylist.addSuccess"));
+    });
+    builder.addCase(addToPlaylistThunk.rejected, (state) => {
+      state.loading = false;
+      toast.error(t("addToPlaylist.addFail"));
     });
   },
 });

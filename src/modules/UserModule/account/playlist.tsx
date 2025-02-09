@@ -119,14 +119,14 @@ export function Playlist() {
               {displayStatus ? (
                 <div className="py-2 px-4 grid grid-cols-[20px_1fr_70px] items-center text-gray-400 gap-x-6 w-full">
                   <p>#</p>
-                  <p>Title</p>
+                  <p>{t("playlistDetail.title")}</p>
                   <i className="fa-regular fa-clock text-center"></i>
                 </div>
               ) : (
                 <div className="py-2 px-4 grid grid-cols-[20px_1fr_1fr_70px] items-center text-gray-400 gap-x-6 w-full">
                   <p>#</p>
-                  <p>Title</p>
-                  <p>Artist</p>
+                  <p>{t("playlistDetail.title")}</p>
+                  <p>{t("playlistDetail.artist")}</p>
                   <i className="fa-regular fa-clock text-center"></i>
                 </div>
               )}

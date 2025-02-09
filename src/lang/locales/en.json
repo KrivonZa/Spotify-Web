@@ -254,6 +254,30 @@
     "remove":"Remove Photo",
     "song": " song",
     "list": "List",
-    "compact": "Compact"
+    "compact": "Compact",
+    "title": "Title",
+    "artist": "Artist"
+  },
+  "yourMusic": {
+    "title": "Your Music",
+    "upload": "Upload new song",
+    "delete": "Delete music"
+  },
+  "deleteMusic": {
+    "title": "Delete Music",
+    "description": "Do you want to delete Song ",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "deleteSuccess": "Delete Song successfully",
+    "deleteFail": "Delete Song failed! Please try again"
+  },
+  "addToPlaylist":{
+    "title": "Add to Playlist",
+    "description": "Please select the playlist to which you wish to add ",
+    "addSuccess": "Add music to Playlist successfully",
+    "addFail": "Add music to Playlist failed! Please try again",
+    "cancel": "Cancel",
+    "add": "Add",
+    "choose": "Playlist choosen: "
   }
 }

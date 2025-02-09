@@ -245,9 +245,33 @@
   "playlistDetail": {
     "playlist": "Danh sách phát",
     "choose": "Chọn Ảnh",
-    "remove":"Xóa Ảnh",
+    "remove": "Xóa Ảnh",
     "song": " bài hát",
     "list": "Danh sách",
-    "compact": "Rút gọn"
+    "compact": "Rút gọn",
+    "title": "Tiêu đề",
+    "artist": "Nghệ sĩ"
+  },
+  "yourMusic": {
+    "title": "Nhạc của bạn",
+    "upload": "Tải nhạc mới lên",
+    "delete": "Xóa nhạc"
+  },
+  "deleteMusic": {
+    "title": "Xóa Nhạc",
+    "description": "Bạn có muốn xóa bài nhạc ",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "deleteSuccess": "Xóa Nhạc thành công",
+    "deleteFail": "Xóa Nhạc thất bại! Vui lòng thử lại"
+  },
+  "addToPlaylist":{
+    "title": "Thêm vào Danh sách phát",
+    "description": "Vui lòng chọn danh sách phát mà bạn muốn thêm ",
+    "addSuccess": "Thêm nhạc vào danh sách thành công",
+    "addFail": "Thêm nhạc vào danh sách thất bại! Vui lòng thử lại",
+    "cancel": "Hủy",
+    "add": "Thêm",
+    "choose": "Danh sách đã chọn: "
   }
 }

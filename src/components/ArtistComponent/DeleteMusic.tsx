@@ -5,26 +5,24 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { AppDispatch } from "../../redux/store";
 import {
-  deletePlaylistThunk,
-  userPlaylistThunk,
-} from "../../stores/playlistManager/thunk";
-import { Playlist } from "../../types/playlist";
-import { usePlaylist } from "../../hooks/usePlaylist";
+  deleteMusicThunk,
+  getMusicByUserThunk,
+} from "../../stores/musicManager/thunk";
+import { getMusic } from "../../types/music";
+import { useMusic } from "../../hooks/useMusic";
+import { useUser } from "../../hooks/useUser";
 
-interface DeletePlaylistProps {
+interface DeleteMusicProps {
   onClose: (shouldDelete?: boolean) => void;
-  playlist: Playlist | null;
+  music: getMusic | null;
 }
 
-const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
-  onClose,
-  playlist,
-}) => {
+const DeleteMusic: React.FC<DeleteMusicProps> = ({ onClose, music }) => {
   const [animate, setAnimate] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
-  const { loading, userPlaylist } = usePlaylist();
+  const { loading } = useMusic();
+  const { userInfo } = useUser();
 
   useEffect(() => {
     setAnimate(true);
@@ -36,9 +34,9 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
   };
 
   const handleDelete = async () => {
-    if (!playlist) return;
-    await dispatch(deletePlaylistThunk(playlist.playlistId));
-    await dispatch(userPlaylistThunk());
+    if (!music || !userInfo) return;
+    await dispatch(deleteMusicThunk(music.id));
+    await dispatch(getMusicByUserThunk(userInfo.id));
     onClose(true);
   };
 
@@ -61,22 +59,22 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
         </div>
 
         <div className="px-4 py-4">
-          <p className="text-xl font-bold">{t("deletePlaylist.title")}</p>
-          {playlist && (
+          <p className="text-xl font-bold">{t("deleteMusic.title")}</p>
+          {music && (
             <p className="mt-4 text-lg">
-              {t("deletePlaylist.description")}{" "}
-              <strong>"{playlist.title}"</strong>?
+              {t("deleteMusic.description")}{" "}
+              <strong>"{music.musicName}"</strong>?
             </p>
           )}
           <div className="absolute bottom-4 right-4 flex space-x-4">
             <button
-              className="bg-gray-300 text-black px-4 rounded-md hover:bg-gray-400 duration-200"
+              className="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400 duration-200"
               onClick={handleClose}
             >
-              {t("deletePlaylist.cancel")}
+              {t("deleteMusic.cancel")}
             </button>
             <button
-              className="bg-red-600 text-white px-4 rounded-md hover:bg-red-700 duration-200"
+              className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 duration-200"
               onClick={handleDelete}
             >
               {loading ? (
@@ -84,7 +82,7 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
                   indicator={<LoadingOutlined spin className="text-white" />}
                 />
               ) : (
-                t("deletePlaylist.delete")
+                t("deleteMusic.delete")
               )}
             </button>
           </div>
@@ -94,4 +92,4 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
   );
 };
 
-export default DeletePlaylist;
+export default DeleteMusic;

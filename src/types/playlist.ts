@@ -1,22 +1,22 @@
 export interface userPlaylist {
-  account: Account
-  playlists: Playlist[]
+  account: Account;
+  playlists: Playlist[];
 }
 
 export interface Account {
-  id: string
-  email: string
-  gender: boolean
-  birthday: string
-  nickName: string
-  avatar: string
-  isSubcribe: boolean
+  id: string;
+  email: string;
+  gender: boolean;
+  birthday: string;
+  nickName: string;
+  avatar: string;
+  isSubcribe: boolean;
 }
 
 export interface Playlist {
-  playlistId: string
-  backgroundImage: string
-  title: string
+  playlistId: string;
+  backgroundImage: string;
+  title: string;
 }
 
 export interface playlistDetail {
@@ -44,4 +44,9 @@ export interface artistCollaboration {
     nickname: string;
   };
   thumbnail: string;
+}
+
+export interface addToPlaylist {
+  playlistId: string;
+  musicId: string;
 }
