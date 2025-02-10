@@ -40,10 +40,6 @@ export function Playlist() {
   const user = localStorage.getItem("user");
 
   useEffect(() => {
-    if (!user) navigate("/");
-  }, [user]);
-
-  useEffect(() => {
     if (user) dispatch(userInfoThunk());
     if (playlistId) dispatch(getPlaylistDetailThunk(playlistId));
   }, [dispatch, user, playlistId]);
