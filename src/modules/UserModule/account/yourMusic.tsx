@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import UpdateNA from "../../../components/ProfieComponent/updateNA";
 import { AppDispatch } from "../../../stores";
 import { useDispatch } from "react-redux";
-import { userInfoThunk } from "../../../stores/userManager/thunk";
 import { getMusicByUserThunk } from "../../../stores/musicManager/thunk";
 import { useUser } from "../../../hooks/useUser";
 import { useMusic } from "../../../hooks/useMusic";
@@ -23,7 +21,11 @@ export function YourMusic() {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [musicToDelete, setMusicToDelete] = useState<getMusic | null>(null);
+  const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
+  const [durations, setDurations] = useState<string[]>([]);
   const [musicToAdd, setMusicToAdd] = useState<getMusic | null>(null);
+
+  console.log(artistMusic)
 
   useEffect(() => {
     if (!userInfo) return;
@@ -54,6 +56,23 @@ export function YourMusic() {
     setMusicToAdd(null);
   };
 
+  const handleAudioLoaded = (index: number, audioElement: HTMLAudioElement) => {
+    const duration = audioElement.duration;
+    setDurations((prev) => {
+      const newDurations = [...prev];
+      newDurations[index] = formatTime(duration);
+      return newDurations;
+    });
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+
   return (
     <section className="bg-[#121212] w-full h-full flex justify-center">
       <div className="my-20 mx-28 w-[70%] flex flex-col gap-y-5">
@@ -65,9 +84,14 @@ export function YourMusic() {
         </div>
         <p className="font-bold text-4xl text-center">{t("yourMusic.title")}</p>
 
-        {artistMusic && artistMusic?.length > 0 && (
+        {artistMusic && artistMusic?.length > 0 ? (
           <div className="px-4 py-10">
-            <div className="flex justify-end">
+            <div className="flex justify-between items-center">
+              <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4">
+                <p className="text-base font-semibold">
+                  {t("yourMusic.createNew")}
+                </p>
+              </button>
               <div
                 className="cursor-pointer flex items-center space-x-2 group"
                 onClick={() => setDisplayStatus(!displayStatus)}
@@ -134,7 +158,17 @@ export function YourMusic() {
                             className="fa-solid fa-circle-plus hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
                             onClick={() => handleOpenAddModal(music)}
                           ></i>
-                          <p>5:18</p>
+                          <audio
+                            src={music.musicurl}
+                            ref={(el) => {
+                              audioRefs.current[index] = el;
+                              if (el) {
+                                el.onloadedmetadata = () =>
+                                  handleAudioLoaded(index, el);
+                              }
+                            }}
+                          />
+                          <p>{durations[index] || "0:00"}</p>
                           <i
                             className="fa-solid fa-ellipsis hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
                             onClick={() => handleEllipsis(index)}
@@ -179,8 +213,21 @@ export function YourMusic() {
                             .join(" • ")}
                         </p>
                         <div className="flex items-center justify-end gap-x-3 relative">
-                          <i className="fa-solid fa-circle-plus hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105" onClick={() => handleOpenAddModal(music)}></i>
-                          <p>5:18</p>
+                          <i
+                            className="fa-solid fa-circle-plus hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
+                            onClick={() => handleOpenAddModal(music)}
+                          ></i>
+                          <audio
+                            src={music.musicurl}
+                            ref={(el) => {
+                              audioRefs.current[index] = el;
+                              if (el) {
+                                el.onloadedmetadata = () =>
+                                  handleAudioLoaded(index, el);
+                              }
+                            }}
+                          />
+                          <p>{durations[index] || "0:00"}</p>
                           <i
                             className="fa-solid fa-ellipsis hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
                             onClick={() => handleEllipsis(index)}
@@ -201,6 +248,15 @@ export function YourMusic() {
                     ))}
               </div>
             </div>
+          </div>
+        ) : (
+          <div className="flex flex-col justify-center items-center mt-10">
+            <p className="font-bold text-lg">{t("yourMusic.empty")}</p>
+            <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4">
+              <p className="text-base font-semibold">
+                {t("yourMusic.createNew")}
+              </p>
+            </button>
           </div>
         )}
         {isModalDeleteOpen && (

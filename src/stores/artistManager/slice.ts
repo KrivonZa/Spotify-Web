@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { becomeArtistThunk, searchArtistThunk } from "./thunk";
+import {
+  becomeArtistThunk,
+  searchArtistThunk,
+  getAllArtistThunk,
+} from "./thunk";
 import { artist } from "../../types/artist";
 import { toast } from "react-toastify";
 import { t } from "i18next";
@@ -7,11 +11,13 @@ import { t } from "i18next";
 type stateType = {
   loading: boolean;
   searchArtist: artist[] | null;
+  getAllArtist: artist[] | null;
 };
 
 const initialState: stateType = {
   loading: false,
   searchArtist: null,
+  getAllArtist: null,
 };
 
 export const manageArtistSlice = createSlice({
@@ -19,7 +25,7 @@ export const manageArtistSlice = createSlice({
   initialState,
   reducers: {
     resetSearchArtist: (state) => {
-      state.searchArtist = [];
+      state.searchArtist = null;
     },
   },
   extraReducers: (builder) => {
@@ -46,6 +52,10 @@ export const manageArtistSlice = createSlice({
     });
     builder.addCase(searchArtistThunk.rejected, (state) => {
       state.loading = false;
+    });
+    builder.addCase(getAllArtistThunk.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.getAllArtist = payload;
     });
   },
 });

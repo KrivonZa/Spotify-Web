@@ -48,7 +48,7 @@ const DropdownProfile: React.FC<DropdownProfileProps> = ({ onClose }) => {
       <button
         className="text-left hover:text-gray-300 duration-100"
         onClick={() => {
-          navigate("/setting");
+          message.warning(t("header.upgrade1"));
           onClose();
         }}
       >

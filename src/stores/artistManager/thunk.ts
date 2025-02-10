@@ -26,3 +26,16 @@ export const searchArtistThunk = createAsyncThunk(
     }
   }
 );
+
+export const getAllArtistThunk = createAsyncThunk(
+  "getAllArtist",
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await manageArtist.getAllArtist();
+      return data.data;
+    } catch (error) {
+      console.log("API error:", error);
+      return rejectWithValue(error);
+    }
+  }
+);

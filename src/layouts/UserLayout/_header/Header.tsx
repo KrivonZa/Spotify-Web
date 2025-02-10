@@ -47,9 +47,10 @@ export default function Header() {
   };
 
   const handleReset = () => {
-    // dispatch(resetSearchArtist());
+    dispatch(resetSearchArtist());
     dispatch(resetSearchMusic());
     setIsSearch("");
+    window.location.reload();
   };
 
   return (
@@ -115,13 +116,19 @@ export default function Header() {
             <div className="flex justify-end items-center gap-x-6">
               <button
                 className="py-2 px-3 font-bold text-sm text-black bg-white transform hover:scale-105 hover:bg-slate-200 duration-200 rounded-full"
-                onClick={() => message.warning(t("setting.useless"))}
+                onClick={() => {
+                  message.warning(t("setting.useless"));
+                  setDropdownVisible(false);
+                }}
               >
                 {t("header.premium")}
               </button>
               <button
                 className="py-2 px-3 font-bold text-sm text-white transform hover:scale-105 hover:text-gray-300 duration-200 flex justify-center items-center"
-                onClick={() => message.warning(t("setting.useless"))}
+                onClick={() => {
+                  message.warning(t("setting.useless"));
+                  setDropdownVisible(false);
+                }}
               >
                 <i className="fa-regular fa-circle-down mr-2 text-lg"></i>
                 {t("header.download")}
@@ -129,7 +136,7 @@ export default function Header() {
               <button
                 className="hover:text-white duration-200 text-gray-400 text-lg"
                 onClick={() => {
-                  navigate("/notification");
+                  message.warning(t("setting.useless"));
                   setDropdownVisible(false);
                 }}
               >

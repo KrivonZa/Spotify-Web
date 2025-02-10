@@ -10,7 +10,7 @@ export interface getMusic {
   artistCollaboration: ArtistCollaboration[];
   uploadTime: string;
   thumbnail: string;
-  musicUrl?: string;
+  musicurl?: string;
 }
 
 export interface ArtistCollaboration {

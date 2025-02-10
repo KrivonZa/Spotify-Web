@@ -1,25 +1,20 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 interface SongContextType {
-  primaryColor: string;
-  setPrimaryColor: (color: string) => void;
-  selectedMusic: any;
-  setSelectedMusic: (music: any) => void;
+  selectedMusic: any[];
+  setSelectedMusic: (music: any[]) => void;
 }
 
 const SongContext = createContext<SongContextType>({
-  primaryColor: "#383838",
-  setPrimaryColor: () => {},
-  selectedMusic: null,
+  selectedMusic: [],
   setSelectedMusic: () => {},
 });
 
 export const SongProvider = ({ children }: { children: ReactNode }) => {
-  const [primaryColor, setPrimaryColor] = useState("#383838");
-  const [selectedMusic, setSelectedMusic] = useState(null);
+  const [selectedMusic, setSelectedMusic] = useState<any[]>([]);
 
   return (
-    <SongContext.Provider value={{ primaryColor, setPrimaryColor, selectedMusic, setSelectedMusic }}>
+    <SongContext.Provider value={{ selectedMusic, setSelectedMusic }}>
       {children}
     </SongContext.Provider>
   );

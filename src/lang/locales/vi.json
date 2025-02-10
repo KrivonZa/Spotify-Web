@@ -174,9 +174,7 @@
     "following": "đang theo dõi",
     "topArtists": "Nghệ sĩ hàng đầu tháng này",
     "artist": "Nghệ sĩ",
-    "visible": "Chỉ hiển thị với bạn",
     "topTracks": "Bản nhạc hàng đầu tháng này",
-    "all": "Hiện tất cả",
     "tokenExpired": "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại",
     "choose": "Chọn Ảnh",
     "remove": "Xóa Ảnh"
@@ -250,12 +248,17 @@
     "list": "Danh sách",
     "compact": "Rút gọn",
     "title": "Tiêu đề",
-    "artist": "Nghệ sĩ"
+    "artist": "Nghệ sĩ",
+    "emptyOwner": "Có vẻ như bạn chưa tạo danh sách phát nào",
+    "empty": "Có vẻ như tác giả chưa tạo danh sách phát nào",
+    "createNew": "Tạo danh sách phát của bạn"
   },
   "yourMusic": {
     "title": "Nhạc của bạn",
     "upload": "Tải nhạc mới lên",
-    "delete": "Xóa nhạc"
+    "delete": "Xóa nhạc",
+    "empty": "Có vẻ như bạn chưa tải lên bản nhạc nào",
+    "createNew": "Tải lên bản nhạc mới nhất của bạn"
   },
   "deleteMusic": {
     "title": "Xóa Nhạc",
@@ -265,7 +268,7 @@
     "deleteSuccess": "Xóa Nhạc thành công",
     "deleteFail": "Xóa Nhạc thất bại! Vui lòng thử lại"
   },
-  "addToPlaylist":{
+  "addToPlaylist": {
     "title": "Thêm vào Danh sách phát",
     "description": "Vui lòng chọn danh sách phát mà bạn muốn thêm ",
     "addSuccess": "Thêm nhạc vào danh sách thành công",
@@ -273,5 +276,10 @@
     "cancel": "Hủy",
     "add": "Thêm",
     "choose": "Danh sách đã chọn: "
+  },
+  "yourPlaylist": {
+    "title": "Danh sách của bạn",
+    "empty": "Có vẻ như bạn chưa tạo danh sách phát nào",
+    "createNew": "Tạo danh sách phát của bạn"
   }
 }

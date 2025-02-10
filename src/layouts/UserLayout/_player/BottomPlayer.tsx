@@ -11,7 +11,8 @@ const BottomPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const { selectedMusic } = useSong();
+  const { selectedMusic, setSelectedMusic } = useSong();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseInt(e.target.value, 10);
@@ -21,6 +22,34 @@ const BottomPlayer = () => {
       audioRef.current.volume = newVolume / 100;
     }
   };
+
+  useEffect(() => {
+    if (!selectedMusic || selectedMusic.length === 0) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      setIsPlaying(false);
+      return;
+    }
+    const currentMusic = selectedMusic[currentIndex] || selectedMusic[0];
+
+    if (currentMusic?.musicUrl && audioRef.current) {
+      audioRef.current.src = currentMusic.musicUrl;
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Error", error);
+        });
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  }, [selectedMusic, currentIndex]);
 
   const toggleMute = () => {
     if (volume === 0) {
@@ -87,36 +116,117 @@ const BottomPlayer = () => {
   };
 
   const handleEnded = () => {
-    setIsPlaying(false);
+    if (selectedMusic.length === 1) {
+      setIsPlaying(false);
+      return;
+    }
+
+    if (currentIndex < selectedMusic.length - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    } else {
+      setCurrentIndex(0);
+    }
+  }; //Cái này là chơi hết list sẽ tự động lặp lại
+
+  // const handleEnded = () => {
+  //   if (selectedMusic.length === 1) {
+  //     setIsPlaying(false);
+  //     return;
+  //   }
+  //   if (currentIndex < selectedMusic.length - 1) {
+  //     setCurrentIndex((prevIndex) => prevIndex + 1);
+  //   } else {
+  //     setIsPlaying(false);
+  //   }
+  // }; Cái này là chơi hết list sẽ dừng
+
+  const handlePrevious = () => {
+    if (selectedMusic.length > 1) {
+      if (currentIndex > 0) {
+        setCurrentIndex((prevIndex) => prevIndex - 1);
+      } else {
+        setCurrentIndex(selectedMusic.length - 1);
+      }
+    }
+  };
+
+  const handleNext = () => {
+    if (selectedMusic.length > 1) {
+      if (currentIndex < selectedMusic.length - 1) {
+        setCurrentIndex((prevIndex) => prevIndex + 1);
+      } else {
+        setCurrentIndex(0);
+      }
+    }
+  };
+
+  //Trộn nhạc lên nào các cháu ơi!!
+  const shufflePlaylist = () => {
+    if (selectedMusic.length > 1) {
+      const shuffled = [...selectedMusic];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[randomIndex]] = [
+          shuffled[randomIndex],
+          shuffled[i],
+        ];
+      }
+      setSelectedMusic(shuffled);
+      setCurrentIndex(0);
+    }
   };
 
   return (
     <div className="flex justify-between items-center px-4 py-4">
       <div className="flex items-center basis-1/4">
-        <div className="h-14 w-14">
-          <img
-            src="https://i.scdn.co/image/ab67616d0000485158b561ead1631521fdcc47f1"
-            className="rounded-lg"
-            alt="cover"
-          />
-        </div>
-        <div className="font-semibold mx-4">
-          <div className="text-sm">AURORA</div>
-          <div className="text-xs text-[#a0a0a0]">
-            NUEKI, VØJ, Narvent, TOLCHONOV
+        {selectedMusic[currentIndex]?.thumbnail ? (
+          <div className="h-14 w-14">
+            <img
+              src={selectedMusic[currentIndex]?.thumbnail}
+              className="rounded-lg"
+              alt="cover"
+            />
           </div>
-        </div>
-        <button className="w-6 h-6 rounded-full border-2 border-[#a0a0a0] text-[#a0a0a0] flex justify-center items-center hover:border-white hover:text-white duration-200">
-          <i className="fa-solid fa-plus text-xs"></i>
-        </button>
+        ) : (
+          <div className="w-14 h-14 object-cover shadow-xl flex justify-center items-center bg-[#242424] rounded-lg">
+            <i className="fa-solid fa-music text-gray-400 text-xl"></i>
+          </div>
+        )}
+        {selectedMusic ? (
+          <div className="font-semibold mx-4">
+            <div className="text-sm">
+              {selectedMusic[currentIndex]?.musicName}
+            </div>
+
+            {selectedMusic[currentIndex]?.artistCollaboration && (
+              <div className="mt-1">
+                {selectedMusic[currentIndex].artistCollaboration
+                  .map((artist: any) => artist.account?.nickname)
+                  .join(", ")}{" "}
+              </div>
+            )}
+          </div>
+        ) : null}
+
+        {selectedMusic.length > 0 && (
+          <button className="w-6 h-6 rounded-full border-2 border-[#a0a0a0] text-[#a0a0a0] flex justify-center items-center hover:border-white hover:text-white duration-200" >
+            <i className="fa-solid fa-plus text-xs"></i>
+          </button>
+        )}
       </div>
       <div className="flex flex-col items-center justify-center basis-2/4 mx-10">
         <div className="flex justify-center items-center w-full gap-x-7 text-xl text-[#a0a0a0] mb-3">
-          <i className="fa-solid fa-shuffle hover:text-white duration-200 cursor-pointer"></i>
-          <i className="fa-solid fa-backward-step hover:text-white duration-200 cursor-pointer"></i>
+          <i
+            className="fa-solid fa-shuffle hover:text-white duration-200 cursor-pointer"
+            onClick={shufflePlaylist}
+          ></i>
+          <i
+            className="fa-solid fa-backward-step hover:text-white duration-200 cursor-pointer"
+            onClick={handlePrevious}
+          ></i>
           <div
-            className="w-9 h-9 rounded-full bg-white transform hover:scale-105 hover:bg-slate-200 duration-200 flex justify-center items-center cursor-pointer"
-            onClick={togglePlayPause}
+            className={`w-9 h-9 rounded-full transform hover:scale-105 duration-200 flex justify-center items-center ${selectedMusic.length > 0 ? "bg-white cursor-pointer hover:bg-slate-200":"bg-gray-600 cursor-not-allowed hover:bg-gray-400"}`}
+            onClick={selectedMusic.length > 0 ? togglePlayPause : undefined}
           >
             <i
               className={`fa-solid ${
@@ -124,7 +234,10 @@ const BottomPlayer = () => {
               } text-black`}
             ></i>
           </div>
-          <i className="fa-solid fa-forward-step hover:text-white duration-200 cursor-pointer"></i>
+          <i
+            className="fa-solid fa-forward-step hover:text-white duration-200 cursor-pointer"
+            onClick={handleNext}
+          ></i>
           <i
             className={`fa-solid fa-repeat ${
               isLooping ? "text-green-400" : "text-[#a0a0a0]"
@@ -149,7 +262,7 @@ const BottomPlayer = () => {
         </div>
         <audio
           ref={audioRef}
-          src="https://music-media.trangiangkhanh.site/39648de7-c3cd-41dd-a193-e5bbc20164df_2025-01-24T11:25:43.650495389.mp3"
+          src={selectedMusic?.[currentIndex]?.musicUrl || ""}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onEnded={handleEnded}

@@ -24,7 +24,7 @@ export function HomePage() {
   const dispatch = useDispatch<AppDispatch>();
   const { userPlaylist, loading, allPlaylist } = usePlaylist();
   const { searchMusic } = useMusic();
-  const { searchArtist } = useArtist();
+  const { searchArtist, getAllArtist } = useArtist();
   const { setSelectedMusic } = useSong();
 
   const user = localStorage.getItem("user");
@@ -148,6 +148,31 @@ export function HomePage() {
             ))}
           </div>
         </div>
+
+        {getAllArtist && getAllArtist.length > 0 && !searchArtist && (
+          <div className="mb-10">
+            <p className="font-bold text-2xl">{t("homepage.allSong")}</p>
+            <div className="flex items-center gap-x-4 py-6 overflow-x-auto overflow-y-hidden custom-scrollbar scrollbar-hide hover:scrollbar-default pb-4 hover:pb-2">
+              {getAllArtist.map((item, index) => (
+                <div
+                  key={index}
+                  className="group relative hover:bg-slate-700 bg-opacity-15 p-4 rounded-lg cursor-pointer duration-200 shrink-0"
+                  onClick={() => handleMusicClick(item)}
+                >
+                  <img
+                    src={item.avatar}
+                    className="w-44 h-44 rounded-full mb-3"
+                    alt={item.nickname}
+                  />
+                  <p className="text-lg font-medium">{item.nickname}</p>
+                  <div className="absolute top-full left-[80%] -translate-x-1/2 bg-green-500 p-2 rounded-full text-white opacity-0 group-hover:top-1/2 group-hover:opacity-100 transition-all duration-300 w-12 h-12 flex justify-center items-center">
+                    <i className="fa-solid fa-play text-lg text-black"></i>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {searchArtist && searchArtist.length > 0 && (
           <div className="my-10">

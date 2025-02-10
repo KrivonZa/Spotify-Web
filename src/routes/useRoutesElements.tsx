@@ -1,8 +1,6 @@
 import { useRoutes, useLocation } from "react-router-dom";
 import {
   HomePage,
-  Notification,
-  Setting,
 } from "../modules/UserModule/homePageLayout";
 import UserLayout from "../layouts/UserLayout";
 import AuthLayout from "../layouts/AuthLayout";
@@ -55,10 +53,6 @@ const useRoutesElements = () => {
       title = t("routes.forgot");
     } else if (location.pathname === "/reset") {
       title = t("routes.reset");
-    } else if (location.pathname === "/notification") {
-      title = t("routes.notification");
-    } else if (location.pathname === "/setting") {
-      title = t("routes.setting");
     } else if (location.pathname === "/user") {
       title = t("routes.user");
     } else if (location.pathname === "/account") {
@@ -84,14 +78,6 @@ const useRoutesElements = () => {
         {
           path: "",
           element: <HomePage />,
-        },
-        {
-          path: "notification",
-          element: <Notification />,
-        },
-        {
-          path: "setting",
-          element: <Setting />,
         },
         {
           path: "user",

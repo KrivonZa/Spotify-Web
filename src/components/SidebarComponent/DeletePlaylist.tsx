@@ -53,12 +53,12 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div
-          className="cursor-pointer absolute top-5 right-4 rounded-full bg-[#414141] hover:bg-[#707070] duration-200 w-9 h-9 flex items-center justify-center"
+        <button
+          className="absolute top-5 right-4 rounded-full bg-[#414141] hover:bg-[#707070] duration-200 w-9 h-9 flex items-center justify-center"
           onClick={handleClose}
         >
           <i className="fa-solid fa-x text-white"></i>
-        </div>
+        </button>
 
         <div className="px-4 py-4">
           <p className="text-xl font-bold">{t("deletePlaylist.title")}</p>
@@ -70,13 +70,13 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
           )}
           <div className="absolute bottom-4 right-4 flex space-x-4">
             <button
-              className="bg-gray-300 text-black px-4 rounded-md hover:bg-gray-400 duration-200"
+              className="bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400 duration-200"
               onClick={handleClose}
             >
               {t("deletePlaylist.cancel")}
             </button>
             <button
-              className="bg-red-600 text-white px-4 rounded-md hover:bg-red-700 duration-200"
+              className="bg-red-600 text-white px-4 py-1 rounded-md hover:bg-red-700 duration-200"
               onClick={handleDelete}
             >
               {loading ? (

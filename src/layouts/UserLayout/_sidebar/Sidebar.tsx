@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../stores";
 import LanguageModal from "../../../components/LanguageModal";
 import { useTranslation } from "react-i18next";
-import { createPlaylistThunk } from "../../../stores/playlistManager/thunk";
+import {
+  createPlaylistThunk,
+  userPlaylistThunk,
+} from "../../../stores/playlistManager/thunk";
 
 export default function Sidebar() {
   const { t } = useTranslation();
@@ -21,6 +24,7 @@ export default function Sidebar() {
       return;
     }
     await dispatch(createPlaylistThunk());
+    await dispatch(userPlaylistThunk());
   };
 
   useEffect(() => {

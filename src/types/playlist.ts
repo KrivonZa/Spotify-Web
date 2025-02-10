@@ -27,6 +27,7 @@ export interface playlistDetail {
   songCount: number;
   description: string;
   musics: music[];
+  account: Account;
 }
 
 export interface music {

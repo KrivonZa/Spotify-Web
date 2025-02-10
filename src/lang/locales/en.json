@@ -180,9 +180,7 @@
     "following": "Following",
     "topArtists": "Top artists this month",
     "artist": "Artist",
-    "visible": "Only visible to you",
     "topTracks": "Top tracks this month",
-    "all": "Show All",
     "tokenExpired": "Your session has expired, please log in again",
     "choose": "Choose Photo",
     "remove": "Remove Photo"
@@ -250,18 +248,23 @@
   },
   "playlistDetail": {
     "playlist": "Playlist",
-    "choose":"Choose Photo",
-    "remove":"Remove Photo",
+    "choose": "Choose Photo",
+    "remove": "Remove Photo",
     "song": " song",
     "list": "List",
     "compact": "Compact",
     "title": "Title",
-    "artist": "Artist"
+    "artist": "Artist",
+    "emptyOwner": "Look like you haven't created any playlist yet",
+    "empty": "Look like Owner haven't created any playlist yet",
+    "createNew": "Create your playlist"
   },
   "yourMusic": {
     "title": "Your Music",
     "upload": "Upload new song",
-    "delete": "Delete music"
+    "delete": "Delete music",
+    "empty": "Look like you haven't uploaded any song yet",
+    "createNew": "Upload your newest song"
   },
   "deleteMusic": {
     "title": "Delete Music",
@@ -271,7 +274,7 @@
     "deleteSuccess": "Delete Song successfully",
     "deleteFail": "Delete Song failed! Please try again"
   },
-  "addToPlaylist":{
+  "addToPlaylist": {
     "title": "Add to Playlist",
     "description": "Please select the playlist to which you wish to add ",
     "addSuccess": "Add music to Playlist successfully",
@@ -279,5 +282,10 @@
     "cancel": "Cancel",
     "add": "Add",
     "choose": "Playlist choosen: "
+  },
+  "yourPlaylist": {
+    "title": "Your Playlist",
+    "empty": "Look like you haven't created any playlist yet",
+    "createNew": "Create your playlist"
   }
 }
