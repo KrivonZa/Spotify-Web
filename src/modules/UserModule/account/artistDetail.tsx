@@ -24,7 +24,7 @@ export function ArtistDetail() {
   const [durations, setDurations] = useState<string[]>([]);
   const [musicToAdd, setMusicToAdd] = useState<getMusic | null>(null);
 
-  const avatarUrl = `https://image-media.trangiangkhanh.site/${avatar}`;
+  const avatarUrl = `https://mygkhanhs3.s3.ap-southeast-2.amazonaws.com/${avatar}`;
 
   useEffect(() => {
     if (!artistId) return;
@@ -68,13 +68,16 @@ export function ArtistDetail() {
     <section className="min-h-screen">
       <div className="flex items-end px-6 pb-6 pt-24">
         <div className="relative w-52 h-52">
-          <img
-            src={
-              avatarUrl ||
-              "https://media.istockphoto.com/id/1305665241/vector/anonymous-gender-neutral-face-avatar-incognito-head-silhouette-stock-illustration.jpg?s=612x612&w=0&k=20&c=qA6GUTalFyrBCRVUzQgp2B5zODxmOA4NXTBcw9notYY="
-            }
-            className="w-52 h-52 rounded-full object-cover shadow-xl"
-          />
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              className="w-52 h-52 rounded-full object-cover shadow-xl"
+            />
+          ) : (
+            <div className="w-52 h-52 object-cover shadow-xl flex justify-center items-center bg-[#242424]">
+              <i className="fa-solid fa-headphones text-gray-400 text-6xl"></i>
+            </div>
+          )}
         </div>
         <div className="ml-6 flex flex-col gap-y-2">
           <p className="text-sm font-semibold">{t("artistDetail.artist")}</p>
