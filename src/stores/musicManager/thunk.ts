@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { manageMusic } from "../../services/manageMusic";
+import { bothFile } from "../../types/file";
 
 export const searchMusicThunk = createAsyncThunk(
   "searchMusic",
@@ -35,6 +36,22 @@ export const deleteMusicThunk = createAsyncThunk(
       return data.data;
     } catch (error) {
       console.log("API error:", error);
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addMusicThunk = createAsyncThunk(
+  "addMusic",
+  async (
+    { req, file }: { req: string; file: bothFile },
+    { rejectWithValue }
+  ) => {
+    try {
+      const data = await manageMusic.addMusic(file, req);
+      return data.data;
+    } catch (error) {
+      console.error("API error:", error);
       return rejectWithValue(error);
     }
   }

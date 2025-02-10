@@ -1,6 +1,6 @@
 import { apiPrivateInstance } from "../constants/privateAPI";
 import { apiInstance } from "../constants/publicAPI";
-import { addToPlaylist } from "../types/playlist";
+import { addToPlaylist, updatePlaylist } from "../types/playlist";
 
 export const managePlaylist = {
   getUserPlaylist: () => apiPrivateInstance().get(`playlist`),
@@ -14,4 +14,8 @@ export const managePlaylist = {
   getAllPlaylist: () => apiInstance().get(`/playlist/get-all`),
   addMusicToPlaylist: (req: addToPlaylist) =>
     apiPrivateInstance().post(`/playlist/add-song`, req),
+  updatePlaylist: (req: updatePlaylist) =>
+    apiPrivateInstance().patch(`/playlist/update`, req),
+  getPlaylistByArtist: (req: string) =>
+    apiPrivateInstance().get(`/playlist/get-all/{userId}?userId=${req}`),
 };

@@ -33,7 +33,7 @@ const CreatePP: React.FC<CreatePPProps> = ({ isExpanded }) => {
     await dispatch(createPlaylistThunk());
     await dispatch(userPlaylistThunk());
   };
-  const { userPlaylist, playlistDetail, loading, allPlaylist } = usePlaylist();
+  const { userPlaylist } = usePlaylist();
 
   useEffect(() => {
     if (!user) {

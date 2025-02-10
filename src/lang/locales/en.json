@@ -178,12 +178,17 @@
   "profile": {
     "profile": "Profile",
     "following": "Following",
-    "topArtists": "Top artists this month",
+    "allPlaylist": "All your Playlist",
+    "playlist": "Playlist",
     "artist": "Artist",
-    "topTracks": "Top tracks this month",
+    "allSong": "All your Song",
     "tokenExpired": "Your session has expired, please log in again",
     "choose": "Choose Photo",
-    "remove": "Remove Photo"
+    "remove": "Remove Photo",
+    "empty": "Look like you haven't created any playlist yet",
+    "createNew": "Create your playlist",
+    "emptyMusic": "Look like you haven't uploaded any song yet",
+    "createNewMusic": "Upload your newest song"
   },
   "updateProfile": {
     "detail": "Profile details",
@@ -256,8 +261,10 @@
     "title": "Title",
     "artist": "Artist",
     "emptyOwner": "Look like you haven't created any playlist yet",
-    "empty": "Look like Owner haven't created any playlist yet",
-    "createNew": "Create your playlist"
+    "empty1": "Look like ",
+    "empty2": "haven't created any playlist yet",
+    "createNew": "Create your playlist",
+    "removeSong": "Remove out of playlist"
   },
   "yourMusic": {
     "title": "Your Music",
@@ -287,5 +294,54 @@
     "title": "Your Playlist",
     "empty": "Look like you haven't created any playlist yet",
     "createNew": "Create your playlist"
+  },
+  "createPlaylist": {
+    "title": "Create Playlist",
+    "description": "To create a playlist tailored to your preferences, please feel free to provide the following information (optional):",
+    "name": "Title",
+    "about": "Description",
+    "image": "Image",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "updatePlaylist": {
+    "title": "Update Playlist",
+    "description": "To update your playlist and tailor it to your preferences, please feel free to provide the following information (optional):",
+    "name": "Title (must be filled)",
+    "about": "Description",
+    "image": "Image",
+    "cancel": "Cancel",
+    "update": "Update",
+    "updateSuccess": "Update Playlist successfully",
+    "updateFail": "Update Playlist failed! Please try again"
+  },
+  "artistDetail": {
+    "artist": "Artist",
+    "allPlaylist": "All Playlist",
+    "allSong": "All Song",
+    "playlist": "Playlist",
+    "empty1Playlist": "Look like ",
+    "empty2Playlist":"haven't created any playlist yet",
+    "empty1Music": "Look like ",
+    "empty2Music": "haven't uploaded any song yet"
+  },
+  "removeSong": {
+    "title": "Remove music",
+    "description1": "Do you want to remove Song",
+    "description2": "from the Playlist",
+    "cancel": "Cancel",
+    "remove": "Remove"
+  },
+  "addMusic": {
+    "addSuccess":"Upload music to Spotify successfully",
+    "addFail":"Upload music to Spotify failed! Please try again",
+    "title": "Upload music to Spotify",
+    "name": "Music name",
+    "choose":"Choose Photo",
+    "remove":"Remove Photo",
+    "chooseAudio": "Choose Audio",
+    "notSupported": "Not supported to this type of audio",
+    "removeAudio": "Remove Audio",
+    "upload": "Upload new song"
   }
 }

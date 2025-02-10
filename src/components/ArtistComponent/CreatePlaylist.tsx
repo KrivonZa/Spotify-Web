@@ -6,29 +6,23 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { AppDispatch } from "../../redux/store";
 import { useUser } from "../../hooks/useUser";
 import { usePlaylist } from "../../hooks/usePlaylist";
-import { playlistDetail } from "../../types/playlist";
 import {
-  updatePlaylistThunk,
+  createPlaylistThunk,
   userPlaylistThunk,
+  updatePlaylistThunk,
 } from "../../stores/playlistManager/thunk";
 import { uploadImageThunk } from "../../stores/fileManager/thunk";
 
-interface UpdatePlaylistProps {
+interface CreatePlaylistProps {
   onClose: (shouldDelete?: boolean) => void;
-  playlist: playlistDetail | null;
 }
 
-const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
-  onClose,
-  playlist,
-}) => {
+const CreatePlaylist: React.FC<CreatePlaylistProps> = ({ onClose }) => {
   const [animate, setAnimate] = useState(false);
-  const [title, setTitle] = useState(playlist?.title || "");
-  const [description, setDescription] = useState(playlist?.description || "");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string | null>(
-    playlist?.backgroundImage || null
-  );
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
@@ -54,23 +48,27 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
 
   const handleSubmit = async () => {
     if (!userInfo) return;
+    const createdPlaylist = await dispatch(createPlaylistThunk()).unwrap();
+    if (!createdPlaylist?.playlistId) {
+      onClose(false);
+      return;
+    }
 
-    let avatar = playlist?.backgroundImage;
+    let avatar = null;
     if (image) {
       try {
         const result = await dispatch(uploadImageThunk({ file: image }));
         if (result) {
           avatar = result.payload.url;
+          console.log("Avatar URL:", avatar);
         }
       } catch (error) {
         console.error("Error uploading image:", error);
       }
     }
 
-    if (!playlist?.playlistId || !avatar) return;
-
     const data = {
-      playlistId: playlist?.playlistId,
+      playlistId: createdPlaylist.playlistId,
       title: title,
       description: description,
       backgroundImage: avatar,
@@ -99,15 +97,15 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
         </div>
 
         <div className="px-4 py-4">
-          <p className="text-xl font-bold mb-4">{t("updatePlaylist.title")}</p>
-          <p className="mt-4 text-lg">{t("updatePlaylist.description")}</p>
+          <p className="text-xl font-bold mb-4">{t("createPlaylist.title")}</p>
+          <p className="mt-4 text-lg">{t("createPlaylist.description")}</p>
           <div className="my-5">
             <div className="mb-4">
               <label
                 className="block font-semibold text-white mb-2"
                 htmlFor="title"
               >
-                {t("updatePlaylist.name")}
+                {t("createPlaylist.name")}
               </label>
               <input
                 id="title"
@@ -115,7 +113,7 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full p-2 rounded-md bg-[#414141] text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder={t("updatePlaylist.name")}
+                placeholder={t("createPlaylist.name")}
               />
             </div>
 
@@ -124,14 +122,14 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
                 className="block font-semibold text-white mb-2"
                 htmlFor="description"
               >
-                {t("updatePlaylist.about")}
+                {t("createPlaylist.about")}
               </label>
               <textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="w-full p-2 rounded-md bg-[#414141] text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder={t("updatePlaylist.about")}
+                placeholder={t("createPlaylist.about")}
                 rows={4}
               ></textarea>
             </div>
@@ -141,37 +139,22 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
                 className="block font-semibold text-white mb-2"
                 htmlFor="image"
               >
-                {t("updatePlaylist.image")}
+                {t("createPlaylist.image")}
               </label>
-              <div
-                className="w-32 h-32 bg-[#414141] rounded-md flex items-center justify-center cursor-pointer"
-                onClick={() => document.getElementById("imageInput")?.click()}
-              >
-                {previewImage ? (
-                  <img
-                    src={previewImage}
-                    alt="Preview"
-                    className="w-full h-full object-cover rounded-md"
-                  />
-                ) : playlist?.backgroundImage ? (
-                  <img
-                    src={playlist.backgroundImage}
-                    alt="Preview"
-                    className="w-full h-full object-cover rounded-md"
-                  />
-                ) : (
-                  <div className="h-full w-full rounded-md flex justify-center items-center bg-[#242424]">
-                    <i className="fa-solid fa-music text-3xl text-gray-400"></i>
-                  </div>
-                )}
-              </div>
               <input
-                id="imageInput"
+                id="image"
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
-                className="hidden"
+                className="block text-white text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-[#414141] file:text-white hover:file:bg-gray-600 file:duration-200 cursor-pointer file:cursor-pointer"
               />
+              {previewImage && (
+                <img
+                  src={previewImage}
+                  alt="Preview"
+                  className="mt-4 w-32 h-32 object-cover rounded-md"
+                />
+              )}
             </div>
           </div>
 
@@ -180,7 +163,7 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
               className="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400 duration-200"
               onClick={handleClose}
             >
-              {t("updatePlaylist.cancel")}
+              {t("createPlaylist.cancel")}
             </button>
             <button
               className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 duration-200"
@@ -191,7 +174,7 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
                   indicator={<LoadingOutlined spin className="text-white" />}
                 />
               ) : (
-                t("updatePlaylist.update")
+                t("createPlaylist.create")
               )}
             </button>
           </div>
@@ -201,4 +184,4 @@ const UpdatePlaylist: React.FC<UpdatePlaylistProps> = ({
   );
 };
 
-export default UpdatePlaylist;
+export default CreatePlaylist;

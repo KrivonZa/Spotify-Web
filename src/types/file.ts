@@ -19,3 +19,8 @@ export interface dataAudioFile {
   url: string;
   duration: number | null;
 }
+
+export interface bothFile {
+  thumbnail: File;
+  musicUrl: File;
+}

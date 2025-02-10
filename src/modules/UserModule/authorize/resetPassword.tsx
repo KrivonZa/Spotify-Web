@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../../redux/hooks";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { AppDispatch } from "../../../redux/store";

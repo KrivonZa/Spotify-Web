@@ -172,12 +172,17 @@
   "profile": {
     "profile": "Hồ sơ",
     "following": "đang theo dõi",
-    "topArtists": "Nghệ sĩ hàng đầu tháng này",
+    "allPlaylist": "Tất cả Playlist của bạn",
+    "playlist": "Playlist",
     "artist": "Nghệ sĩ",
-    "topTracks": "Bản nhạc hàng đầu tháng này",
+    "allSong": "Tất cả Nhạc của bạn",
     "tokenExpired": "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại",
     "choose": "Chọn Ảnh",
-    "remove": "Xóa Ảnh"
+    "remove": "Xóa Ảnh",
+    "empty": "Có vẻ như bạn chưa tạo danh sách phát nào",
+    "createNew": "Tạo danh sách phát của bạn",
+    "emptyMusic": "Có vẻ như bạn chưa tải lên bản nhạc nào",
+    "createNewMusic": "Tải lên bản nhạc mới nhất của bạn"
   },
   "updateProfile": {
     "detail": "Chi tiết hồ sơ",
@@ -250,8 +255,10 @@
     "title": "Tiêu đề",
     "artist": "Nghệ sĩ",
     "emptyOwner": "Có vẻ như bạn chưa tạo danh sách phát nào",
-    "empty": "Có vẻ như tác giả chưa tạo danh sách phát nào",
-    "createNew": "Tạo danh sách phát của bạn"
+    "empty1": "Có vẻ như",
+    "empty2": "chưa tạo danh sách phát nào",
+    "createNew": "Tạo danh sách phát của bạn",
+    "removeSong": "Xóa khỏi danh sách"
   },
   "yourMusic": {
     "title": "Nhạc của bạn",
@@ -281,5 +288,54 @@
     "title": "Danh sách của bạn",
     "empty": "Có vẻ như bạn chưa tạo danh sách phát nào",
     "createNew": "Tạo danh sách phát của bạn"
+  },
+  "createPlaylist": {
+    "title": "Tạo danh sách phát",
+    "description": "Để tạo playlist theo ý thích, bạn có thể cung cấp thêm thông tin sau (tùy chọn):",
+    "name": "Tiêu đề",
+    "about": "Miêu tả",
+    "image": "Ảnh",
+    "cancel": "Hủy",
+    "create": "Tạo"
+  },
+  "updatePlaylist": {
+    "title": "Cập nhật danh sách",
+    "description": "Để cập nhật playlist theo ý thích, bạn có thể cung cấp thêm thông tin sau (tùy chọn):",
+    "name": "Tiêu đề (bắt buộc điền)",
+    "about": "Miêu tả",
+    "image": "Hình ảnh",
+    "cancel": "Hủy",
+    "update": "Cập nhật",
+    "updateSuccess": "Cập nhật danh sách phát thành công",
+    "updateFail": "Cập nhật danh sách phát thất bại! Vui lòng thử lại"
+  },
+  "artistDetail": {
+    "artist": "Nghệ sĩ",
+    "allPlaylist": "Tất cả Playlist",
+    "allSong": "Tất cả Nhạc",
+    "playlist": "Playlist",
+    "empty1Playlist": "Có vẻ như ",
+    "empty2Playlist": "chưa tạo danh sách phát nào",
+    "empty1Music": "Có vẻ như ",
+    "empty2Music": "chưa tải lên bản nhạc nào"
+  },
+  "removeSong": {
+    "title": "Xóa nhạc",
+    "description1": "Bạn có muốn xóa",
+    "description2": "khỏi danh sách",
+    "cancel": "Hủy",
+    "remove": "Xóa"
+  },
+  "addMusic": {
+    "addSuccess": "Tải nhạc lên Spotify thành công",
+    "addFail": "Tải nhạc lên Spotify thất bại! Vui lòng thử lại",
+    "title": "Tải nhạc lên Spotify",
+    "name": "Tên nhạc",
+    "choose": "Chọn Ảnh",
+    "remove": "Xóa Ảnh",
+    "chooseAudio": "Chọn Âm thanh",
+    "notSupported": "Không hỗ trợ đối với âm thanh định dạng này",
+    "removeAudio": "Xóa Âm thanh",
+    "upload": "Tải nhạc mới lên"
   }
 }

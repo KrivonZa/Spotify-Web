@@ -1,14 +1,12 @@
 import { message, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import FormLogin from "../../../components/login";
-import { useAppSelector } from "../../../redux/hooks";
 import { useModal } from "../../../globalContext/ModalContext";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import DropdownProfile from "../../../components/HeaderComponent/DropdownProfile";
 import { useUser } from "../../../hooks/useUser";
-import { useArtist } from "../../../hooks/useArtist";
 import { userInfoThunk } from "../../../stores/userManager/thunk";
 import { searchArtistThunk } from "../../../stores/artistManager/thunk";
 import { searchMusicThunk } from "../../../stores/musicManager/thunk";
@@ -19,7 +17,7 @@ import { AppDispatch } from "../../../stores";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { isModalOpen, closeModal, openModal } = useModal();
+  const { isModalOpen, closeModal } = useModal();
   const dispatch = useDispatch<AppDispatch>();
   const [isFocused, setIsFocused] = useState(false);
   const [isSearch, setIsSearch] = useState("");

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Spin } from "antd";
@@ -46,7 +46,7 @@ const DeleteMusic: React.FC<DeleteMusicProps> = ({ onClose, music }) => {
       onClick={handleClose}
     >
       <div
-        className={`bg-[#1e1e1e] min-h-[20%] w-[40%] rounded-xl transform transition-transform duration-200 ${
+        className={`bg-[#1e1e1e] min-h-[25%] w-[40%] rounded-xl transform transition-transform duration-200 ${
           animate ? "translate-y-0" : "translate-y-full"
         }`}
         onClick={(e) => e.stopPropagation()}

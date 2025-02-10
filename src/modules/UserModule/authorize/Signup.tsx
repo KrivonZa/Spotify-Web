@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../../redux/hooks";
 import { AppDispatch } from "../../../redux/store";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";

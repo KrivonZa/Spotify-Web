@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.css";
-import tippy from "tippy.js";
+// import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
+import AddToPlaylist from "../../../components/ArtistComponent/AddToPlaylist";
 import { useSong } from "../../../globalContext/SongContext";
+import { getMusic } from "../../../types/music";
 
 const BottomPlayer = () => {
   const [volume, setVolume] = useState(100);
@@ -13,6 +15,8 @@ const BottomPlayer = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { selectedMusic, setSelectedMusic } = useSong();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+  const [musicToAdd, setMusicToAdd] = useState<getMusic | null>(null);
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseInt(e.target.value, 10);
@@ -176,6 +180,16 @@ const BottomPlayer = () => {
     }
   };
 
+  const handleOpenAddModal = (music: getMusic) => {
+    setMusicToAdd(music);
+    setIsModalAddOpen(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setIsModalAddOpen(false);
+    setMusicToAdd(null);
+  };
+
   return (
     <div className="flex justify-between items-center px-4 py-4">
       <div className="flex items-center basis-1/4">
@@ -209,7 +223,10 @@ const BottomPlayer = () => {
         ) : null}
 
         {selectedMusic.length > 0 && (
-          <button className="w-6 h-6 rounded-full border-2 border-[#a0a0a0] text-[#a0a0a0] flex justify-center items-center hover:border-white hover:text-white duration-200" >
+          <button
+            className="w-6 h-6 rounded-full border-2 border-[#a0a0a0] text-[#a0a0a0] flex justify-center items-center hover:border-white hover:text-white duration-200"
+            onClick={() => handleOpenAddModal(selectedMusic?.[currentIndex])}
+          >
             <i className="fa-solid fa-plus text-xs"></i>
           </button>
         )}
@@ -225,7 +242,11 @@ const BottomPlayer = () => {
             onClick={handlePrevious}
           ></i>
           <div
-            className={`w-9 h-9 rounded-full transform hover:scale-105 duration-200 flex justify-center items-center ${selectedMusic.length > 0 ? "bg-white cursor-pointer hover:bg-slate-200":"bg-gray-600 cursor-not-allowed hover:bg-gray-400"}`}
+            className={`w-9 h-9 rounded-full transform hover:scale-105 duration-200 flex justify-center items-center ${
+              selectedMusic.length > 0
+                ? "bg-white cursor-pointer hover:bg-slate-200"
+                : "bg-gray-600 cursor-not-allowed hover:bg-gray-400"
+            }`}
             onClick={selectedMusic.length > 0 ? togglePlayPause : undefined}
           >
             <i
@@ -292,6 +313,9 @@ const BottomPlayer = () => {
         <i className="fa-solid fa-square hover:text-white duration-200 cursor-pointer"></i>
         <i className="fa-solid fa-down-left-and-up-right-to-center hover:text-white duration-200 cursor-pointer"></i>
       </div>
+      {isModalAddOpen && (
+        <AddToPlaylist onClose={handleCloseAddModal} music={musicToAdd} />
+      )}
     </div>
   );
 };

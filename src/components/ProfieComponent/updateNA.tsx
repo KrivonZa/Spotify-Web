@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { uploadImageThunk } from "../../stores/fileManager/thunk";
 import { updateInfo2Thunk } from "../../stores/userManager/thunk";
-import { useFile } from "../../hooks/useFile";
 
 interface UpdateNAProps {
   onClose: () => void;

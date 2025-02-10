@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useColor } from "../../../globalContext/ColorContext";
 import { useTranslation } from "react-i18next";
-import data from "./data.json";
 import { processImageAndSetBackground } from "../../../tools/dominantColor";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,10 +8,10 @@ import {
   getAllPlaylistThunk,
 } from "../../../stores/playlistManager/thunk";
 import { searchArtistThunk } from "../../../stores/artistManager/thunk";
-import { searchMusicThunk } from "../../../stores/musicManager/thunk";
 import { usePlaylist } from "../../../hooks/usePlaylist";
 import { useMusic } from "../../../hooks/useMusic";
 import { useArtist } from "../../../hooks/useArtist";
+import { useUser } from "../../../hooks/useUser";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../stores";
 import { useSong } from "../../../globalContext/SongContext";
@@ -22,15 +21,14 @@ export function HomePage() {
   const { setPrimaryColor } = useColor();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { userPlaylist, loading, allPlaylist } = usePlaylist();
+  const { userPlaylist, allPlaylist } = usePlaylist();
   const { searchMusic } = useMusic();
+  const { userInfo } = useUser();
   const { searchArtist, getAllArtist } = useArtist();
   const { setSelectedMusic } = useSong();
 
-  const user = localStorage.getItem("user");
-
   useEffect(() => {
-    if (user) {
+    if (userInfo) {
       dispatch(userPlaylistThunk());
     }
     dispatch(getAllPlaylistThunk());
@@ -54,10 +52,26 @@ export function HomePage() {
     setSelectedMusic(item);
   };
 
+  const handleArtist = (
+    accountId: string | undefined,
+    name: string | undefined,
+    avatar: string | undefined
+  ) => {
+    if (userInfo?.id === accountId) {
+      navigate("/user");
+      return;
+    }
+    let cleanedAvatar = avatar?.replace("https://image-media.trangiangkhanh.site/", "");
+    if (!cleanedAvatar?.trim()) {
+      cleanedAvatar = "null";
+    }
+    navigate(`/artist/${accountId}/${name}/${cleanedAvatar}`);
+  };
+
   return (
     <section className="min-h-screen">
       <div className="px-7 py-5">
-        {user && (
+        {userInfo && (
           <div className="flex gap-x-3 font-medium">
             <button className="px-4 py-1 rounded-full bg-white bg-opacity-15 hover:bg-opacity-25 duration-200">
               {t("homepage.all")}
@@ -72,13 +86,14 @@ export function HomePage() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 my-5">
-          {user &&
+          {userInfo &&
             userPlaylist?.playlists.map((item, index) => (
               <div
                 key={index}
                 className="bg-white bg-opacity-15 hover:bg-opacity-25 duration-200 h-12 flex items-center rounded overflow-hidden cursor-pointer"
                 onMouseEnter={() => handleMouseEnter(item.backgroundImage)}
                 onMouseLeave={handleMouseLeave}
+                onClick={() => navigate(`playlist/${item.playlistId}`)}
               >
                 {item?.backgroundImage ? (
                   <img
@@ -182,7 +197,9 @@ export function HomePage() {
                 <div
                   key={index}
                   className="group relative hover:bg-slate-700 bg-opacity-15 p-4 rounded-lg cursor-pointer duration-200 shrink-0"
-                  onClick={() => navigate(`artist/${item.id}`)}
+                  onClick={() =>
+                    handleArtist(item.id, item.nickname, item.avatar)
+                  }
                 >
                   <img
                     src={item.avatar}

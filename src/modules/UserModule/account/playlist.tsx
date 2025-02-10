@@ -1,15 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import UpdateNA from "../../../components/ProfieComponent/updateNA";
 import { AppDispatch } from "../../../stores";
 import { useDispatch } from "react-redux";
 import { getPlaylistDetailThunk } from "../../../stores/playlistManager/thunk";
-import { userInfoThunk } from "../../../stores/userManager/thunk"
+import { userInfoThunk } from "../../../stores/userManager/thunk";
 import { usePlaylist } from "../../../hooks/usePlaylist";
 import { useSong } from "../../../globalContext/SongContext";
 import { useUser } from "../../../hooks/useUser";
-import { motion } from "framer-motion";
+import { getMusic } from "../../../types/music";
+import { playlistDetail } from "../../../types/playlist";
+import AddToPlaylist from "../../../components/ArtistComponent/AddToPlaylist";
+import RemoveMusic from "../../../components/ArtistComponent/RemoveMusic";
+import UpdatePlaylist from "../../../components/ArtistComponent/updatePlaylist";
 
 export function Playlist() {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,17 +21,24 @@ export function Playlist() {
   const { setSelectedMusic } = useSong();
   const { userInfo } = useUser();
   const navigate = useNavigate();
-  const [isUpdateNA, setUpdateNA] = useState(false);
+  const [isUpdatePlaylist, setUpdatePlaylist] = useState(false);
   const [displayStatus, setDisplayStatus] = useState(true);
   const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
   const { playlistId } = useParams();
   const [durations, setDurations] = useState<string[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+  const [isModalRemoveOpen, setIsModalRemoveOpen] = useState(false);
+  const [musicToAdd, setMusicToAdd] = useState<getMusic | null>(null);
+  const [isOpen, setIsOpen] = useState<number | null>(null);
+  const [musicToRemove, setMusicToRemove] = useState<getMusic | null>(null);
+  const [playlistRemoved, setPlaylistRemoved] = useState<playlistDetail | null>(
+    null
+  );
+
   const [isOwner, setIsOwner] = useState(
     userInfo?.id === playlistDetail?.account.id
   );
-
-  console.log(userInfo?.id)
 
   useEffect(() => {
     if (!playlistId) return;
@@ -38,7 +48,7 @@ export function Playlist() {
   }, [dispatch, playlistId, userInfo]);
 
   const handleUpdateClick = () => {
-    setUpdateNA(true);
+    setUpdatePlaylist(true);
   };
 
   const handleAudioLoaded = (index: number, audioElement: HTMLAudioElement) => {
@@ -70,6 +80,54 @@ export function Playlist() {
   const handleMusicOneClick = (item: any, index: number) => {
     const reorderedList = [...item.slice(index), ...item.slice(0, index)];
     setSelectedMusic(reorderedList);
+  };
+
+  const handleAuthorName = (
+    accountId: string | undefined,
+    name: string | undefined,
+    avatar: string | undefined
+  ) => {
+    let cleanedAvatar = avatar?.replace(
+      "https://image-media.trangiangkhanh.site/",
+      ""
+    );
+
+    if (isOwner) {
+      navigate("/user");
+      return;
+    }
+    if (!cleanedAvatar?.trim()) {
+      cleanedAvatar = "null";
+    }
+    navigate(`/artist/${accountId}/${name}/${cleanedAvatar}`);
+  };
+
+  const handleOpenAddModal = (music: getMusic) => {
+    setMusicToAdd(music);
+    setIsModalAddOpen(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setIsModalAddOpen(false);
+    setMusicToAdd(null);
+  };
+
+  const handleEllipsis = (index: number) => {
+    setIsOpen((prev) => (prev === index ? null : index));
+  };
+
+  const handleRemove = (
+    musicToRemove: getMusic,
+    playlistDetail: playlistDetail
+  ) => {
+    setIsOpen(null);
+    handleRemoveClose();
+    setMusicToRemove(musicToRemove);
+    setPlaylistRemoved(playlistDetail);
+  };
+
+  const handleRemoveClose = () => {
+    setIsModalRemoveOpen(!isModalRemoveOpen);
   };
 
   return (
@@ -113,7 +171,13 @@ export function Playlist() {
           </p>
           <p
             className="font-semibold text-white hover:underline duration-200 cursor-pointer mt-1"
-            onClick={() => navigate(`/artist/${playlistDetail?.account.id}`)}
+            onClick={() =>
+              handleAuthorName(
+                playlistDetail?.account.id,
+                playlistDetail?.account.nickName,
+                playlistDetail?.account.avatar
+              )
+            }
           >
             {playlistDetail?.account.nickName}
           </p>
@@ -196,15 +260,21 @@ export function Playlist() {
                           <p className="font-semibold text-white">
                             {music.musicName}
                           </p>
-                          <p className="hover:underline cursor-pointer duration-150 group-hover:text-white">
+                          <p className="duration-150 group-hover:text-white">
                             {music.artistCollaboration
                               ?.map((artist) => artist.account.nickname)
                               .join(" • ")}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center justify-end gap-x-3">
-                        <i className="fa-solid fa-circle-plus hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"></i>
+                      <div className="flex items-center justify-end gap-x-3 relative">
+                        <i
+                          className="fa-solid fa-circle-plus hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenAddModal(music);
+                          }}
+                        ></i>
                         <audio
                           src={music.musicUrl}
                           ref={(el) => {
@@ -216,7 +286,27 @@ export function Playlist() {
                           }}
                         />
                         <p>{durations[index] || "0:00"}</p>
-                        <i className="fa-solid fa-ellipsis hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"></i>
+                        <i
+                          className="fa-solid fa-ellipsis hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEllipsis(index);
+                          }}
+                        ></i>
+                        {isOpen === index && (
+                          <div className="absolute z-10 top-full right-0 mt-2 bg-[#414141] text-white px-5 py-2 rounded-lg shadow-lg flex justify-center items-center gap-x-2 w-auto whitespace-nowrap">
+                            <i className="fa-solid fa-trash"></i>
+                            <button
+                              className="font-bold text-left"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleRemove(music, playlistDetail);
+                              }}
+                            >
+                              {t("playlistDetail.removeSong")}
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))
@@ -241,13 +331,19 @@ export function Playlist() {
                           {music.musicName}
                         </p>
                       </div>
-                      <p className="hover:underline cursor-pointer duration-150 group-hover:text-white">
+                      <p className="duration-150 group-hover:text-white">
                         {music.artistCollaboration
                           ?.map((artist) => artist.account.nickname)
                           .join(" • ")}
                       </p>
-                      <div className="flex items-center justify-end gap-x-3">
-                        <i className="fa-solid fa-circle-plus hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"></i>
+                      <div className="flex items-center justify-end gap-x-3 relative">
+                        <i
+                          className="fa-solid fa-circle-plus hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenAddModal(music);
+                          }}
+                        ></i>
                         <audio
                           src={music.musicUrl}
                           ref={(el) => {
@@ -259,7 +355,27 @@ export function Playlist() {
                           }}
                         />
                         <p>{durations[index] || "0:00"}</p>
-                        <i className="fa-solid fa-ellipsis hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"></i>
+                        <i
+                          className="fa-solid fa-ellipsis hover:text-white duration-150 cursor-pointer opacity-0 group-hover:opacity-100 transform hover:scale-105"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEllipsis(index);
+                          }}
+                        ></i>
+                        {isOpen === index && (
+                          <div className="absolute z-10 top-full right-0 mt-2 bg-[#414141] text-white px-5 py-2 rounded-lg shadow-lg flex justify-center items-center gap-x-2 w-auto whitespace-nowrap">
+                            <i className="fa-solid fa-trash"></i>
+                            <button
+                              className="font-bold text-left"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleRemove(music, playlistDetail);
+                              }}
+                            >
+                              {t("playlistDetail.removeSong")}
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -277,17 +393,30 @@ export function Playlist() {
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center mt-10">
-          <p className="font-bold text-lg">{t("playlistDetail.emptyOwner")}</p>
+          <p className="font-bold text-lg">
+            {t("playlistDetail.empty1")} {playlistDetail?.account.nickName}{" "}
+            {t("playlistDetail.empty2")}
+          </p>
         </div>
       )}
-      {/* {isUpdateNA && (
-        <UpdateNA
-          userInfo={userInfo}
+      {isUpdatePlaylist && (
+        <UpdatePlaylist
+          playlist={playlistDetail}
           onClose={() => {
-            setUpdateNA(false);
+            setUpdatePlaylist(false);
           }}
         />
-      )} */}
+      )}
+      {isModalAddOpen && (
+        <AddToPlaylist onClose={handleCloseAddModal} music={musicToAdd} />
+      )}
+      {isModalRemoveOpen && (
+        <RemoveMusic
+          onClose={handleRemoveClose}
+          music={musicToRemove}
+          playlist={playlistRemoved}
+        />
+      )}
     </section>
   );
 }

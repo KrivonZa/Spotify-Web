@@ -88,7 +88,7 @@ const useRoutesElements = () => {
           element: <Playlist />,
         },
         {
-          path: "artist/:artistId",
+          path: "artist/:artistId/:name/:avatar",
           element: <ArtistDetail />,
         },
       ],

@@ -51,3 +51,10 @@ export interface addToPlaylist {
   playlistId: string;
   musicId: string;
 }
+
+export interface updatePlaylist {
+  playlistId: string;
+  backgroundImage: string | null;
+  title: string;
+  description: string;
+}

@@ -9,6 +9,7 @@ import { useMusic } from "../../../hooks/useMusic";
 import { getMusic } from "../../../types/music";
 import DeleteMusic from "../../../components/ArtistComponent/DeleteMusic";
 import AddToPlaylist from "../../../components/ArtistComponent/AddToPlaylist";
+import UploadMusic from "../../../components/ArtistComponent/uploadMusic";
 
 export function YourMusic() {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,12 +21,11 @@ export function YourMusic() {
   const [isOpen, setIsOpen] = useState<number | null>(null);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+  const [isModalUploadOpen, setIsModalUploadOpen] = useState(false);
   const [musicToDelete, setMusicToDelete] = useState<getMusic | null>(null);
   const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
   const [durations, setDurations] = useState<string[]>([]);
   const [musicToAdd, setMusicToAdd] = useState<getMusic | null>(null);
-
-  console.log(artistMusic)
 
   useEffect(() => {
     if (!userInfo) return;
@@ -73,6 +73,10 @@ export function YourMusic() {
     return `${minutes}:${seconds}`;
   };
 
+  const handleUpload = () => {
+    setIsModalUploadOpen((prev) => !prev);
+  };
+
   return (
     <section className="bg-[#121212] w-full h-full flex justify-center">
       <div className="my-20 mx-28 w-[70%] flex flex-col gap-y-5">
@@ -87,7 +91,10 @@ export function YourMusic() {
         {artistMusic && artistMusic?.length > 0 ? (
           <div className="px-4 py-10">
             <div className="flex justify-between items-center">
-              <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4">
+              <button
+                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4"
+                onClick={handleUpload}
+              >
                 <p className="text-base font-semibold">
                   {t("yourMusic.createNew")}
                 </p>
@@ -159,7 +166,7 @@ export function YourMusic() {
                             onClick={() => handleOpenAddModal(music)}
                           ></i>
                           <audio
-                            src={music.musicurl}
+                            src={music.musicUrl}
                             ref={(el) => {
                               audioRefs.current[index] = el;
                               if (el) {
@@ -218,7 +225,7 @@ export function YourMusic() {
                             onClick={() => handleOpenAddModal(music)}
                           ></i>
                           <audio
-                            src={music.musicurl}
+                            src={music.musicUrl}
                             ref={(el) => {
                               audioRefs.current[index] = el;
                               if (el) {
@@ -253,7 +260,7 @@ export function YourMusic() {
           <div className="flex flex-col justify-center items-center mt-10">
             <p className="font-bold text-lg">{t("yourMusic.empty")}</p>
             <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4">
-              <p className="text-base font-semibold">
+              <p className="text-base font-semibold" onClick={handleUpload}>
                 {t("yourMusic.createNew")}
               </p>
             </button>
@@ -265,6 +272,7 @@ export function YourMusic() {
         {isModalAddOpen && (
           <AddToPlaylist onClose={handleCloseAddModal} music={musicToAdd} />
         )}
+        {isModalUploadOpen && <UploadMusic onClose={handleUpload} />}
       </div>
     </section>
   );

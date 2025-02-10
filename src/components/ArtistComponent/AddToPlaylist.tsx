@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import { AppDispatch } from "../../redux/store";
 import {
   userPlaylistThunk,
   addToPlaylistThunk,
+  createPlaylistThunk
 } from "../../stores/playlistManager/thunk";
 import { getMusic } from "../../types/music";
 import { usePlaylist } from "../../hooks/usePlaylist";
@@ -51,6 +52,11 @@ const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ onClose, music }) => {
     await dispatch(addToPlaylistThunk(addData));
     onClose(true);
   };
+
+  const handleCreate = async () => {
+    await dispatch(createPlaylistThunk);
+    await dispatch(userPlaylistThunk());
+  }
 
   return (
     <div
@@ -118,9 +124,16 @@ const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ onClose, music }) => {
                 ))}
               </div>
             ) : (
-              <p className="text-gray-500 text-center">
-                No playlists available.
-              </p>
+              <div className="flex flex-col justify-center items-center mt-10">
+                <p className="font-bold text-lg">
+                  {t("playlistDetail.emptyOwner")}
+                </p>
+                <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4" onClick={handleCreate}>
+                  <p className="text-base font-semibold">
+                    {t("playlistDetail.createNew")}
+                  </p>
+                </button>
+              </div>
             )}
           </div>
 
@@ -141,7 +154,7 @@ const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ onClose, music }) => {
                 {t("addToPlaylist.cancel")}
               </button>
               <button
-                className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 duration-200"
+                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 duration-200"
                 onClick={handleAdd}
               >
                 {loading ? (

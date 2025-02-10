@@ -6,6 +6,8 @@ import {
   getPlaylistDetailThunk,
   getAllPlaylistThunk,
   addToPlaylistThunk,
+  updatePlaylistThunk,
+  getArtistPlaylistThunk
 } from "./thunk";
 import { userPlaylist, playlistDetail, Playlist } from "../../types/playlist";
 import { toast } from "react-toastify";
@@ -15,6 +17,7 @@ type stateType = {
   userPlaylist: userPlaylist | null;
   playlistDetail: playlistDetail | null;
   allPlaylist: Playlist[] | [];
+  artistPlaylist: Playlist[] | [];
   loading: boolean;
 };
 
@@ -22,6 +25,7 @@ const initialState: stateType = {
   userPlaylist: null,
   playlistDetail: null,
   allPlaylist: [],
+  artistPlaylist: [],
   loading: false,
 };
 
@@ -76,6 +80,21 @@ export const managePlaylistSlice = createSlice({
     builder.addCase(addToPlaylistThunk.rejected, (state) => {
       state.loading = false;
       toast.error(t("addToPlaylist.addFail"));
+    });
+    builder.addCase(updatePlaylistThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updatePlaylistThunk.fulfilled, (state) => {
+      state.loading = false;
+      toast.success(t("updatePlaylist.updateSuccess"));
+    });
+    builder.addCase(updatePlaylistThunk.rejected, (state) => {
+      state.loading = false;
+      toast.error(t("updatePlaylist.updateFail"));
+    });
+    builder.addCase(getArtistPlaylistThunk.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      state.artistPlaylist = payload;
     });
   },
 });

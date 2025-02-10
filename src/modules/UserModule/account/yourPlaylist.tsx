@@ -8,6 +8,7 @@ import { useUser } from "../../../hooks/useUser";
 import { usePlaylist } from "../../../hooks/usePlaylist";
 import { Playlist } from "../../../types/playlist";
 import DeletePlaylist from "../../../components/SidebarComponent/DeletePlaylist";
+import CreatePlaylist from "../../../components/ArtistComponent/CreatePlaylist";
 
 export function YourPlaylist() {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,6 +17,7 @@ export function YourPlaylist() {
   const { userInfo } = useUser();
   const { userPlaylist } = usePlaylist();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [playlistToDelete, setPlaylistToDelete] = useState<Playlist | null>(
     null
   );
@@ -23,15 +25,23 @@ export function YourPlaylist() {
   useEffect(() => {
     if (!userInfo) return;
     dispatch(userPlaylistThunk());
-  }, [dispatch]);
+  }, [dispatch, userInfo]);
 
   const handleDeletePlaylist = (playlistToDelete: Playlist) => {
     handleClose();
     setPlaylistToDelete(playlistToDelete);
   };
 
+  const handleCreate = () => {
+    handleCreateClose();
+  };
+
+  const handleCreateClose = () => {
+    setIsCreateOpen((prev) => !prev);
+  };
+
   const handleClose = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsModalOpen((prev) => !prev);
   };
 
   return (
@@ -49,16 +59,24 @@ export function YourPlaylist() {
 
         {userPlaylist && userPlaylist?.playlists?.length > 0 ? (
           <div className="px-4 py-10">
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4"
+              onClick={handleCreate}
+            >
+              <p className="text-base font-semibold">
+                {t("yourPlaylist.createNew")}
+              </p>
+            </button>
             <div className="flex flex-col gap-y-1 py-6">
               <div className="py-2 px-4 grid grid-cols-[20px_1fr_1fr] items-center text-gray-400 gap-x-6 w-full">
                 <p>#</p>
                 <p className="text-center">{t("playlistDetail.title")}</p>
               </div>
               {userPlaylist.playlists.map((playlist, index) => (
-                <div>
+                <div key={playlist.playlistId}>
                   <div
-                    key={playlist.playlistId}
                     className="flex items-center hover:bg-gray-700 gap-4 p-4 rounded-lg shadow-lg transition cursor-pointer"
+                    onClick={() => navigate(`/playlist/${playlist.playlistId}`)}
                   >
                     <span>{index + 1}</span>
                     {playlist.backgroundImage ? (
@@ -80,7 +98,8 @@ export function YourPlaylist() {
                     <div className="ml-auto flex justify-center items-center gap-x-5">
                       <div
                         className="bg-[#292929] hover:bg-[#414141] text-gray-400 hover:text-white cursor-pointer duration-200 transform hover:scale-105 px-2 py-2 flex justify-center items-center h-10 w-10 rounded-full"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           handleDeletePlaylist(playlist);
                         }}
                       >
@@ -88,9 +107,10 @@ export function YourPlaylist() {
                       </div>
                       <div
                         className="bg-[#292929] hover:bg-green-500 hover:text-black cursor-pointer duration-200 transform hover:scale-105 px-2 py-2 flex justify-center items-center h-10 w-10 rounded-full"
-                        onClick={() =>
-                          navigate(`/playlist/${playlist.playlistId}`)
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/playlist/${playlist.playlistId}`);
+                        }}
                       >
                         <i className="fa-solid fa-chevron-right text-xl"></i>
                       </div>
@@ -104,6 +124,7 @@ export function YourPlaylist() {
                   )}
                 </div>
               ))}
+              {isCreateOpen && <CreatePlaylist onClose={handleCreateClose} />}
             </div>
           </div>
         ) : (
@@ -114,6 +135,7 @@ export function YourPlaylist() {
                 {t("yourPlaylist.createNew")}
               </p>
             </button>
+            {isCreateOpen && <CreatePlaylist onClose={handleCreateClose} />}
           </div>
         )}
       </div>
