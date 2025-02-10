@@ -261,8 +261,9 @@
     "title": "Title",
     "artist": "Artist",
     "emptyOwner": "Look like you haven't created any playlist yet",
+    "emptyMusic": "Look like you haven't add any song into playlist yet",
     "empty1": "Look like ",
-    "empty2": "haven't created any playlist yet",
+    "empty2": "haven't add any song into playlist yet",
     "createNew": "Create your playlist",
     "removeSong": "Remove out of playlist"
   },
@@ -321,7 +322,7 @@
     "allSong": "All Song",
     "playlist": "Playlist",
     "empty1Playlist": "Look like ",
-    "empty2Playlist":"haven't created any playlist yet",
+    "empty2Playlist": "haven't created any playlist yet",
     "empty1Music": "Look like ",
     "empty2Music": "haven't uploaded any song yet"
   },
@@ -330,15 +331,17 @@
     "description1": "Do you want to remove Song",
     "description2": "from the Playlist",
     "cancel": "Cancel",
-    "remove": "Remove"
+    "remove": "Remove",
+    "removeSuccess": "Remove music from playlist successfully",
+    "removeFail": "Remove music from playlist failed! Please try again"
   },
   "addMusic": {
-    "addSuccess":"Upload music to Spotify successfully",
-    "addFail":"Upload music to Spotify failed! Please try again",
+    "addSuccess": "Upload music to Spotify successfully",
+    "addFail": "Upload music to Spotify failed! Please try again",
     "title": "Upload music to Spotify",
     "name": "Music name",
-    "choose":"Choose Photo",
-    "remove":"Remove Photo",
+    "choose": "Choose Photo",
+    "remove": "Remove Photo",
     "chooseAudio": "Choose Audio",
     "notSupported": "Not supported to this type of audio",
     "removeAudio": "Remove Audio",

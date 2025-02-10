@@ -16,6 +16,12 @@ export function ChangePassword() {
   const { t } = useTranslation();
   const { userInfo } = useUser();
 
+  const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user]);
+
   const [isFocused, setIsFocused] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -70,7 +76,7 @@ export function ChangePassword() {
       return;
     }
 
-    const email = userInfo?.email
+    const email = userInfo?.email;
 
     const changeData = { email, password, newPassword };
 

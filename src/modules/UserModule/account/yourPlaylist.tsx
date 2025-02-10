@@ -22,8 +22,10 @@ export function YourPlaylist() {
     null
   );
 
+  const user = localStorage.getItem("user");
+
   useEffect(() => {
-    if (!userInfo) return;
+    if (!user) navigate("/");
     dispatch(userPlaylistThunk());
   }, [dispatch, userInfo]);
 

@@ -4,14 +4,12 @@ import { useDispatch } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { AppDispatch } from "../../redux/store";
-import {
-  deleteMusicThunk,
-  getMusicByUserThunk,
-} from "../../stores/musicManager/thunk";
+import { removeFromPlaylistThunk, getPlaylistDetailThunk } from "../../stores/playlistManager/thunk";
 import { getMusic } from "../../types/music";
 import { playlistDetail } from "../../types/playlist";
 import { useMusic } from "../../hooks/useMusic";
 import { useUser } from "../../hooks/useUser";
+import { usePlaylist } from "../../hooks/usePlaylist";
 
 interface RemoveMusicProps {
   onClose: (shouldDelete?: boolean) => void;
@@ -27,7 +25,8 @@ const RemoveMusic: React.FC<RemoveMusicProps> = ({
   const [animate, setAnimate] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
-  const { loading } = useMusic();
+  const { loading: musicLoading } = useMusic();
+  const { loading: playlistLoading } = usePlaylist();
   const { userInfo } = useUser();
 
   useEffect(() => {
@@ -40,9 +39,11 @@ const RemoveMusic: React.FC<RemoveMusicProps> = ({
   };
 
   const handleRemove = async () => {
-    if (!music || !userInfo) return;
-    await dispatch(deleteMusicThunk(music.id));
-    await dispatch(getMusicByUserThunk(userInfo.id));
+    if (!music || !userInfo || !playlist) return;
+    const data = { playlistId: playlist.playlistId, musicId: music.id };
+    console.log("oke")
+    await dispatch(removeFromPlaylistThunk(data));
+    await dispatch(getPlaylistDetailThunk(playlist.playlistId));
     onClose(true);
   };
 
@@ -85,7 +86,7 @@ const RemoveMusic: React.FC<RemoveMusicProps> = ({
               className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 duration-200"
               onClick={handleRemove}
             >
-              {loading ? (
+              {musicLoading || playlistLoading ? (
                 <Spin
                   indicator={<LoadingOutlined spin className="text-white" />}
                 />

@@ -105,3 +105,16 @@ export const getArtistPlaylistThunk = createAsyncThunk(
     }
   }
 );
+
+export const removeFromPlaylistThunk = createAsyncThunk(
+  "removeFromPlaylist",
+  async (req: addToPlaylist, { rejectWithValue }) => {
+    try {
+      const data = await managePlaylist.removeFromPlaylist(req);
+      return data.data;
+    } catch (error) {
+      console.log("API error:", error);
+      return rejectWithValue(error);
+    }
+  }
+);

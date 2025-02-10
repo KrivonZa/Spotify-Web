@@ -23,6 +23,7 @@ export function Playlist() {
   const navigate = useNavigate();
   const [isUpdatePlaylist, setUpdatePlaylist] = useState(false);
   const [displayStatus, setDisplayStatus] = useState(true);
+  const [isOwner, setIsOwner] = useState(false);
   const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
   const { playlistId } = useParams();
   const [durations, setDurations] = useState<string[]>([]);
@@ -36,16 +37,22 @@ export function Playlist() {
     null
   );
 
-  const [isOwner, setIsOwner] = useState(
-    userInfo?.id === playlistDetail?.account.id
-  );
+  const user = localStorage.getItem("user");
 
   useEffect(() => {
-    if (!playlistId) return;
-    dispatch(getPlaylistDetailThunk(playlistId));
-    dispatch(userInfoThunk());
-    setIsOwner(userInfo?.id === playlistDetail?.account.id);
-  }, [dispatch, playlistId, userInfo]);
+    if (!user) navigate("/");
+  }, [user]);
+
+  useEffect(() => {
+    if (user) dispatch(userInfoThunk());
+    if (playlistId) dispatch(getPlaylistDetailThunk(playlistId));
+  }, [dispatch, user, playlistId]);
+
+  useEffect(() => {
+    if (userInfo && playlistDetail) {
+      setIsOwner(userInfo.id === playlistDetail.account.id);
+    }
+  }, [userInfo, playlistDetail]);
 
   const handleUpdateClick = () => {
     setUpdatePlaylist(true);
@@ -252,10 +259,16 @@ export function Playlist() {
                         <i className="fa-solid fa-play hidden group-hover:inline text-white text-sm"></i>
                       </p>
                       <div className="flex items-center gap-x-2">
-                        <img
-                          src={music.thumbnail}
-                          className="h-12 w-12 rounded-lg"
-                        />
+                        {music.thumbnail ? (
+                          <img
+                            src={music.thumbnail}
+                            className="h-12 w-12 rounded-lg"
+                          />
+                        ) : (
+                          <div className="h-12 w-12 flex justify-center items-center bg-[#242424]">
+                            <i className="fa-solid fa-music text-gray-400"></i>
+                          </div>
+                        )}
                         <div>
                           <p className="font-semibold text-white">
                             {music.musicName}
@@ -323,10 +336,16 @@ export function Playlist() {
                         <i className="fa-solid fa-play hidden group-hover:inline text-white text-sm"></i>
                       </p>
                       <div className="flex items-center gap-x-2">
-                        <img
-                          src={music.thumbnail}
-                          className="h-12 w-12 rounded-lg"
-                        />
+                        {music.thumbnail ? (
+                          <img
+                            src={music.thumbnail}
+                            className="h-12 w-12 rounded-lg"
+                          />
+                        ) : (
+                          <div className="h-12 w-12 flex justify-center items-center bg-[#242424]">
+                            <i className="fa-solid fa-music text-gray-400"></i>
+                          </div>
+                        )}
                         <p className="font-semibold text-white">
                           {music.musicName}
                         </p>
@@ -384,12 +403,7 @@ export function Playlist() {
         </div>
       ) : isOwner ? (
         <div className="flex flex-col justify-center items-center mt-10">
-          <p className="font-bold text-lg">{t("playlistDetail.emptyOwner")}</p>
-          <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4">
-            <p className="text-base font-semibold">
-              {t("playlistDetail.createNew")}
-            </p>
-          </button>
+          <p className="font-bold text-lg">{t("playlistDetail.emptyMusic")}</p>
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center mt-10">

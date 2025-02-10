@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,12 @@ export function BecomeArtist() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { loading } = useArtist();
+
+  const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user]);
 
   const [checkStates, setCheckStates] = useState({
     rule1: false,

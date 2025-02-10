@@ -3,7 +3,8 @@ import {
   searchMusicThunk,
   getMusicByUserThunk,
   deleteMusicThunk,
-  addMusicThunk
+  addMusicThunk,
+  musicQueueThunk,
 } from "./thunk";
 import { getMusic } from "../../types/music";
 import { toast } from "react-toastify";
@@ -13,12 +14,14 @@ type stateType = {
   loading: boolean;
   searchMusic: getMusic[] | [];
   artistMusic: getMusic[] | [];
+  musicQueue: getMusic[] | [];
 };
 
 const initialState: stateType = {
   loading: false,
   searchMusic: [],
   artistMusic: [],
+  musicQueue: [],
 };
 
 export const manageMusicSlice = createSlice({
@@ -64,10 +67,16 @@ export const manageMusicSlice = createSlice({
     builder.addCase(addMusicThunk.fulfilled, (state) => {
       state.loading = false;
       toast.success(t("addMusic.addSuccess"));
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     });
     builder.addCase(addMusicThunk.rejected, (state) => {
       state.loading = false;
       toast.error(t("addMusic.addFail"));
+    });
+    builder.addCase(musicQueueThunk.fulfilled, (state, { payload }) => {
+      state.musicQueue = payload;
     });
   },
 });

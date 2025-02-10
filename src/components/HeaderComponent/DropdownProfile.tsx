@@ -12,6 +12,7 @@ const DropdownProfile: React.FC<DropdownProfileProps> = ({ onClose }) => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/");
+    window.location.reload();
     onClose();
   };
   return (

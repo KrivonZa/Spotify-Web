@@ -32,8 +32,14 @@ export function MainProfile() {
   const [musicToDelete, setMusicToDelete] = useState<getMusic | null>(null);
   const [musicToAdd, setMusicToAdd] = useState<getMusic | null>(null);
 
+  const user = localStorage.getItem("user");
+
   useEffect(() => {
-    if (!userInfo) return;
+    if (!user) navigate("/");
+  }, [user]);
+
+  useEffect(() => {
+    if (!userInfo || !user) return;
     dispatch(userInfoThunk());
     dispatch(userPlaylistThunk());
     dispatch(getMusicByUserThunk(userInfo.id));
@@ -140,11 +146,17 @@ export function MainProfile() {
                   className="group relative hover:bg-slate-700 bg-opacity-15 p-4 rounded-lg cursor-pointer duration-200"
                   onClick={() => navigate(`/playlist/${playlist.playlistId}`)}
                 >
-                  <img
-                    src={playlist.backgroundImage}
-                    className="w-44 h-44 rounded-full mb-3"
-                    alt={playlist.title}
-                  />
+                  {playlist.backgroundImage ? (
+                    <img
+                      src={playlist.backgroundImage}
+                      className="w-44 h-44 rounded-full mb-3"
+                      alt={playlist.title}
+                    />
+                  ) : (
+                    <div className="w-44 h-44 rounded-full flex justify-center items-center bg-[#242424]">
+                      <i className="text-3xl fa-solid fa-music text-gray-400"></i>
+                    </div>
+                  )}
                   <p className="text-lg font-medium">{playlist.title}</p>
                   <p className="text-gray-400 text-sm font-medium">
                     {t("profile.playlist")}
@@ -184,10 +196,16 @@ export function MainProfile() {
                       <i className="fa-solid fa-play hidden group-hover:inline text-white text-sm"></i>
                     </p>
                     <div className="flex items-center gap-x-2">
-                      <img
-                        src={music.thumbnail}
-                        className="h-12 w-12 rounded-lg"
-                      />
+                      {music.thumbnail ? (
+                        <img
+                          src={music.thumbnail}
+                          className="h-12 w-12 rounded-lg"
+                        />
+                      ) : (
+                        <div className="w-12 h-12 rounded-lg flex justify-center items-center bg-[#242424]">
+                          <i className="fa-solid fa-music text-gray-400"></i>
+                        </div>
+                      )}
                       <div>
                         <p className="font-semibold text-white">
                           {music.musicName}

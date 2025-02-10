@@ -7,7 +7,7 @@ import {
   userPlaylistThunk,
   getAllPlaylistThunk,
 } from "../../../stores/playlistManager/thunk";
-import { searchArtistThunk } from "../../../stores/artistManager/thunk";
+import { getAllArtistThunk } from "../../../stores/artistManager/thunk";
 import { usePlaylist } from "../../../hooks/usePlaylist";
 import { useMusic } from "../../../hooks/useMusic";
 import { useArtist } from "../../../hooks/useArtist";
@@ -32,8 +32,8 @@ export function HomePage() {
       dispatch(userPlaylistThunk());
     }
     dispatch(getAllPlaylistThunk());
-    dispatch(searchArtistThunk(""));
-  }, [dispatch]);
+    dispatch(getAllArtistThunk());
+  }, [dispatch, userInfo?.id]);
 
   const handleMouseEnter = async (imageUrl: string) => {
     const calculatedRgb = await processImageAndSetBackground(imageUrl);
@@ -49,7 +49,7 @@ export function HomePage() {
   };
 
   const handleMusicClick = (item: any) => {
-    setSelectedMusic(item);
+    setSelectedMusic(Array.isArray(item) ? item : [item]);
   };
 
   const handleArtist = (
@@ -61,7 +61,10 @@ export function HomePage() {
       navigate("/user");
       return;
     }
-    let cleanedAvatar = avatar?.replace("https://image-media.trangiangkhanh.site/", "");
+    let cleanedAvatar = avatar?.replace(
+      "https://image-media.trangiangkhanh.site/",
+      ""
+    );
     if (!cleanedAvatar?.trim()) {
       cleanedAvatar = "null";
     }
@@ -97,7 +100,7 @@ export function HomePage() {
               >
                 {item?.backgroundImage ? (
                   <img
-                    className="w-12 h-full object-cover"
+                    className="w-12 h-full object-cover bg-[#242424]"
                     src={item.backgroundImage}
                     alt={item.title}
                   />
@@ -126,11 +129,17 @@ export function HomePage() {
                   className="group relative hover:bg-slate-700 bg-opacity-15 p-4 rounded-lg cursor-pointer duration-200 shrink-0"
                   onClick={() => handleMusicClick(item)}
                 >
-                  <img
-                    src={item.thumbnail}
-                    className="w-44 h-44 rounded-full mb-3"
-                    alt={item.musicName}
-                  />
+                  {item.thumbnail ? (
+                    <img
+                      src={item.thumbnail}
+                      className="w-44 h-44 rounded-full mb-3"
+                      alt={item.musicName}
+                    />
+                  ) : (
+                    <div className="h-44 w-44 flex justify-center rounded-full items-center bg-[#242424]">
+                      <i className="text-3xl fa-solid fa-music text-gray-400"></i>
+                    </div>
+                  )}
                   <p className="text-lg font-medium">{item.musicName}</p>
                   <div className="absolute top-full left-[80%] -translate-x-1/2 bg-green-500 p-2 rounded-full text-white opacity-0 group-hover:top-1/2 group-hover:opacity-100 transition-all duration-300 w-12 h-12 flex justify-center items-center">
                     <i className="fa-solid fa-play text-lg text-black"></i>
@@ -150,11 +159,17 @@ export function HomePage() {
                 className="group relative hover:bg-slate-700 bg-opacity-15 p-4 rounded-lg cursor-pointer duration-200 shrink-0"
                 onClick={() => navigate(`playlist/${item.playlistId}`)}
               >
-                <img
-                  src={item.backgroundImage}
-                  className="w-44 h-44 rounded-full mb-3"
-                  alt={item.title}
-                />
+                {item.backgroundImage ? (
+                  <img
+                    src={item.backgroundImage}
+                    className="w-44 h-44 rounded-full mb-3"
+                    alt={item.title}
+                  />
+                ) : (
+                  <div className="h-44 w-44 flex justify-center rounded-full items-center bg-[#242424]">
+                    <i className="text-3xl fa-solid fa-music text-gray-400"></i>
+                  </div>
+                )}
                 <p className="text-lg font-medium">{item.title}</p>
                 <div className="absolute top-full left-[80%] -translate-x-1/2 bg-green-500 p-2 rounded-full text-white opacity-0 group-hover:top-1/2 group-hover:opacity-100 transition-all duration-300 w-12 h-12 flex justify-center items-center">
                   <i className="fa-solid fa-play text-lg text-black"></i>
@@ -166,20 +181,31 @@ export function HomePage() {
 
         {getAllArtist && getAllArtist.length > 0 && !searchArtist && (
           <div className="mb-10">
-            <p className="font-bold text-2xl">{t("homepage.allSong")}</p>
+            <p className="font-bold text-2xl">{t("homepage.allArtist")}</p>
             <div className="flex items-center gap-x-4 py-6 overflow-x-auto overflow-y-hidden custom-scrollbar scrollbar-hide hover:scrollbar-default pb-4 hover:pb-2">
               {getAllArtist.map((item, index) => (
                 <div
                   key={index}
                   className="group relative hover:bg-slate-700 bg-opacity-15 p-4 rounded-lg cursor-pointer duration-200 shrink-0"
-                  onClick={() => handleMusicClick(item)}
+                  onClick={() =>
+                    handleArtist(item.id, item.nickname, item.avatar)
+                  }
                 >
-                  <img
-                    src={item.avatar}
-                    className="w-44 h-44 rounded-full mb-3"
-                    alt={item.nickname}
-                  />
+                  {item.avatar ? (
+                    <img
+                      src={item.avatar}
+                      className="w-44 h-44 rounded-full mb-3"
+                      alt={item.nickname}
+                    />
+                  ) : (
+                    <div className="h-44 w-44 flex justify-center items-center rounded-full bg-[#242424]">
+                      <i className="text-3xl fa-solid fa-headphones text-gray-400"></i>
+                    </div>
+                  )}
                   <p className="text-lg font-medium">{item.nickname}</p>
+                  <p className="text-gray-400 text-sm font-medium">
+                    {t("profile.artist")}
+                  </p>
                   <div className="absolute top-full left-[80%] -translate-x-1/2 bg-green-500 p-2 rounded-full text-white opacity-0 group-hover:top-1/2 group-hover:opacity-100 transition-all duration-300 w-12 h-12 flex justify-center items-center">
                     <i className="fa-solid fa-play text-lg text-black"></i>
                   </div>
@@ -201,11 +227,17 @@ export function HomePage() {
                     handleArtist(item.id, item.nickname, item.avatar)
                   }
                 >
-                  <img
-                    src={item.avatar}
-                    className="w-44 h-44 rounded-full mb-3"
-                    alt={item.nickname}
-                  />
+                  {item.avatar ? (
+                    <img
+                      src={item.avatar}
+                      className="w-44 h-44 rounded-full mb-3"
+                      alt={item.nickname}
+                    />
+                  ) : (
+                    <div className="h-44 w-44 flex justify-center items-center rounded-full bg-[#242424]">
+                      <i className="text-3xl fa-solid fa-headphones text-gray-400"></i>
+                    </div>
+                  )}
                   <p className="text-lg font-medium">{item.nickname}</p>
                   <p className="text-gray-400 text-sm font-medium">
                     {t("profile.artist")}

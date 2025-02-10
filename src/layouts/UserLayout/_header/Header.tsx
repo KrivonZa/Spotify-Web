@@ -1,5 +1,5 @@
 import { message, Modal } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormLogin from "../../../components/login";
 import { useModal } from "../../../globalContext/ModalContext";
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ import { AppDispatch } from "../../../stores";
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isModalOpen, closeModal } = useModal();
   const dispatch = useDispatch<AppDispatch>();
   const [isFocused, setIsFocused] = useState(false);
@@ -77,36 +78,38 @@ export default function Header() {
           >
             <i className="fa-solid fa-home text-xl"></i>
           </button>
-          <div
-            className={`flex items-center border-2 hover:bg-[#414141] duration-200 rounded-full px-4 py-2 w-full bg-[#292929] ${
-              isFocused ? "border-white bg-[#414141]" : "border-[#141414]"
-            }`}
-          >
-            <i
-              className={`fa-solid fa-search duration-150 cursor-pointer hover:text-white transform hover:scale-110 ${
-                isFocused ? "text-white" : "text-[#a0a0a0]"
+          {location.pathname === "/" && (
+            <div
+              className={`flex items-center border-2 hover:bg-[#414141] duration-200 rounded-full px-4 py-2 w-full bg-[#292929] ${
+                isFocused ? "border-white bg-[#414141]" : "border-[#141414]"
               }`}
-              onClick={handleSearch}
-            ></i>
-            <input
-              type="text"
-              className="bg-transparent border-r-2 focus:outline-none w-full px-3 mr-3 placeholder-[#a0a0a0]"
-              value={isSearch}
-              onChange={(e) => setIsSearch(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch();
-                }
-              }}
-              placeholder={t("header.search")}
-              onFocus={() => {
-                setIsFocused(true);
-                setDropdownVisible(false);
-              }}
-              onBlur={() => setIsFocused(false)}
-            />
-            <i className="fa-solid fa-layer-group duration-200 text-[#a0a0a0] hover:text-white cursor-pointer transform hover:scale-110"></i>
-          </div>
+            >
+              <i
+                className={`fa-solid fa-search duration-150 cursor-pointer hover:text-white transform hover:scale-110 ${
+                  isFocused ? "text-white" : "text-[#a0a0a0]"
+                }`}
+                onClick={handleSearch}
+              ></i>
+              <input
+                type="text"
+                className="bg-transparent border-r-2 focus:outline-none w-full px-3 mr-3 placeholder-[#a0a0a0]"
+                value={isSearch}
+                onChange={(e) => setIsSearch(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
+                placeholder={t("header.search")}
+                onFocus={() => {
+                  setIsFocused(true);
+                  setDropdownVisible(false);
+                }}
+                onBlur={() => setIsFocused(false)}
+              />
+              <i className="fa-solid fa-layer-group duration-200 text-[#a0a0a0] hover:text-white cursor-pointer transform hover:scale-110"></i>
+            </div>
+          )}
         </div>
 
         <div className="mx-8 font-bold flex-1">

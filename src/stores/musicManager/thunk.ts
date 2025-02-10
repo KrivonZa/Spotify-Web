@@ -56,3 +56,16 @@ export const addMusicThunk = createAsyncThunk(
     }
   }
 );
+
+export const musicQueueThunk = createAsyncThunk(
+  "musicQueue",
+  async (req: string, { rejectWithValue }) => {
+    try {
+      const data = await manageMusic.musicQueue(req);
+      return data.data;
+    } catch (error) {
+      console.log("API error:", error);
+      return rejectWithValue(error);
+    }
+  }
+);

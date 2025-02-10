@@ -26,6 +26,12 @@ export function EditProfile() {
   const [isValid, setIsValid] = useState(true);
   const [hasInput, setHasInput] = useState(false);
 
+  const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user]);
+
   useEffect(() => {
     if (
       userInfo?.gender !== undefined &&

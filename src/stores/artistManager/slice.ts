@@ -36,7 +36,7 @@ export const manageArtistSlice = createSlice({
       toast.success(t("becomeArtist.success"));
       state.loading = false;
       setTimeout(() => {
-        window.location.href = "/playlist";
+        window.location.href = "/account";
       }, 3000);
     });
     builder.addCase(becomeArtistThunk.rejected, (state) => {

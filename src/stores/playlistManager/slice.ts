@@ -7,7 +7,8 @@ import {
   getAllPlaylistThunk,
   addToPlaylistThunk,
   updatePlaylistThunk,
-  getArtistPlaylistThunk
+  getArtistPlaylistThunk,
+  removeFromPlaylistThunk,
 } from "./thunk";
 import { userPlaylist, playlistDetail, Playlist } from "../../types/playlist";
 import { toast } from "react-toastify";
@@ -92,9 +93,20 @@ export const managePlaylistSlice = createSlice({
       state.loading = false;
       toast.error(t("updatePlaylist.updateFail"));
     });
-    builder.addCase(getArtistPlaylistThunk.fulfilled, (state, {payload}) => {
+    builder.addCase(getArtistPlaylistThunk.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.artistPlaylist = payload;
+    });
+    builder.addCase(removeFromPlaylistThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(removeFromPlaylistThunk.fulfilled, (state) => {
+      state.loading = false;
+      toast.success(t("removeSong.removeSuccess"));
+    });
+    builder.addCase(removeFromPlaylistThunk.rejected, (state) => {
+      state.loading = false;
+      toast.error(t("removeSong.removeFail"));
     });
   },
 });

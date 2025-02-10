@@ -1,11 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../../hooks/useUser";
+import { useEffect } from "react";
 
 export function AccountMenu() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { userInfo } = useUser();
+
+  const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user]);
 
   return (
     <div className="bg-[#121212] w-full h-full flex justify-center">

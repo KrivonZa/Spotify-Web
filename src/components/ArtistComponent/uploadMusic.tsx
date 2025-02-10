@@ -4,10 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import {
-  addMusicThunk,
-  getMusicByUserThunk,
-} from "../../stores/musicManager/thunk";
+import { addMusicThunk, getMusicByUserThunk } from "../../stores/musicManager/thunk";
 import { useMusic } from "../../hooks/useMusic";
 import { useUser } from "../../hooks/useUser";
 
@@ -83,10 +80,10 @@ const UploadMusic: React.FC<UploadMusicProps> = ({ onClose }) => {
       };
       await dispatch(addMusicThunk({ req: musicName, file: fileData }));
       await dispatch(getMusicByUserThunk(userInfo.id));
+      onClose();
     } catch (error) {
       console.error("Error uploading files:", error);
     }
-    onClose();
   };
 
   return (

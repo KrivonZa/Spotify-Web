@@ -324,7 +324,9 @@
     "description1": "Bạn có muốn xóa",
     "description2": "khỏi danh sách",
     "cancel": "Hủy",
-    "remove": "Xóa"
+    "remove": "Xóa",
+    "removeSuccess": "Xóa nhạc khỏi danh sách thành công",
+    "removeFail": "Xóa nhạc khỏi danh sách thất bại! Vui lòng thử lại"
   },
   "addMusic": {
     "addSuccess": "Tải nhạc lên Spotify thành công",

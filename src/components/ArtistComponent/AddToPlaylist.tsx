@@ -8,7 +8,7 @@ import { AppDispatch } from "../../redux/store";
 import {
   userPlaylistThunk,
   addToPlaylistThunk,
-  createPlaylistThunk
+  createPlaylistThunk,
 } from "../../stores/playlistManager/thunk";
 import { getMusic } from "../../types/music";
 import { usePlaylist } from "../../hooks/usePlaylist";
@@ -49,6 +49,7 @@ const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ onClose, music }) => {
   const handleAdd = async () => {
     if (!userInfo || !isSelected || !music?.id) return;
     const addData = { playlistId: isSelected, musicId: music.id };
+    console.log(addData);
     await dispatch(addToPlaylistThunk(addData));
     onClose(true);
   };
@@ -56,7 +57,7 @@ const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ onClose, music }) => {
   const handleCreate = async () => {
     await dispatch(createPlaylistThunk);
     await dispatch(userPlaylistThunk());
-  }
+  };
 
   return (
     <div
@@ -102,11 +103,17 @@ const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ onClose, music }) => {
                       handleSelected(playlist.playlistId, playlist.title)
                     }
                   >
-                    <img
-                      src={playlist.backgroundImage}
-                      alt={playlist.title}
-                      className="w-16 h-16 rounded-md object-cover"
-                    />
+                    {playlist.backgroundImage ? (
+                      <img
+                        src={playlist.backgroundImage}
+                        alt={playlist.title}
+                        className="w-16 h-16 rounded-md object-cover"
+                      />
+                    ) : (
+                      <div className="h-16 w-16 rounded-md flex justify-center items-center bg-[#242424]">
+                        <i className="fa-solid fa-music text-gray-400"></i>
+                      </div>
+                    )}
                     <div>
                       <h3 className="text-white text-lg font-medium">
                         {playlist.title}
@@ -128,7 +135,10 @@ const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ onClose, music }) => {
                 <p className="font-bold text-lg">
                   {t("playlistDetail.emptyOwner")}
                 </p>
-                <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4" onClick={handleCreate}>
+                <button
+                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-400 hover:scale-105 duration-200 max-w-[50%] transform flex justify-center items-center shadow-md mt-4"
+                  onClick={handleCreate}
+                >
                   <p className="text-base font-semibold">
                     {t("playlistDetail.createNew")}
                   </p>

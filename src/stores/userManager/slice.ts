@@ -27,9 +27,9 @@ export const manageUserSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(userInfoThunk.rejected, (state) => {
-      // localStorage.removeItem("user");
-      // state.userInfo = null;
-      // toast.error(t("profile.tokenExpired"));
+      localStorage.removeItem("user");
+      state.userInfo = null;
+      toast.error(t("profile.tokenExpired"));
       state.loading = false;
     });
     builder.addCase(updateInfo1Thunk.pending, (state) => {

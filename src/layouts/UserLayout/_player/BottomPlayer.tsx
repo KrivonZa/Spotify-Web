@@ -197,7 +197,7 @@ const BottomPlayer = () => {
           <div className="h-14 w-14">
             <img
               src={selectedMusic[currentIndex]?.thumbnail}
-              className="rounded-lg"
+              className="rounded-lg object-cover"
               alt="cover"
             />
           </div>

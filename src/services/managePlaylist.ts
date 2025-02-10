@@ -18,4 +18,6 @@ export const managePlaylist = {
     apiPrivateInstance().patch(`/playlist/update`, req),
   getPlaylistByArtist: (req: string) =>
     apiPrivateInstance().get(`/playlist/get-all/{userId}?userId=${req}`),
+  removeFromPlaylist: (req: addToPlaylist) =>
+    apiPrivateInstance().delete(`/playlist/remove-song`, { data: req }),
 };
