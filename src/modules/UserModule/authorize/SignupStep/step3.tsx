@@ -14,7 +14,7 @@ interface Step1Props {
   nextStep: () => void;
 }
 
-export function Step3({ nextStep }: Step1Props) {
+export function Step3({  }: Step1Props) {
   const navigate = useNavigate();
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [dataSharingConsent, setDataSharingConsent] = useState(false);
