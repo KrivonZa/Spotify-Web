@@ -57,7 +57,7 @@ export default function Header() {
       <header className="h-16 w-full flex justify-between items-center">
         <div className="w-12 ml-10 flex-1">
           <img
-            src="/src/public/spotify.svg"
+            src="/vite.svg"
             alt="Logo Spotify"
             className="w-10 h-10 cursor-pointer"
             onClick={() => {
