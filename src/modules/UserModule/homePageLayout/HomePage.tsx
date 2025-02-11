@@ -62,7 +62,7 @@ export function HomePage() {
       return;
     }
     let cleanedAvatar = avatar?.replace(
-      "https://image-media.trangiangkhanh.site/",
+      "https://mygkhanhs3.s3.ap-southeast-2.amazonaws.com/",
       ""
     );
     if (!cleanedAvatar?.trim()) {

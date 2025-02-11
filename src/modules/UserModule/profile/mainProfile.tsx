@@ -97,7 +97,15 @@ export function MainProfile() {
 
   return (
     <section className="min-h-screen">
-      <div className="flex items-end px-6 pb-6 pt-24">
+      <div className="mt-5 ml-10">
+        <div
+          className="bg-[#292929] hover:bg-[#414141] cursor-pointer duration-200 transform hover:scale-105 px-2 py-2 flex justify-center items-center h-10 w-10 rounded-full"
+          onClick={() => navigate(-1)}
+        >
+          <i className="fa-solid fa-chevron-left text-xl"></i>
+        </div>
+      </div>
+      <div className="flex items-end px-6 pb-6 pt-16">
         <div
           className="relative w-52 h-52 group cursor-pointer"
           onClick={handleUpdateClick}
