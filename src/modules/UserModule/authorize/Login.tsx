@@ -42,7 +42,7 @@ export function Login() {
         } else if (error.code === 1007) {
           message.error(t("login.error2"));
         } else {
-          message.error(t("login.error3"))
+          message.error(t("login.error3"));
         }
       }
     }
@@ -50,6 +50,14 @@ export function Login() {
 
   return (
     <div className="bg-gradient-to-b from-[#292929] to-[#000000] w-full flex items-center justify-center">
+      <div className="absolute top-10 left-10">
+        <div
+          className="bg-[#121212] hover:bg-[#414141] cursor-pointer duration-200 transform hover:scale-105 px-2 py-2 flex justify-center items-center h-10 w-10 rounded-full"
+          onClick={() => navigate(-1)}
+        >
+          <i className="fa-solid fa-chevron-left text-xl"></i>
+        </div>
+      </div>
       <div className="rounded-xl bg-[#121212] my-10">
         <div className="mt-10 mx-64 flex flex-col justify-center items-center">
           <i

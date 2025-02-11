@@ -57,6 +57,14 @@ export function ForgotPass() {
 
   return (
     <div className="bg-[#121212] w-full h-full flex justify-center">
+      <div className="absolute top-10 left-10">
+        <div
+          className="bg-[#292929] hover:bg-[#414141] cursor-pointer duration-200 transform hover:scale-105 px-2 py-2 flex justify-center items-center h-10 w-10 rounded-full"
+          onClick={() => navigate(-1)}
+        >
+          <i className="fa-solid fa-chevron-left text-xl"></i>
+        </div>
+      </div>
       <div className="my-10 mx-28 max-w-sm">
         <div className="flex flex-col">
           <i

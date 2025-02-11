@@ -165,7 +165,9 @@
     "change": "Change Password",
     "editProfile": "Edit Profile",
     "becomeArtist": "Become Artist",
-    "notFound": "Not Found"
+    "notFound": "Not Found",
+    "yourMusic": "Your Music",
+    "yourPlaylist": "Your Playlist"
   },
   "setting": {
     "useless": "This feature is still in testing"

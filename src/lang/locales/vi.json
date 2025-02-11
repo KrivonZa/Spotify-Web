@@ -159,7 +159,9 @@
     "change": "Thay đổi mật khẩu",
     "editProfile": "Chỉnh sửa hồ sơ",
     "becomeArtist": "Trở thành Nghệ sĩ",
-    "notFound": "Không tìm thấy"
+    "notFound": "Không tìm thấy",
+    "yourMusic": "Nhạc của bạn",
+    "yourPlaylist": "Playlist của bạn"
   },
   "setting": {
     "useless": "Chức năng vẫn đang trong quá trình thử nghiệm"

@@ -1,7 +1,5 @@
 import { useRoutes, useLocation } from "react-router-dom";
-import {
-  HomePage,
-} from "../modules/UserModule/homePageLayout";
+import { HomePage } from "../modules/UserModule/homePageLayout";
 import UserLayout from "../layouts/UserLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import AccountLayout from "../layouts/AccountLayout";
@@ -37,7 +35,7 @@ const useRoutesElements = () => {
 
     if (location.pathname === "/") {
       title = "Spotify";
-    } else if (location.pathname.startsWith("/detail-artists")) {
+    } else if (location.pathname.startsWith("/artist")) {
       title = t("routes.artists");
     } else if (location.pathname.startsWith("/playlist")) {
       title = t("routes.playlist");
@@ -63,6 +61,10 @@ const useRoutesElements = () => {
       title = t("routes.editProfile");
     } else if (location.pathname === "/becomeArtist") {
       title = t("routes.becomeArtist");
+    } else if (location.pathname === "/yourMusic") {
+      title = t("routes.yourMusic");
+    } else if (location.pathname === "/yourPlaylist") {
+      title = t("routes.yourPlaylist");
     } else if (location.pathname === "*") {
       title = t("routes.notFound");
     }
